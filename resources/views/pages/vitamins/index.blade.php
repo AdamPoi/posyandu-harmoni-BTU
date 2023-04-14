@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Halaman Data User')
+@section('title', 'Halaman Data Vitamin')
 
 @push('style')
     <link rel="stylesheet" href="{{ asset('library/datatables/media/css/dataTables.bootstrap4.min.css') }}">
@@ -11,11 +11,11 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>User</h1>
+                <h1>Vitamin</h1>
 
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="{{ url('dashboard-general-dashboard') }}">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="{{ route('users.index') }}">User</a></div>
+                    <div class="breadcrumb-item"><a href="{{ route('vitamins.index') }}">Vitamin</a></div>
                 </div>
             </div>
             <div class="section-body">
@@ -35,7 +35,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Data User</h4>
+                                <h4>Data Vitamin</h4>
                                 <div class="card-header-action">
 
                                     <a href="#" class="btn btn-icon btn-primary icon-left"><i
@@ -48,17 +48,17 @@
                                 <table class="table table-bordered">
                                     <tr>
                                         <th>No</th>
-                                        <th>Nama</th>
-                                        <th>Role</th>
-                                        <th>Email</th>
+                                        <th>Jenis Vitamin</th>
+                                        <th>Deskripsi</th>
                                         <th width="280px">Action</th>
                                     </tr>
                                     {{-- @foreach ($mahasiswas as $Mahasiswa) --}}
                                     <tr>
                                         <td>1</td>
-                                        <td>Harmoni</td>
-                                        <td>Bidan</td>
-                                        <td>harmoni@harmoni.com</td>
+                                        <td>Vitamin A</td>
+                                        <td>Vitamin A penting untuk pertumbuhan dan perkembangan tulang, gigi, mata,
+                                            dan sistem kekebalan tubuh. Kekurangan vitamin A dapat menyebabkan
+                                            masalah kesehatan seperti kebutaan malam dan infeksi.</td>
                                         <td>
                                             <form action="#" method="POST">
 

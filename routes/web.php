@@ -44,10 +44,10 @@ Route::get('/dashboard-ecommerce-dashboard', function () {
 Route::resource('penjualan', PenjualanController::class);
 
 // Data User
-Route::resource('user', UserController::class);
+Route::resource('users', UserController::class);
 
 // Data Vitamin
-Route::resource('vitamin', VitaminController::class);
+Route::resource('vitamins', VitaminController::class);
 
 // Layout
 Route::get('/layout-default-layout', function () {
