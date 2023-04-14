@@ -5,10 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Balita;
+
 class Imunisasi extends Model
 {
   use HasFactory;
   protected $table = 'imunisasis';
+  protected $primaryKey = 'id_imunisasi';
+
 
   protected $fillable = [
     'id_balita',

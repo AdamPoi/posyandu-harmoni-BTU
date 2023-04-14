@@ -1,8 +1,13 @@
 <?php
 
+use App\Http\Controllers\BalitaController;
+use App\Http\Controllers\IbuHamilController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VitaminController;
 use App\Http\Controllers\ImunisasiController;
+use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\PemeriksaanController;
+use App\Http\Controllers\PenimbanganController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,19 +26,22 @@ Route::redirect('/', '/dashboard-general-dashboard');
 
 
 // Login & Logout
-Route::controller(LoginController::class)->group(function () {
-  Route::get('login', 'index')->name('login');
-  Route::post('login/proses', 'proses');
-  Route::get('logout', 'logout');
-});
+// Route::controller(LoginController::class)->group(function () {
+//   Route::get('login', 'index')->name('login');
+//   Route::post('login/proses', 'proses');
+//   Route::get('logout', 'logout');
+// });
 
+Route::get('login', function () {
+  return view('pages.auth-login');
+});
 
 // Middleware Login
-Route::group(['middleware' => ['auth']], function () {
-  Route::group(['middleware' => ['CekUserLogin:apoteker']], function () {
-    Route::resource('dashboard', DashboardController::class);
-  });
-});
+// Route::group(['middleware' => ['auth']], function () {
+//   Route::group(['middleware' => ['CekUserLogin:admin']], function () {
+//     Route::resource('dashboard', DashboardController::class);
+//   });
+// });
 
 // Dashboard
 Route::get('/dashboard-general-dashboard', function () {
@@ -42,16 +50,23 @@ Route::get('/dashboard-general-dashboard', function () {
 Route::get('/dashboard-ecommerce-dashboard', function () {
   return view('pages.dashboard-ecommerce-dashboard', ['type_menu' => 'dashboard']);
 });
-Route::resource('penjualan', PenjualanController::class);
 
 // Data User
-Route::resource('users', UserController::class);
-
+Route::resource('user', UserController::class);
+// Data Ibu hamil
+Route::resource('ibuhamil', IbuHamilController::class);
+// Data Balita
+Route::resource('balita', BalitaController::class);
+// Data Jadwal
+Route::resource('jadwal', JadwalController::class);
 // Data Vitamin
-Route::resource('vitamins', VitaminController::class);
+Route::resource('vitamin', VitaminController::class);
 // Data Imunisasi
-Route::resource('imunisasis', ImunisasiController::class);
-
+Route::resource('imunisasi', ImunisasiController::class);
+// Data Imunisasi
+Route::resource('pemeriksaan', PemeriksaanController::class);
+// Data Imunisasi
+Route::resource('penimbangan', PenimbanganController::class);
 // Layout
 Route::get('/layout-default-layout', function () {
   return view('pages.layout-default-layout', ['type_menu' => 'layout']);
@@ -297,5 +312,3 @@ Route::get('/utilities-subscribe', function () {
 Route::get('/credits', function () {
   return view('pages.credits', ['type_menu' => '']);
 });
-
-
