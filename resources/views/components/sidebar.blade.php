@@ -23,7 +23,7 @@
             <li class="menu-header">Kader Posyandu</li>
             <li class="{{ Request::is('pengguna') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('pengguna') }}"><i class="fas fa-user"></i>
-                    <span>Data Pengguna</span></a>
+                    <span>Data User</span></a>
             </li>
             <li class="{{ Request::is('ibu-hamil') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('ibu-hamil') }}"><i class="fas fa-person-pregnant"></i>
@@ -44,6 +44,10 @@
             <li class="{{ Request::is('jadwal') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('jadwal') }}"><i class="fas fa-calendar-days"></i>
                     <span>Data Jadwal</span></a>
+            </li>
+            <li class="{{ Request::is('vitamin') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('vitamin') }}"><i class="fa-solid fa-tablets"></i>
+                    <span>Data Vitamin</span></a>
             </li>
     </aside>
 </div>
