@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\IbuHamil;
 use App\Models\Pemeriksaan;
 use Illuminate\Http\Request;
 
@@ -12,9 +13,23 @@ class PemeriksaanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index(Request $request){
+        $katakunci = $request->katakunci;
+        $jumlahbaris = 4;
+        if(strlen($katakunci)){
+            $pemeriksaan = IbuHamil::with('Nim', 'like', "%$katakunci%")
+                ->orwhere('Nama', 'like', "%$katakunci%")
+                ->orwhere('kelas_id', 'like', "%$katakunci%")
+                ->orwhere('Jurusan', 'like', "%$katakunci%")
+                ->orwhere('No_Handphone', 'like', "%$katakunci%")
+                ->orwhere('email', 'like', "%$katakunci%")
+                ->orwhere('tgl_lahir', 'like', "%$katakunci%")
+                ->paginate($jumlahbaris);
+        } else {
+            $pemeriksaan = IbuHamil::with('ibu_hamils')->get();
+            $paginate = IbuHamil::orderBy('id_pemeriksaan', 'asc')->paginate(5);
+        }
+        return view('pages.pemeriksaan.index', ['pemeriksaan' => $pemeriksaan, 'paginate'=>$paginate]);
     }
 
     /**
@@ -24,7 +39,8 @@ class PemeriksaanController extends Controller
      */
     public function create()
     {
-        //
+        $ibu_hamil = IbuHamil::all(); //mendapatkan data dari tabel ibu hamil
+        return view('pages.pemeriksaan.create' , ['ibu_hamil' => $ibu_hamil]);
     }
 
     /**
@@ -35,7 +51,30 @@ class PemeriksaanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //melakukan validasi data
+        $request->validate([
+            'id_ibu_hamil' => 'required',
+            'tanggal' => 'required',
+            'keterangan' => 'required',
+        ],
+        [
+            'id_ibu_hamil.required' => 'Nama Ibu Hamil wajib diisi',
+            'tanggal.required' => 'Tanggal wajib diisi',
+            'keterangan.required' => 'Nama wajib diisi',
+        ]);
+        $pemeriksaan = new Pemeriksaan;
+        $pemeriksaan->tanggal = $request->get('tanggal');
+        $pemeriksaan->keterangan = $request->get('keterangan');
+
+        $ibu_hamil = new IbuHamil;
+        $ibu_hamil->id = $request->get('id_ibu_hamil');
+
+        //fungsi eloquent untuk menambah data dengan relasi belongsTo
+        $pemeriksaan->ibu_hamil()->associate($ibu_hamil);
+        $pemeriksaan->save();
+        //jika data berhasil ditambahkan, akan kembali ke halaman utama
+        return redirect()->route('pemeriksaan.index')
+            ->with('success', 'Data Berhasil ditambahkan');
     }
 
     /**

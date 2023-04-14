@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PemeriksaanController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VitaminController;
 use Illuminate\Support\Facades\Route;
@@ -48,6 +49,9 @@ Route::resource('users', UserController::class);
 
 // Data Vitamin
 Route::resource('vitamins', VitaminController::class);
+
+// Data Pemeriksaan
+Route::resource('pemeriksaan', PemeriksaanController::class);
 
 // Layout
 Route::get('/layout-default-layout', function () {
