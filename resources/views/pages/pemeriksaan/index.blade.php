@@ -59,19 +59,21 @@
                                             @foreach ($paginate as $Pemeriksaan)
                                             <tr>
                                                 <td>{{ $i }}</td>
-                                                <td>{{ $Pemeriksaan->ibu_hamil->nama }}</td>
+                                                <td>{{ $Pemeriksaan->id_ibu_hamil }}</td>
                                                 <td>{{ $Pemeriksaan->tanggal }}</td>
                                                 <td>{{ $Pemeriksaan->catatan }}</td>
-                                                <form action="{{ route('pemeriksaan.destroy',$Pemeriksaan->id_pemeriksaan) }}" method="POST">
-                                                    <a class="btn btn-icon icon-left btn-primary" href="{{ route('pemeriksaan.show',$Pemeriksaan->id_pemeriksaan) }}">
-                                                        <i class="fas fa-circle-info"></i>Show</a>
-                                                        <a class="btn btn-icon icon-left btn-warning" href="{{ route('pemeriksaan.edit',$Pemeriksaan->id_pemeriksaan) }}">
-                                                            <i class="fas fa-pencil-alt"></i>Edit</a>
-                                                        @csrf
-                                                        @method('DELETE')
+                                                <td>
+                                                    <form action="{{ route('pemeriksaan.destroy',$Pemeriksaan->id_pemeriksaan) }}" method="POST">
+                                                        <a class="btn btn-icon icon-left btn-primary" href="{{ route('pemeriksaan.show',$Pemeriksaan->id_pemeriksaan) }}">
+                                                            <i class="fas fa-circle-info"></i>Show</a>
+                                                            <a class="btn btn-icon icon-left btn-warning" href="{{ route('pemeriksaan.edit',$Pemeriksaan->id_pemeriksaan) }}">
+                                                                <i class="fas fa-pencil-alt"></i>Edit</a>
+                                                            @csrf
+                                                            @method('DELETE')
 
-                                                    <button type="submit" class="btn btn-danger btn-icon icon-left"><i class="fas fa-trash"></i>>Delete</button>
-                                                </form>
+                                                        <button type="submit" class="btn btn-danger btn-icon icon-left"><i class="fas fa-trash"></i>Delete</button>
+                                                    </form>
+                                                </td>
                                             </tr>
                                             <?php $i++ ?>
                                             @endforeach
