@@ -8,14 +8,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Vitamin extends Model
 {
-    use HasFactory, SoftDeletes;
+  use HasFactory, SoftDeletes;
 
-    protected $table = 'vitamins';
-    protected $primaryKey = 'id_vitamin';
+  protected $table = 'vitamins';
+  protected $primaryKey = 'id_vitamin';
 
-    protected $fillable = [
-      'id_vitamin',
-      'jenis_vitamin',
-      'deskripsi',
-    ];
+  protected $fillable = [
+    'jenis_vitamin',
+    'deskripsi',
+  ];
 }

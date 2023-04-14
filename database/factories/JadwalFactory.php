@@ -17,7 +17,9 @@ class JadwalFactory extends Factory
     public function definition()
     {
         return [
-            //
+      'tanggal'=>fake()->date(),
+      'kegiatan'=>fake()->title(),
+      'deskripsi'=>fake()->realText(),
         ];
     }
 }
