@@ -37,8 +37,8 @@
                 <a class="nav-link" href="{{ url('pemeriksaan-bayi') }}"><i class="fas fa-file-prescription"></i>
                     <span>Data Pemeriksaan Bayi</span></a>
             </li>
-            <li class="{{ Request::is('imunisasi') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ url('imunisasi') }}"><i class="fas fa-syringe"></i>
+            <li class="{{ Request::is('imunisasis') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('imunisasis') }}"><i class="fas fa-syringe"></i>
                     <span>Data Imunisasi</span></a>
             </li>
             <li class="{{ Request::is('jadwal') ? 'active' : '' }}">

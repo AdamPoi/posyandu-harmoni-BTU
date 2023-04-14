@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VitaminController;
+use App\Http\Controllers\ImunisasiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,6 +49,8 @@ Route::resource('users', UserController::class);
 
 // Data Vitamin
 Route::resource('vitamins', VitaminController::class);
+// Data Imunisasi
+Route::resource('imunisasis', ImunisasiController::class);
 
 // Layout
 Route::get('/layout-default-layout', function () {
@@ -294,3 +297,5 @@ Route::get('/utilities-subscribe', function () {
 Route::get('/credits', function () {
   return view('pages.credits', ['type_menu' => '']);
 });
+
+
