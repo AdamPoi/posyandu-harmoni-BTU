@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class IbuHamil extends Model
 {
   use HasFactory;
-
   protected $table = 'ibu_hamils';
   protected $primaryKey = 'id_ibu_hamil';
 
@@ -24,6 +23,6 @@ class IbuHamil extends Model
 
   public function pemeriksaan()
   {
-    return $this->hasMany(Pemeriksaan::class, 'id_ibu_hamil');
+    return $this->belongsTo(Pemeriksaan::class, 'id_ibu_hamil');
   }
 }

@@ -11,6 +11,6 @@ class Pemeriksaan extends Model
 
   public function ibu_hamil()
   {
-    return $this->belongsTo(IbuHamil::class, 'id_ibu_hamil');
+    return $this->hasMany(IbuHamil::class, 'id_ibu_hamil');
   }
 }

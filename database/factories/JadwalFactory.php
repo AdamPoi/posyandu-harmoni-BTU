@@ -9,15 +9,15 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class JadwalFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition()
-    {
-        return [
-            //
-        ];
-    }
+  /**
+   * Define the model's default state.
+   *
+   * @return array<string, mixed>
+   */
+  public function definition()
+  {
+    return [
+      'tanggal' => fake()->date(), 'kegiatan' => fake()->title(), 'deskripsi' => fake()->realText()
+    ];
+  }
 }
