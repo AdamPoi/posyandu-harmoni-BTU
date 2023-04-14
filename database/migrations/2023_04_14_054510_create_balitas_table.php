@@ -14,14 +14,16 @@ return new class extends Migration
   public function up()
   {
     Schema::create('balitas', function (Blueprint $table) {
-      $table->id();
+      $table->increments('id_balita');
+      $table->unsignedInteger('id_ibu_hamil');
       $table->string('nama');
+      $table->string('nama_ayah');
+      $table->string('nama_ibu');
       $table->date('tanggal_lahir');
       $table->string('jenis_kelamin');
-      $table->float('berat_badan');
-      $table->float('tinggi_badan');
       $table->timestamps();
-      $table->timestamps();
+
+      $table->foreign('id_ibu_hamil')->references('id_ibu_hamil')->on('ibu_hamils')->onDelete('cascade');
     });
   }
 

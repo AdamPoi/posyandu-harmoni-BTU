@@ -7,5 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Balita extends Model
 {
-    use HasFactory;
+  use HasFactory;
+
+  public function penimbangan()
+  {
+    return $this->hasMany(penimbangan::class, 'id_balita');
+  }
 }

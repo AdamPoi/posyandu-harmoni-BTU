@@ -6,26 +6,32 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::create('imunisasis', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
-    }
+  /**
+   * Run the migrations.
+   *
+   * @return void
+   */
+  public function up()
+  {
+    Schema::create('imunisasis', function (Blueprint $table) {
+      $table->increments('id_imunisasi');
+      $table->unsignedInteger('id_balita');
+      $table->string('jenis_imunisasi');
+      $table->date('tanggal');
+      $table->text('deskripsi')->nullable();
+      $table->timestamps();
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('imunisasis');
-    }
+      $table->foreign('id_balita')->references('id_balita')->on('balitas')->onDelete('cascade');
+    });
+  }
+
+  /**
+   * Reverse the migrations.
+   *
+   * @return void
+   */
+  public function down()
+  {
+    Schema::dropIfExists('imunisasis');
+  }
 };

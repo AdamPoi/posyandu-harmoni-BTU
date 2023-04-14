@@ -7,5 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pemeriksaan extends Model
 {
-    use HasFactory;
+  use HasFactory;
+
+  public function ibu_hamil()
+  {
+    return $this->belongsTo(IbuHamil::class, 'id_ibu_hamil');
+  }
 }

@@ -7,5 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Penimbangan extends Model
 {
-    use HasFactory;
+  use HasFactory;
+
+  public function balita()
+  {
+    return $this->belongsTo(Balita::class, 'id_balita');
+  }
 }
