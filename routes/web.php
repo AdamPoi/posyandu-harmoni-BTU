@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VitaminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,7 +44,10 @@ Route::get('/dashboard-ecommerce-dashboard', function () {
 Route::resource('penjualan', PenjualanController::class);
 
 // Data User
-Route::resource('user', UserController::class);
+Route::resource('users', UserController::class);
+
+// Data Vitamin
+Route::resource('vitamins', VitaminController::class);
 
 // Layout
 Route::get('/layout-default-layout', function () {

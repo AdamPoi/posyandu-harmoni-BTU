@@ -14,7 +14,7 @@ class VitaminController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.vitamins.index');
     }
 
     /**

@@ -21,8 +21,8 @@
                 </ul>
             </li>
             <li class="menu-header">Kader Posyandu</li>
-            <li class="{{ Request::is('user') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ url('user') }}"><i class="fas fa-user"></i>
+            <li class="{{ Request::is('users') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('users') }}"><i class="fas fa-user"></i>
                     <span>Data User</span></a>
             </li>
             <li class="{{ Request::is('ibu-hamil') ? 'active' : '' }}">
@@ -45,8 +45,8 @@
                 <a class="nav-link" href="{{ url('jadwal') }}"><i class="fas fa-calendar-days"></i>
                     <span>Data Jadwal</span></a>
             </li>
-            <li class="{{ Request::is('vitamin') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ url('vitamin') }}"><i class="fa-solid fa-tablets"></i>
+            <li class="{{ Request::is('vitamins') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('vitamins') }}"><i class="fa-solid fa-tablets"></i>
                     <span>Data Vitamin</span></a>
             </li>
     </aside>

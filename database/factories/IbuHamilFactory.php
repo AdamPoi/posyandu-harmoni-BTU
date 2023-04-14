@@ -17,12 +17,7 @@ class IbuHamilFactory extends Factory
     public function definition()
     {
         return [
-            'nama' =>fake()->name(),
-            'alamat'=> fake()->realText(),
-            'no_telepon'=> fake()->randomNumber(),
-            'usia_kandungan'=>fake()->randomNumber(),
-            'tanggal_hamil'=> fake()->date(),
-            'tanggal_lahir'=>fake()->date(),
+            //
         ];
     }
 }
