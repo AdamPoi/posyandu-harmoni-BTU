@@ -49,7 +49,7 @@
                                     <table class="table-striped table" id="imunisasis-table">
                                         <thead>
                                             <tr>
-                                                <th>No</th>
+                                            <th>No</th>
                                                 <th>Nama Balita</th>
                                                 <th>Jenis Imunisasi</th>
                                                 <th>Tanggal</th>
