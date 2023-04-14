@@ -17,8 +17,8 @@ return new class extends Migration
             $table->increments('id_user');
             $table->string('nama')->index();
             $table->string('umur');
-            $table->string('role');
             $table->string('alamat');
+            $table->string('role');
             $table->string('email')->unique();
             $table->string('password')->nullable();
             $table->timestamps();

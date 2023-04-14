@@ -23,5 +23,7 @@ class DatabaseSeeder extends Seeder
     \App\Models\Balita::factory(100)->create();
     \App\Models\Penimbangan::factory(100)->create();
     \App\Models\Jadwal::factory(100)->create();
+    \App\Models\User::factory(100)->create();
+    \App\Models\Vitamin::factory(100)->create();
   }
 }
