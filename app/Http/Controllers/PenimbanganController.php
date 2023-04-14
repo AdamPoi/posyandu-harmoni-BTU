@@ -12,9 +12,24 @@ class PenimbanganController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $katakunci = $request->katakunci;
+        $jumlahbaris = 4;
+        if (strlen($katakunci)) {
+        $penimbangan = Penimbangan::with('Nim', 'like', "%$katakunci%")
+            ->orwhere('Nama', 'like', "%$katakunci%")
+            ->orwhere('kelas_id', 'like', "%$katakunci%")
+            ->orwhere('Jurusan', 'like', "%$katakunci%")
+            ->orwhere('No_Handphone', 'like', "%$katakunci%")
+            ->orwhere('email', 'like', "%$katakunci%")
+            ->orwhere('tgl_lahir', 'like', "%$katakunci%")
+            ->paginate($jumlahbaris);
+        } else {
+            $penimbangan = Penimbangan::with('balita')->get();
+            $paginate = Penimbangan::orderBy('id_penimbangan', 'asc')->paginate(5);
+    }
+    return view('pages.penimbangan.index', ['penimbangan' => $penimbangan, 'paginate' => $paginate]);
     }
 
     /**

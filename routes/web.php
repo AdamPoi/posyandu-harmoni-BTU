@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PemeriksaanController;
 use App\Http\Controllers\IbuHamilController;
+use App\Http\Controllers\PenimbanganController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VitaminController;
 use Illuminate\Support\Facades\Route;
@@ -55,6 +56,9 @@ Route::resource('vitamins', VitaminController::class);
 
 // Data Pemeriksaan
 Route::resource('pemeriksaan', PemeriksaanController::class);
+
+// Data Penimbangan
+Route::resource('penimbangan', PenimbanganController::class);
 
 // Layout
 Route::get('/layout-default-layout', function () {
