@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Factories;
-
+use App\Models\Balita;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +17,10 @@ class PenimbanganFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'id_balita' => Balita::inRandomOrder()->first()->id_balita,
+            'berat_badan' => fake()->randomDigit(),
+            'tinggi_badan' => fake()->randomDigit(),
+            'tanggal'=> fake()->date(),
         ];
     }
 }

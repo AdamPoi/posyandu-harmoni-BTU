@@ -22,6 +22,6 @@ class DatabaseSeeder extends Seeder
         // ]);
         \App\Models\IbuHamil::factory(100)->create();
         \App\Models\Balita::factory(100)->create();
-        
+        \App\Models\Penimbangan::factory(100)->create();
     }
 }
