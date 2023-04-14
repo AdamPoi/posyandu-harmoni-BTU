@@ -21,8 +21,8 @@
                 </ul>
             </li>
             <li class="menu-header">Kader Posyandu</li>
-            <li class="{{ Request::is('pengguna') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ url('pengguna') }}"><i class="fas fa-user"></i>
+            <li class="{{ Request::is('user') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('user') }}"><i class="fas fa-user"></i>
                     <span>Data User</span></a>
             </li>
             <li class="{{ Request::is('ibu-hamil') ? 'active' : '' }}">
