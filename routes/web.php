@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,12 +43,7 @@ Route::get('/dashboard-ecommerce-dashboard', function () {
 Route::resource('penjualan', PenjualanController::class);
 
 // Data User
-Route::controller(PenggunaController::class)->group(function () {
-    Route::get('pengguna', 'index')->name('pengguna');
-    Route::get('pengguna/tambah-pengguna', 'create')->name('tambah-pengguna');
-    Route::post('pengguna/simpan-pengguna', 'save');
-    Route::delete('pengguna/hapus-pengguna/{id}', 'delete');
-});
+Route::resource('user', UserController::class);
 
 // Layout
 Route::get('/layout-default-layout', function () {
