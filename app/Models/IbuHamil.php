@@ -14,7 +14,6 @@ class IbuHamil extends Model
   protected $fillable = [
     'nama',
     'alamat',
-    'nama_ibu',
     'no_telepon',
     'usia_kandungan',
     'tanggal_hamil',
