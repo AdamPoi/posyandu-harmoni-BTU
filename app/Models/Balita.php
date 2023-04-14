@@ -8,6 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Balita extends Model
 {
   use HasFactory;
+  
+  protected $table = 'balitas';
+  protected $primaryKey = 'id_balita';
+
+  protected $fillable = [
+    'id_ibu_hamil',
+    'nama',
+    'nama_ayah',
+    'nama_ibu',
+    'tanggal_lahir',
+    'jenis_kelamin'
+  ];
 
   public function penimbangan()
   {

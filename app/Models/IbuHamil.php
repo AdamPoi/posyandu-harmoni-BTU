@@ -9,6 +9,18 @@ class IbuHamil extends Model
 {
   use HasFactory;
 
+  protected $table = 'ibu_hamils';
+  protected $primaryKey = 'id_ibu_hamil';
+
+  protected $fillable = [
+    'nama',
+    'alamat',
+    'nama_ibu',
+    'no_telepon',
+    'usia_kandungan',
+    'tanggal_hamil',
+    'tanggal_lahir'
+  ];
 
   public function pemeriksaan()
   {

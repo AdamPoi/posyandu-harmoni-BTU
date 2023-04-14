@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Balita;
+use App\Models\IbuHamil;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,12 @@ class BalitaFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'id_ibu_hamil' => IbuHamil::inRandomOrder()->first()->id_ibu_hamil,
+            'nama' => fake()->name(),
+            'nama_ayah' => fake()->name(),
+            'nama_ibu' => fake()->name(),
+            'tanggal_lahir' => fake()->date(),
+            'jenis_kelamin' => fake()->randomElement(['L', 'P'])
         ];
     }
 }
