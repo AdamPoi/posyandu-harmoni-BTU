@@ -50,7 +50,7 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Nama</th>
+                                                <th>Nama Balita</th>
                                                 <th>Jenis Imunisasi</th>
                                                 <th>Tanggal</th>
                                                 <th>Deskripsi</th>
