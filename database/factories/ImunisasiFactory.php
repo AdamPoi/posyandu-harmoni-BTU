@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Factories;
-
+use App\Models\Balita;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +17,10 @@ class ImunisasiFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'id_balita' => Balita::inRandomOrder()->first()->id_balita,
+            'jenis_imunisasi' =>fake()->name(),
+            'tanggal'=> fake()->date(),
+            'deskripsi'=> fake()->realText(),
         ];
     }
 }
