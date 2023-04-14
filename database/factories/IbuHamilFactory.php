@@ -19,10 +19,10 @@ class IbuHamilFactory extends Factory
         return [
             'nama' =>fake()->name(),
             'alamat'=> fake()->realText(),
-            'no_telepon'=> fake()->randonNumber(),
+            'no_telepon'=> fake()->randomNumber(),
             'usia_kandungan'=>fake()->randomNumber(),
-            'tanggal_hamil'=> fake()->datetime(),
-            'tanggal_lahir'=>fake()->datetime(),
+            'tanggal_hamil'=> fake()->date(),
+            'tanggal_lahir'=>fake()->date(),
         ];
     }
 }
