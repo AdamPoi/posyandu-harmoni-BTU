@@ -70,9 +70,11 @@ class PemeriksaanController extends Controller
    * @param  \App\Models\Pemeriksaan  $pemeriksaan
    * @return \Illuminate\Http\Response
    */
-  public function show(Pemeriksaan $pemeriksaan)
+  public function show($id_pemeriksaan)
   {
-    //
+      //menampilkan detail data dengan menemukan berdasarkan id_pemeriksaan
+      $pemeriksaans = Pemeriksaan::with('ibu_hamils')->where('id_pemeriksaan', $id_pemeriksaan)->first();
+      return view('pages.pemeriksaan.show', ['pemeriksaans' => $pemeriksaans]);
   }
 
   /**
@@ -81,9 +83,13 @@ class PemeriksaanController extends Controller
    * @param  \App\Models\Pemeriksaan  $pemeriksaan
    * @return \Illuminate\Http\Response
    */
-  public function edit(Pemeriksaan $pemeriksaan)
+  public function edit($id_pemeriksaan)
   {
-    //
+    //menampilkan detail data dengan menemukan berdasarkan id_pemeriksaan 
+    //Pemriksaan untuk diedit
+    $pemeriksaans = Pemeriksaan::with('ibu_hamils')->where('id_pemeriksaan', $id_pemeriksaan)->first();
+    $ibu_hamils = IbuHamil::all(); //mendapatkan data dari ibu hamil
+    return view('pages.pemeriksaan.edit', compact('pemeriksaans','ibu_hamils'));
   }
 
   /**
@@ -93,9 +99,32 @@ class PemeriksaanController extends Controller
    * @param  \App\Models\Pemeriksaan  $pemeriksaan
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request, Pemeriksaan $pemeriksaan)
+  public function update(Request $request, $id_pemeriksaan)
   {
-    //
+    //melakukan validasi data
+    $request->validate([
+      'tanggal' => 'required',
+      'id_ibu_hamil' => 'required',
+      'catatan' => 'required',
+  ],
+  [
+      'tanggal.required' => 'Tanggal wajib diisi',
+      'catatan.required' => 'Catatan wajib diisi',
+      'id_ibu_hamil.required' => 'Nama Ibu Hamil wajib diisi',
+  ]);
+  $pemeriksaan = Pemeriksaan::with('ibu_hamils')->where('id_pemeriksaan', $id_pemeriksaan)->first();
+  $pemeriksaan->tanggal = $request->get('tanggal');
+  $pemeriksaan->catatan = $request->get('catatan');
+
+  $ibu_hamils = new IbuHamil;
+  $ibu_hamils->id_ibu_hamil = $request->get('id_ibu_hamil');
+
+  //fungsi eloquent untuk menambah data dengan relasi belongsTo
+  $pemeriksaan->ibu_hamil()->associate($ibu_hamils);
+  $pemeriksaan->save();
+  //jika data berhasil ditambahkan, akan kembali ke halaman utama
+  return redirect()->route('pemeriksaan.index')
+      ->with('success', 'Data Berhasil ditambahkan');
   }
 
   /**
@@ -104,8 +133,11 @@ class PemeriksaanController extends Controller
    * @param  \App\Models\Pemeriksaan  $pemeriksaan
    * @return \Illuminate\Http\Response
    */
-  public function destroy(Pemeriksaan $pemeriksaan)
+  public function destroy($id_pemeriksaan)
   {
-    //
+    //fungsi eloquent untuk menghapus data
+    Pemeriksaan::find($id_pemeriksaan)->delete();
+    return redirect()->route('pemeriksaan.index')
+        -> with('success', 'Data Berhasil Dihapus');
   }
 }

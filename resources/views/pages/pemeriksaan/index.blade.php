@@ -46,7 +46,18 @@
                             </div>
                             <div class="card-body">
                                 <livewire:pemeriksaan-table theme='bootstrap-4' />
-                                {{-- {{ $mahasiswas->links(); }} --}}
+                                {{-- <td>
+                                    <form action="{{ route('pemeriksaan.destroy',$pemeriksaan->id_pemeriksaan) }}" method="POST">
+
+                                        <a class="btn btn-info" href="{{ route('pemeriksaan.show',$pemeriksaan->id_pemeriksaan) }}">Show</a>
+                                        <a class="btn btn-primary" href="{{ route('pemeriksaan.edit',$pemeriksaan->id_pemeriksaan) }}">Edit</a>
+                                            @csrf
+                                            @method('DELETE')
+                        
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </td> --}}
+                                {{-- {{ $pemeriksaans->links(); }} --}}
                             </div>
                         </div>
                     </div>
