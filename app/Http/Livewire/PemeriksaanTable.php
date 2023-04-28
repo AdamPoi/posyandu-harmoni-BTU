@@ -48,7 +48,7 @@ class PemeriksaanTable extends DataTableComponent
                             '<a href="' . route('pemeriksaan.show', ['pemeriksaan' => $row->id_pemeriksaan]) . '" class="btn btn-icon icon-center btn-primary">
                                 <i class="fas fa-circle-info"></i>
                             </a>';
-                        return $detail . $edit . $delete;
+                        return '<div class="btn-group" role="group">' .  $detail . $edit . $delete;
                     }
                 )->html(),
         ];
