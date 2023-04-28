@@ -24,7 +24,7 @@ class VitaminController extends Controller
    */
   public function create()
   {
-    //
+    return view('pages.vitamin.create');
   }
 
   /**
@@ -35,7 +35,28 @@ class VitaminController extends Controller
    */
   public function store(Request $request)
   {
-    //
+    $request->validate([
+        'jenis_vitamin' => 'required',
+        'deskripsi' => 'required',
+    ],
+    [
+        'jenis_vitamin.required' => 'Jenis Vitamin wajib diisi',
+        'deskripsi.required' => 'Deskripsi Vitamin wajib diisi',
+    ]);
+
+    $jenis_vitamin = $request->jenis_vitamin;
+    $deskripsi = $request->deskripsi;
+
+    try {
+        $vitamin = new Vitamin();
+        $vitamin->jenis_vitamin = $jenis_vitamin;
+        $vitamin->deskripsi = $deskripsi;
+        $vitamin->save();
+
+        return redirect()->to('vitamin')->with('msg-success', 'Berhasil menambahkan data');
+    } catch (\Throwable $th) {
+        echo $th;
+    }
   }
 
   /**

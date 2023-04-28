@@ -39,35 +39,13 @@
                                 <h4>Data Vitamin</h4>
                                 <div class="card-header-action">
 
-                                    <a href="#" class="btn btn-icon btn-primary icon-left"><i class="fas fa-plus"></i>
+                                    <a href="{{ route('vitamin.create') }}" class="btn btn-icon btn-primary icon-left"><i class="fas fa-plus"></i>
                                         Tambah</a>
 
                                 </div>
                             </div>
                             <div class="card-body">
-                                {{-- <table class="table table-bordered">
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Jenis Vitamin</th>
-                                        <th>Deskripsi</th>
-                                        <th width="280px">Action</th>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Vitamin A</td>
-                                        <td>Vitamin A penting untuk pertumbuhan dan perkembangan tulang, gigi, mata,
-                                            dan sistem kekebalan tubuh. Kekurangan vitamin A dapat menyebabkan
-                                            masalah kesehatan seperti kebutaan malam dan infeksi.</td>
-                                        <td>
-                                            <form action="#" method="POST">
 
-                                                <a class="btn btn-info" href="#">Detail</a>
-                                                <a class="btn btn-primary" href="#">Edit</a>
-                                                <button type="submit" class="btn btn-danger">Delete</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                </table> --}}
                                 <livewire:vitamin-table theme='bootstrap-4' />
 
                             </div>
