@@ -58,10 +58,12 @@
                             </div>
                             <div class="form-group">
                                 <label>Catatan</label>
-                                <input type="text" name="catatan"
-                                    class="form-control @if (old('catatan')) is-valid @endif
+                                <textarea name="catatan"
+                                class="form-control @if (old('catatan')) is-valid @endif
                                 @error('catatan') is-invalid @enderror"
-                                    value="{{ old('catatan') }}">
+                                value="{{ old('catatan') }}"class="form-control"
+                                data-height="150">
+                                </textarea>
                             </div>
                         </div>
                         <div class="card-footer text-right">

@@ -59,15 +59,16 @@
                             </div>
                             <div class="form-group">
                                 <label>Catatan</label>
-                                <input type="text" name="catatan"
-                                    class="form-control @if (old('catatan')) is-valid @endif 
+                                <textarea name="catatan"
+                                class="form-control @if (old('catatan')) is-valid @endif
                                 @error('catatan') is-invalid @enderror"
-                                    value="{{ old('catatan', $pemeriksaans->catatan) }}">
+                                value="{{ old('catatan', $pemeriksaans->catatan) }}"class="form-control"
+                                data-height="150">
+                                </textarea>
                             </div>
                         </div>
                         <div class="card-footer text-right">
                             <button type="submit" class="btn btn-primary">Submit</button>
-                            <button type="reset" class="btn btn-warning">Reset</button>
                         </div>
                     </form>
                 </div>

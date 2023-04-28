@@ -60,9 +60,7 @@
                                     <div class="row">
                                         <div class="form-group col-12">
                                             <label>Catatan</label>
-                                            <input readonly type="text"
-                                                class="form-control"
-                                                value="{{ $pemeriksaans->catatan }}">
+                                            <textarea readonly class="form-control summernote-simple">{{ $pemeriksaans->catatan }}</textarea>
                                         </div>
                                     </div>
                                 </div>
