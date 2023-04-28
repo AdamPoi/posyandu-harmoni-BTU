@@ -39,7 +39,7 @@
                                 <h4>Data User</h4>
                                 <div class="card-header-action">
 
-                                    <a href="#" class="btn btn-icon btn-primary icon-left"><i class="fas fa-plus"></i>
+                                    <a href="{{ route('user.create') }}" class="btn btn-icon btn-primary icon-left"><i class="fas fa-plus"></i>
                                         Tambah</a>
 
                                 </div>
@@ -58,5 +58,25 @@
     </div>
 @endsection
 @push('scripts')
+
+    {{-- <script>
+        $(document).on('click', '.delete-btn', function (event) {
+            event.preventDefault();
+            var rowId = $(this).data('id');
+            if (confirm('Are you sure you want to delete this row?')) {
+                $.ajax({
+                    url: '/delete/' + rowId,
+                    method: 'DELETE',
+                    success: function (response) {
+                        $('#table').DataTable().row('[data-id="' + rowId + '"]').remove().draw();
+                    },
+                    error: function (response) {
+                        console.log(response);
+                    }
+                });
+            }
+        });
+    </script> --}}
+
     @livewireScripts()
 @endpush
