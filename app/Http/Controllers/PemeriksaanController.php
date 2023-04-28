@@ -61,7 +61,7 @@ class PemeriksaanController extends Controller
   $pemeriksaan->save();
   //jika data berhasil ditambahkan, akan kembali ke halaman utama
   return redirect()->route('pemeriksaan.index')
-      ->with('success', 'Data Berhasil ditambahkan');
+      ->with('msg-success', 'Data Berhasil ditambahkan');
   }
 
   /**
@@ -124,7 +124,7 @@ class PemeriksaanController extends Controller
   $pemeriksaan->save();
   //jika data berhasil ditambahkan, akan kembali ke halaman utama
   return redirect()->route('pemeriksaan.index')
-      ->with('success', 'Data Berhasil ditambahkan');
+      ->with('msg-success', 'Data Berhasil ditambahkan');
   }
 
   /**
@@ -138,6 +138,6 @@ class PemeriksaanController extends Controller
     //fungsi eloquent untuk menghapus data
     Pemeriksaan::find($id_pemeriksaan)->delete();
     return redirect()->route('pemeriksaan.index')
-        -> with('success', 'Data Berhasil Dihapus');
+        -> with('msg-success', 'Data Berhasil Dihapus');
   }
 }
