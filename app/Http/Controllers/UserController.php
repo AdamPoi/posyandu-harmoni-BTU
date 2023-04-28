@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
 {
@@ -12,8 +13,11 @@ class UserController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function index()
+  public function index(Request $request)
   {
+    if ($request->ajax()) {
+        return DataTables::of(User::query())->toJson();
+    }
     return view('pages.user.index');
   }
 
@@ -24,7 +28,7 @@ class UserController extends Controller
    */
   public function create()
   {
-    //
+    return view('pages.user.create');
   }
 
   /**
@@ -35,7 +39,44 @@ class UserController extends Controller
    */
   public function store(Request $request)
   {
-    //
+    $request->validate([
+        'nama' => 'required',
+        'umur' => 'required',
+        'role' => 'required',
+        'alamat' => 'required',
+        'email' => 'required',
+        'password' => 'required',
+    ],
+    [
+        'nama.required' => 'Nama User wajib diisi',
+        'umur.required' => 'Umur User wajib diisi',
+        'role.required' => 'Role User wajib diisi',
+        'alamat.required' => 'Alamat User wajib diisi',
+        'email.required' => 'Email User wajib diisi',
+        'password.required' => 'Password User wajib diisi',
+    ]);
+
+    $nama = $request->nama;
+    $umur = $request->umur;
+    $role = $request->role;
+    $alamat = $request->alamat;
+    $email = $request->email;
+    $password = $request->password;
+
+    try {
+        $user = new User();
+        $user->nama = $nama;
+        $user->umur = $umur;
+        $user->role = $role;
+        $user->alamat = $alamat;
+        $user->email = $email;
+        $user->password = bcrypt($password);
+        $user->save();
+
+        return redirect()->to('user')->with('msg-success', 'Berhasil menambahkan data');
+    } catch (\Throwable $th) {
+        echo $th;
+    }
   }
 
   /**
@@ -46,7 +87,7 @@ class UserController extends Controller
    */
   public function show(User $user)
   {
-    //
+    return view('pages.user.show',compact('user'));
   }
 
   /**
@@ -57,7 +98,7 @@ class UserController extends Controller
    */
   public function edit(User $user)
   {
-    //
+    return view('pages.user.edit', compact('user'));
   }
 
   /**
@@ -69,7 +110,45 @@ class UserController extends Controller
    */
   public function update(Request $request, User $user)
   {
-    //
+    $request->validate([
+        'nama' => 'required',
+        'umur' => 'required',
+        'role' => 'required',
+        'alamat' => 'required',
+        'email' => 'required|unique:user,email',
+        'password' => 'required',
+    ],
+    [
+        'nama.required' => 'Nama User wajib diisi',
+        'umur.required' => 'Umur User wajib diisi',
+        'role.required' => 'Role User wajib diisi',
+        'alamat.required' => 'Alamat User wajib diisi',
+        'email.required' => 'Email User wajib diisi',
+        'email.unique' => 'Email User yang diisikan sudah ada dalam database',
+        'password.required' => 'Password User wajib diisi',
+    ]);
+
+    $nama = $request->nama;
+    $umur = $request->umur;
+    $role = $request->role;
+    $alamat = $request->alamat;
+    $email = $request->email;
+    $password = $request->password;
+
+    try {
+        $user = new User();
+        $user->nama = $nama;
+        $user->umur = $umur;
+        $user->role = $role;
+        $user->alamat = $alamat;
+        $user->email = $email;
+        $user->password = bcrypt($password);
+        $user->save();
+
+        return redirect()->to('user')->with('msg-success', 'Berhasil melakukan update data');
+    } catch (\Throwable $th) {
+        echo $th;
+    }
   }
 
   /**
@@ -80,6 +159,7 @@ class UserController extends Controller
    */
   public function destroy(User $user)
   {
-    //
+    $user->delete();
+        return redirect()->route('user.index')->with('msg-success', 'Berhasil menghapus data user' . $user->nama);
   }
 }

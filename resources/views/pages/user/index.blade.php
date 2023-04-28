@@ -45,31 +45,9 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                {{-- <table class="table table-bordered">
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Nama</th>
-                                        <th>Role</th>
-                                        <th>Email</th>
-                                        <th width="280px">Action</th>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Harmoni</td>
-                                        <td>Bidan</td>
-                                        <td>harmoni@harmoni.com</td>
-                                        <td>
-                                            <form action="#" method="POST">
 
-                                                <a class="btn btn-info" href="#">Detail</a>
-                                                <a class="btn btn-primary" href="#">Edit</a>
-                                                <button type="submit" class="btn btn-danger">Delete</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                </table> --}}
                                 <livewire:user-table theme='bootstrap-4' />
-                                {{-- {{ $mahasiswas->links(); }} --}}
+
                             </div>
                         </div>
                     </div>
