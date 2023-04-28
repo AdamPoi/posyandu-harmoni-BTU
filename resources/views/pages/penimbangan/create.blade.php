@@ -42,7 +42,7 @@
                         <div class="card-body">
                             @csrf
                             <div class="form-group">
-                                <label for="id_balita">ID Balita</label>
+                                <label for="id_balita">Nama Balita</label>
                                 <select class="form-control" name="id_balita" id="id_balita">
                                     @foreach ($balitas as $balita)
                                         <option value="{{$balita->id_balita}}">{{$balita->nama}}</option>
@@ -51,17 +51,24 @@
                             </div>
                             <div class="form-group">
                                 <label>Berat Badan</label>
-                                <input type="text" name="berat badan"
-                                    class="form-control @if (old('berat badan')) is-valid @endif
-                                @error('berat badan') is-invalid @enderror"
-                                    value="{{ old('berat badan') }}">
+                                <input type="text" name="berat_badan"
+                                    class="form-control @if (old('berat_badan')) is-valid @endif
+                                @error('berat_badan') is-invalid @enderror"
+                                    value="{{ old('berat_badan') }}">
                             </div>
                             <div class="form-group">
                                 <label>Tinggi Badan</label>
-                                <input type="text" name="tinggi badan"
-                                    class="form-control @if (old('tinggi badan')) is-valid @endif
-                                @error('tinggi badan') is-invalid @enderror"
-                                    value="{{ old('tinggi badan') }}">
+                                <input type="text" name="tinggi_badan"
+                                    class="form-control @if (old('tinggi_badan')) is-valid @endif
+                                @error('tinggi_badan') is-invalid @enderror"
+                                    value="{{ old('tinggi_badan') }}">
+                            </div>
+                            <div class="form-group">
+                                <label>Tanggal</label>
+                                <input type="date" name="tanggal"
+                                    class="form-control @if (old('tanggal')) is-valid @endif
+                                @error('tanggal') is-invalid @enderror"
+                                    value="{{ old('tanggal') }}">
                             </div>
                         </div>
                         <div class="card-footer text-right">

@@ -24,7 +24,7 @@ class PenimbanganController extends Controller
    */
   public function create()
   {
-    $balitas = Balita::all(); //mendapatkan data dari tabel ibu_hamilss
+    $balitas = Balita::all(); //mendapatkan data dari tabel balitas
     return view('pages.penimbangan.create' , ['balitas' => $balitas]);
   }
 
@@ -38,19 +38,22 @@ class PenimbanganController extends Controller
   {
     //melakukan validasi data
     $request->validate([
-      'tinggi_badan' => 'required',
       'id_balita' => 'required',
       'berat_badan' => 'required',
+      'tinggi_badan' => 'required',
+      'tanggal' => 'required',
   ],
   [
-      'tinggi_badan.required' => 'Tinngi badan wajib diisi',
-      'berat_badan.required' => 'Berat badan wajib diisi',
-      'id_balita.required' => 'Id Balita wajib diisi',
+      'berat_badan.required' => 'Berat Badan wajib diisi',
+      'tinggi_badan.required' => 'Tinggi Badan wajib diisi',
+      'id_balita.required' => 'Nama Balta wajib diisi',
+      'tanggal.required' => 'Tanggal wajib diisi',
   ]);
   $penimbangan = new Penimbangan;
-  $penimbangan->id_balita = $request->get('id_penimbangan');
-  $penimbangan->tinggi_badan = $request->get('tinggi_badan');
+  $penimbangan->id_penimbangan = $request->get('id_penimbangan');
   $penimbangan->berat_badan = $request->get('berat_badan');
+  $penimbangan->tinggi_badan = $request->get('tinggi_badan');
+  $penimbangan->tanggal = $request->get('tanggal');
 
   $balitas = new Balita;
   $balitas->id_balita = $request->get('id_balita');
@@ -60,7 +63,7 @@ class PenimbanganController extends Controller
   $penimbangan->save();
   //jika data berhasil ditambahkan, akan kembali ke halaman utama
   return redirect()->route('penimbangan.index')
-      ->with('success', 'Data Berhasil ditambahkan');
+      ->with('msg-success', 'Data Berhasil ditambahkan');
   }
   
 
