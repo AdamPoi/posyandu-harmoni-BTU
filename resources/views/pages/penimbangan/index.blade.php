@@ -45,6 +45,37 @@
                                 </div>
                             </div>
                             <div class="card-body">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th>No</th>
+                                        <th>ID Balita</th>
+                                        <th>Berat Badan</th>
+                                        <th>Tinggi Badan</th>
+                                        <th width="200px">Action</th>
+                                    </tr>
+                                    {{-- @foreach ($mahasiswas as $Mahasiswa) --}}
+                                    <tr>
+                                        <td>1</td>
+                                        <td>B001</td>
+                                        <td>7kg</td>
+                                        <td>90cm</td>
+                                        <td>
+                                            <form action="#" method="POST" class="d-flex">
+
+                                                <a class="btn btn-info" href="#">Detail</a>
+                                                <a class="btn btn-primary" href="#">Edit</a>
+                                                {{-- @csrf
+                                                @method('DELETE') --}}
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    {{-- @endforeach --}}
+                                </table>
+
+                                {{-- {{ $mahasiswas->links(); }} --}}
+                            </div>
+                            <div class="card-body">
                                 <livewire:penimbangan-table theme='bootstrap-4' />
                                 {{-- {{ $mahasiswas->links(); }} --}}
                             </div>
