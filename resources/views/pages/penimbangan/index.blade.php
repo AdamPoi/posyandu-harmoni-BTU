@@ -39,8 +39,8 @@
                                 <h4>Data Penimbangan</h4>
                                 <div class="card-header-action">
 
-                                    <a href="#" class="btn btn-icon btn-primary icon-left"><i class="fas fa-plus"></i>
-                                        Tambah</a>
+                                    <a href="{{ route('penimbangan.create') }}" class="btn btn-icon btn-primary icon-left"><i class="fas fa-plus"></i>
+                                    Tambah</a>
 
                                 </div>
                             </div>
