@@ -67,7 +67,7 @@ class VitaminController extends Controller
    */
   public function show(Vitamin $vitamin)
   {
-    //
+    return view('pages.vitamin.show',compact('vitamin'));
   }
 
   /**
@@ -78,7 +78,7 @@ class VitaminController extends Controller
    */
   public function edit(Vitamin $vitamin)
   {
-    //
+    return view('pages.vitamin.edit', compact('vitamin'));
   }
 
   /**
@@ -88,9 +88,24 @@ class VitaminController extends Controller
    * @param  \App\Models\Vitamin  $vitamin
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request, Vitamin $vitamin)
+  public function update(Request $request, $id)
   {
-    //
+    $request->validate([
+        'jenis_vitamin' => 'required|unique:vitamins,jenis_vitamin',
+        'deskripsi' => 'required',
+      ],[
+        'jenis_vitamin.required' => 'Jenis Vitamin wajib diisi',
+        'jenis_vitamin.unique' => 'Jenis Vitamin yang diisikan sudah ada dalam database',
+        'deskripsi.required' => 'Deskripsi Vitamin wajib diisi',
+      ]);
+
+      $data = [
+        'jenis_vitamin' => $request->jenis_vitamin,
+        'deskripsi' => $request->deskripsi,
+      ];
+
+      Vitamin::where('id_vitamin', $id)->update($data);
+      return redirect()->to('vitamin')->with('msg-success', 'Berhasil melakukan update data');
   }
 
   /**
