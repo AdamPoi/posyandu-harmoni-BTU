@@ -115,7 +115,7 @@ class UserController extends Controller
         'umur' => 'required',
         'role' => 'required',
         'alamat' => 'required',
-        'email' => 'required|unique:user,email',
+        'email' => 'required|unique:users,email',
         'password' => 'required',
     ],
     [
@@ -136,7 +136,6 @@ class UserController extends Controller
     $password = $request->password;
 
     try {
-        $user = new User();
         $user->nama = $nama;
         $user->umur = $umur;
         $user->role = $role;
