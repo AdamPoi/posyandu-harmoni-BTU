@@ -30,11 +30,7 @@
             </li>
             <li class="{{ Request::is('balita') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('balita') }}"><i class="fas fa-baby"></i>
-                    <span>Data Balita</span></a>
-            </li>
-            <li class="{{ Request::is('pemeriksaan') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ url('pemeriksaan') }}"><i class="fas fa-file-prescription"></i>
-                    <span>Data Pemeriksaan</span></a>
+                    <span>Data Bayi</span></a>
             </li>
             <li class="{{ Request::is('imunisasi') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('imunisasi') }}"><i class="fas fa-syringe"></i>
