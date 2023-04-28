@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Halaman Tambah Obat')
+@section('title', 'Halaman Tambah Balita')
 
 @push('style')
     <link rel="stylesheet" href="{{ asset('library/select2/dist/css/select2.min.css') }}">
@@ -10,11 +10,11 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Tambah Obat</h1>
+                <h1>Tambah Balita</h1>
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="{{ url('dashboard-general-dashboard') }}">Dashboard</a></div>
-                    <div class="breadcrumb-item active"><a href="{{ route('obat.index') }}">Obat</a></div>
-                    <div class="breadcrumb-item"><a href="{{ route('obat.create') }}">Tambah Obat</a></div>
+                    <div class="breadcrumb-item active"><a href="{{ route('balita.index') }}">Balita</a></div>
+                    <div class="breadcrumb-item"><a href="{{ route('balita.create') }}">Tambah Balita</a></div>
                 </div>
             </div>
 
@@ -35,25 +35,47 @@
                 @endif
                 <div class="card">
                     <div class="card-header">
-                        <h4>Tambah Obat</h4>
+                        <h4>Tambah Balita</h4>
 
                     </div>
-                    <form action="{{ route('obat.store') }}" method="POST">
+                    <form action="{{ route('balita.store') }}" method="POST">
                         <div class="card-body">
                             @csrf
                             <div class="form-group">
-                                <label>Nama obat</label>
-                                <input type="text" name="nama_obat"
-                                    class="form-control @if (old('nama_obat')) is-valid @endif
-                                @error('nama_obat') is-invalid @enderror"
-                                    value="{{ old('nama_obat') }}">
+                                <label>Nama Balita</label>
+                                <input type="text" name="nama"
+                                    class="form-control @if (old('nama')) is-valid @endif
+                                @error('nama') is-invalid @enderror"
+                                    value="{{ old('nama') }}">
                             </div>
                             <div class="form-group">
-                                <label>Jenis obat</label>
-                                <input type="text" name="jenis_obat"
-                                    class="form-control @if (old('jenis_obat')) is-valid @endif
-                                @error('jenis_obat') is-invalid @enderror"
-                                    value="{{ old('jenis_obat') }}">
+                                <label>Nama Ayah</label>
+                                <input type="text" name="nama_ayah"
+                                    class="form-control @if (old('nama_ayah')) is-valid @endif
+                                @error('nama_ayah') is-invalid @enderror"
+                                    value="{{ old('nama_ayah') }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="id_ibu_hamil">Nama Ibu</label>
+                                <select class="form-control" name="id_ibu_hamil" id="id_ibu_hamil">
+                                    @foreach ($ibu_hamils as $ibu)
+                                        <option value="{{$ibu->id_ibu_hamil}}">{{$ibu->nama}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Tanggal Lahir</label>
+                                <input type="date" name="tanggal_lahir"
+                                    class="form-control @if (old('tanggal_lahir')) is-valid @endif
+                                @error('tanggal_lahir') is-invalid @enderror"
+                                    value="{{ old('tanggal_lahir') }}">
+                            </div>
+                            <div class="form-group">
+                                <label>Jenis Kelamin</label>
+                                <select class="form-control" name="jenis_kelamin" id="jenis_kelamin">
+                                    <option value="L">Laki-Laki</option>
+                                    <option value="P">Perempuan</option>
+                                </select>
                             </div>
                         </div>
                         <div class="card-footer text-right">
