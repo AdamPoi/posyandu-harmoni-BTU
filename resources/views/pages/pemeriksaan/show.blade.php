@@ -43,10 +43,10 @@
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-12">
-                                            <label>Id Ibu Hamil</label>
+                                            <label>Nama Ibu Hamil</label>
                                             <input readonly type="text"
                                                 class="form-control"
-                                                value="{{ $pemeriksaans->id_ibu_hamil }}">
+                                                value="{{ $pemeriksaans->ibu_hamil->nama }}">
                                         </div>
                                     </div>
                                     <div class="row">

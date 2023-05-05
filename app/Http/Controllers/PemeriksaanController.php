@@ -73,7 +73,7 @@ class PemeriksaanController extends Controller
   public function show($id_pemeriksaan)
   {
       //menampilkan detail data dengan menemukan berdasarkan id_pemeriksaan
-      $pemeriksaans = Pemeriksaan::with('ibu_hamils')->where('id_pemeriksaan', $id_pemeriksaan)->first();
+      $pemeriksaans = Pemeriksaan::with('ibu_hamil')->where('id_pemeriksaan', $id_pemeriksaan)->first();
       return view('pages.pemeriksaan.show', ['pemeriksaans' => $pemeriksaans]);
   }
 
@@ -87,7 +87,7 @@ class PemeriksaanController extends Controller
   {
     //menampilkan detail data dengan menemukan berdasarkan id_pemeriksaan 
     //Pemriksaan untuk diedit
-    $pemeriksaans = Pemeriksaan::with('ibu_hamils')->where('id_pemeriksaan', $id_pemeriksaan)->first();
+    $pemeriksaans = Pemeriksaan::with('ibu_hamil')->where('id_pemeriksaan', $id_pemeriksaan)->first();
     $ibu_hamils = IbuHamil::all(); //mendapatkan data dari ibu hamil
     return view('pages.pemeriksaan.edit', compact('pemeriksaans','ibu_hamils'));
   }
@@ -112,7 +112,7 @@ class PemeriksaanController extends Controller
       'catatan.required' => 'Catatan wajib diisi',
       'id_ibu_hamil.required' => 'Nama Ibu Hamil wajib diisi',
   ]);
-  $pemeriksaan = Pemeriksaan::with('ibu_hamils')->where('id_pemeriksaan', $id_pemeriksaan)->first();
+  $pemeriksaan = Pemeriksaan::with('ibu_hamil')->where('id_pemeriksaan', $id_pemeriksaan)->first();
   $pemeriksaan->tanggal = $request->get('tanggal');
   $pemeriksaan->catatan = $request->get('catatan');
 
@@ -124,7 +124,7 @@ class PemeriksaanController extends Controller
   $pemeriksaan->save();
   //jika data berhasil ditambahkan, akan kembali ke halaman utama
   return redirect()->route('pemeriksaan.index')
-      ->with('msg-success', 'Data Berhasil ditambahkan');
+      ->with('msg-success', 'Data Berhasil diubah');
   }
 
   /**

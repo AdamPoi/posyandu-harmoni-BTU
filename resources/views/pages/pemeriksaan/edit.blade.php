@@ -44,7 +44,7 @@
                             @method('PUT')
                             <div class="form-group">
                                 <label for="id_ibu_hamil">Nama Ibu Hamil</label>
-                                <select readonly class="form-control" name="id_ibu_hamil" id="id_ibu_hamil">
+                                <select class="form-control" name="id_ibu_hamil" id="id_ibu_hamil">
                                     @foreach ($ibu_hamils as $prk)
                                         <option value="{{$prk->id_ibu_hamil}}" {{$prk->id_ibu_hamil == $prk->id_ibu_hamil ? 'selected' : ''}}>{{$prk->nama}}</option>
                                     @endforeach
@@ -55,16 +55,15 @@
                                 <input type="date" name="tanggal"
                                     class="form-control @if (old('tanggal')) is-valid @endif 
                                 @error('tanggal') is-invalid @enderror"
-                                value="{{ old('tanggal', $pemeriksaan->tanggal) }}">
+                                value="{{ old('tanggal', $pemeriksaans->tanggal) }}">
                             </div>
                             <div class="form-group">
                                 <label>Catatan</label>
                                 <textarea name="catatan"
                                 class="form-control @if (old('catatan')) is-valid @endif
                                 @error('catatan') is-invalid @enderror"
-                                value="{{ old('catatan', $pemeriksaans->catatan) }}"class="form-control"
-                                data-height="150">
-                                </textarea>
+                                data-height="150">{{ old('catatan', $pemeriksaans->catatan) }}
+                            </textarea>
                             </div>
                         </div>
                         <div class="card-footer text-right">
