@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Balita;
 use App\Models\Penimbangan;
 use Illuminate\Http\Request;
+use PDF;
 
 class PenimbanganController extends Controller
 {
@@ -145,5 +146,11 @@ class PenimbanganController extends Controller
     Penimbangan::find($id_penimbangan)->delete();
     return redirect()->route('penimbangan.index')
         -> with('success', 'Data Berhasil Dihapus');
+  }
+  public function cetak_pdf()
+  {
+    $penimbangan = Penimbangan::all();
+    $pdf = PDF::loadview('pages.penimbangan.penimbangan_pdf',['penimbangan'=>$penimbangan]);
+    return $pdf->stream();
   }
 }
