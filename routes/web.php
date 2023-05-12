@@ -8,6 +8,8 @@ use App\Http\Controllers\ImunisasiController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\PemeriksaanController;
 use App\Http\Controllers\PenimbanganController;
+use App\Http\Controllers\AutocompleteController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -71,6 +73,11 @@ Route::resource('imunisasi', ImunisasiController::class);
 Route::resource('pemeriksaan', PemeriksaanController::class);
 // Data Imunisasi
 Route::resource('penimbangan', PenimbanganController::class);
+
+
+Route::prefix('autocomplete')->controller(AutocompleteController::class)->group(function () {
+  Route::get('ibuHamil', 'getIbuHamil')->name('autocomplete.ibuHamil');
+})->name('autocomplete');
 // Layout
 Route::get('/layout-default-layout', function () {
   return view('pages.layout-default-layout', ['type_menu' => 'layout']);

@@ -8,15 +8,15 @@ use Illuminate\Http\Request;
 
 class BalitaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('pages.balita.index');
-    }
+  /**
+   * Display a listing of the resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function index()
+  {
+    return view('pages.balita.index');
+  }
 
   /**
    * Show the form for creating a new resource.
@@ -26,7 +26,7 @@ class BalitaController extends Controller
   public function create()
   {
     $ibu_hamils = IbuHamil::all(); //mendapatkan data dari tabel ibu_hamilss
-    return view('pages.balita.create' , ['ibu_hamils' => $ibu_hamils]);
+    return view('pages.balita.create', ['ibu_hamils' => $ibu_hamils]);
   }
 
   /**
@@ -37,36 +37,40 @@ class BalitaController extends Controller
    */
   public function store(Request $request)
   {
-      //melakukan validasi data
-      $request->validate([
+    //melakukan validasi data
+    $request->validate(
+      [
         'nama' => 'required',
         'nama_ayah' => 'required',
-        'nama_ibu' => 'required',
+        'ibu_hamil' => 'required',
         'tanggal_lahir' => 'required',
         'jenis_kelamin' => 'required',
-    ],
-    [
+      ],
+      [
         'nama.required' => 'Nama wajib diisi',
         'nama_ayah.required' => 'Nama Ayah wajib diisi',
-        'id_ibu_hamil.required' => 'Nama Ibu wajib diisi',
+        'ibu_hamil.required' => 'Nama Ibu wajib diisi',
         'tanggal_lahir.required' => 'Tanggal Lahir wajib diisi',
         'jenis_kelamin.required' => 'Jenis Kelamin wajib diisi',
-    ]);
+      ]
+    );
     $balita = new Balita();
     $balita->id_balita = $request->get('id_balita');
+    $balita->nama = $request->get('nama');
     $balita->nama_ayah = $request->get('nama_ayah');
+    $balita->nama_ibu = explode('-', $request->get('ibu_hamil'))[1];
     $balita->tanggal_lahir = $request->get('tanggal_lahir');
     $balita->jenis_kelamin = $request->get('jenis_kelamin');
 
     $ibu_hamils = new IbuHamil;
-    $ibu_hamils->id_ibu_hamil = $request->get('id_ibu_hamil');
+    $ibu_hamils->id_ibu_hamil = explode('-', $request->get('ibu_hamil'))[0];
 
     //fungsi eloquent untuk menambah data dengan relasi belongsTo
     $balita->ibu_hamil()->associate($ibu_hamils);
     $balita->save();
     //jika data berhasil ditambahkan, akan kembali ke halaman utama
     return redirect()->route('balita.index')
-        ->with('success', 'Data Berhasil ditambahkan');
+      ->with('success', 'Data Berhasil ditambahkan');
   }
 
   /**
@@ -88,13 +92,13 @@ class BalitaController extends Controller
    * @param  \App\Models\Balita  $balita
    * @return \Illuminate\Http\Response
    */
-  public function edit(Balita $balita)
+  public function edit(Balita $id_balita)
   {
     //menampilkan detail data dengan menemukan berdasarkan id_balita 
-    //Balita untuk diedit
-    $balitas = Balita::with('ibu_hamils')->where('id_balita', $id_balita)->first();
+
+    $balitas = Balita::with('ibu_hamils')->where('id_balita', $id_balita)->first(); //Balita untuk diedit
     $ibu_hamils = IbuHamil::all(); //mendapatkan data dari ibu hamil
-    return view('pages.balita.edit', compact('balitas','ibu_hamils'));
+    return view('pages.balita.edit', compact('balitas', 'ibu_hamils'));
   }
 
   /**
@@ -106,30 +110,30 @@ class BalitaController extends Controller
    */
   public function update(Request $request, Balita $balita)
   {
-      //   //melakukan validasi data
-      //   $request->validate([
-      //     'tanggal' => 'required',
-      //     'id_ibu_hamil' => 'required',
-      //     'catatan' => 'required',
-      // ],
-      // [
-      //     'tanggal.required' => 'Tanggal wajib diisi',
-      //     'catatan.required' => 'Catatan wajib diisi',
-      //     'id_ibu_hamil.required' => 'Nama Ibu Hamil wajib diisi',
-      // ]);
-      // $pemeriksaan = Pemeriksaan::with('ibu_hamils')->where('id_pemeriksaan', $id_pemeriksaan)->first();
-      // $pemeriksaan->tanggal = $request->get('tanggal');
-      // $pemeriksaan->catatan = $request->get('catatan');
-    
-      // $ibu_hamils = new IbuHamil;
-      // $ibu_hamils->id_ibu_hamil = $request->get('id_ibu_hamil');
-    
-      // //fungsi eloquent untuk menambah data dengan relasi belongsTo
-      // $pemeriksaan->ibu_hamil()->associate($ibu_hamils);
-      // $pemeriksaan->save();
-      // //jika data berhasil ditambahkan, akan kembali ke halaman utama
-      // return redirect()->route('pemeriksaan.index')
-      //     ->with('success', 'Data Berhasil ditambahkan');
+    //   //melakukan validasi data
+    //   $request->validate([
+    //     'tanggal' => 'required',
+    //     'id_ibu_hamil' => 'required',
+    //     'catatan' => 'required',
+    // ],
+    // [
+    //     'tanggal.required' => 'Tanggal wajib diisi',
+    //     'catatan.required' => 'Catatan wajib diisi',
+    //     'id_ibu_hamil.required' => 'Nama Ibu Hamil wajib diisi',
+    // ]);
+    // $pemeriksaan = Pemeriksaan::with('ibu_hamils')->where('id_pemeriksaan', $id_pemeriksaan)->first();
+    // $pemeriksaan->tanggal = $request->get('tanggal');
+    // $pemeriksaan->catatan = $request->get('catatan');
+
+    // $ibu_hamils = new IbuHamil;
+    // $ibu_hamils->id_ibu_hamil = $request->get('id_ibu_hamil');
+
+    // //fungsi eloquent untuk menambah data dengan relasi belongsTo
+    // $pemeriksaan->ibu_hamil()->associate($ibu_hamils);
+    // $pemeriksaan->save();
+    // //jika data berhasil ditambahkan, akan kembali ke halaman utama
+    // return redirect()->route('pemeriksaan.index')
+    //     ->with('success', 'Data Berhasil ditambahkan');
   }
 
   /**
@@ -143,6 +147,6 @@ class BalitaController extends Controller
     //fungsi eloquent untuk menghapus data
     Balita::find($id_balita)->delete();
     return redirect()->route('balita.index')
-        -> with('success', 'Data Berhasil Dihapus');
+      ->with('success', 'Data Berhasil Dihapus');
   }
 }

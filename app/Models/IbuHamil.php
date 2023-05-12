@@ -25,4 +25,8 @@ class IbuHamil extends Model
   {
     return $this->hasMany(Pemeriksaan::class, 'id_ibu_hamil');
   }
+  public function balita()
+  {
+    return $this->hasMany(Balita::class, 'id_balita');
+  }
 }

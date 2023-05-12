@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Halaman Edit Obat')
+@section('title', 'Halaman Edit Pemeriksaan')
 
 @push('style')
     <link rel="stylesheet" href="{{ asset('library/select2/dist/css/select2.min.css') }}">
@@ -10,11 +10,11 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Edit Obat</h1>
+                <h1>Edit Balita</h1>
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="{{ url('dashboard-general-dashboard') }}">Dashboard</a></div>
-                    <div class="breadcrumb-item active"><a href="{{ route('obat.index') }}">Obat</a></div>
-                    <div class="breadcrumb-item">Edit Obat</div>
+                    <div class="breadcrumb-item active"><a href="{{ route('pemeriksaan.index') }}">Pemeriksaan</a></div>
+                    <div class="breadcrumb-item">Edit Pemeriksaan</div>
                 </div>
             </div>
 
@@ -35,31 +35,40 @@
                 @endif
                 <div class="card">
                     <div class="card-header">
-                        <h4>Edit Obat</h4>
+                        <h4>Edit Balita</h4>
 
                     </div>
-                    <form action="{{ route('obat.update', $obat->id_obat) }}" method="POST">
+                    <form action="{{ route('pemeriksaan.update', $pemeriksaans->id_pemeriksaan) }}" method="POST">
                         <div class="card-body">
                             @csrf
                             @method('PUT')
                             <div class="form-group">
-                                <label>Nama obat</label>
-                                <input type="text" name="nama_obat"
-                                    class="form-control @if (old('nama_obat')) is-valid @endif 
-                                @error('nama_obat') is-invalid @enderror"
-                                    value="{{ old('nama_obat', $obat->nama_obat) }}">
+                                <label for="id_ibu_hamil">Nama Ibu Hamil</label>
+                                <select readonly class="form-control" name="id_ibu_hamil" id="id_ibu_hamil">
+                                    @foreach ($ibu_hamils as $prk)
+                                        <option value="{{$prk->id_ibu_hamil}}" {{$prk->id_ibu_hamil == $prk->id_ibu_hamil ? 'selected' : ''}}>{{$prk->nama}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group">
-                                <label>Jenis obat</label>
-                                <input type="text" name="jenis_obat"
-                                    class="form-control @if (old('jenis_obat')) is-valid @endif 
-                                @error('jenis_obat') is-invalid @enderror"
-                                    value="{{ old('jenis_obat', $obat->jenis_obat) }}">
+                                <label>Tanggal</label>
+                                <input type="date" name="tanggal"
+                                    class="form-control @if (old('tanggal')) is-valid @endif 
+                                @error('tanggal') is-invalid @enderror"
+                                value="{{ old('tanggal', $pemeriksaan->tanggal) }}">
+                            </div>
+                            <div class="form-group">
+                                <label>Catatan</label>
+                                <textarea name="catatan"
+                                class="form-control @if (old('catatan')) is-valid @endif
+                                @error('catatan') is-invalid @enderror"
+                                value="{{ old('catatan', $pemeriksaans->catatan) }}"class="form-control"
+                                data-height="150">
+                                </textarea>
                             </div>
                         </div>
                         <div class="card-footer text-right">
                             <button type="submit" class="btn btn-primary">Submit</button>
-                            <button type="reset" class="btn btn-warning">Reset</button>
                         </div>
                     </form>
                 </div>

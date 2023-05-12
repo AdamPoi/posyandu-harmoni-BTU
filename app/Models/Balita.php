@@ -25,4 +25,8 @@ class Balita extends Model
   {
     return $this->hasMany(penimbangan::class, 'id_balita');
   }
+  public function ibu_hamil()
+  {
+    return $this->belongsTo(IbuHamil::class, 'id_ibu_hamil');
+  }
 }

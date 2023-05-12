@@ -55,11 +55,12 @@
                                 @error('nama_ayah') is-invalid @enderror"
                                     value="{{ old('nama_ayah') }}">
                             </div>
+                            
                             <div class="form-group">
                                 <label for="id_ibu_hamil">Nama Ibu</label>
-                                <select class="form-control" name="id_ibu_hamil" id="id_ibu_hamil">
+                                <select class="form-control" name="ibu_hamil" id="ibu_hamil">
                                     @foreach ($ibu_hamils as $ibu)
-                                        <option value="{{$ibu->id_ibu_hamil}}">{{$ibu->nama}}</option>
+                                        <option value="{{$ibu->id_ibu_hamil.'-'.$ibu->nama}}">{{$ibu->nama}}</option>
                                     @endforeach
                                 </select>
                             </div>
