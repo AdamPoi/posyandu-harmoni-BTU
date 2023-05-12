@@ -16,4 +16,9 @@ class Vitamin extends Model
     'jenis_vitamin',
     'deskripsi',
   ];
+
+  public function ibu_hamil()
+  {
+    return $this->belongsTo(IbuHamil::class, 'id_ibu_hamil');
+  }
 }
