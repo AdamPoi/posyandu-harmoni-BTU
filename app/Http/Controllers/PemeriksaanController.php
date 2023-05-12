@@ -26,7 +26,7 @@ class PemeriksaanController extends Controller
   public function create()
   {
     $ibu_hamils = IbuHamil::all(); //mendapatkan data dari tabel ibu_hamilss
-    return view('pages.pemeriksaan.create' , ['ibu_hamils' => $ibu_hamils]);
+    return view('pages.pemeriksaan.create', ['ibu_hamils' => $ibu_hamils]);
   }
 
   /**
@@ -38,29 +38,31 @@ class PemeriksaanController extends Controller
   public function store(Request $request)
   {
     //melakukan validasi data
-    $request->validate([
-      'tanggal' => 'required',
-      'id_ibu_hamil' => 'required',
-      'catatan' => 'required',
-  ],
-  [
-      'tanggal.required' => 'Tanggal wajib diisi',
-      'catatan.required' => 'Catatan wajib diisi',
-      'id_ibu_hamil.required' => 'Nama Ibu Hamil wajib diisi',
-  ]);
-  $pemeriksaan = new Pemeriksaan;
-  $pemeriksaan->id_pemeriksaan = $request->get('id_pemeriksaan');
-  $pemeriksaan->tanggal = $request->get('tanggal');
-  $pemeriksaan->catatan = $request->get('catatan');
+    $request->validate(
+      [
+        'tanggal' => 'required',
+        'id_ibu_hamil' => 'required',
+        'catatan' => 'required',
+      ],
+      [
+        'tanggal.required' => 'Tanggal wajib diisi',
+        'catatan.required' => 'Catatan wajib diisi',
+        'id_ibu_hamil.required' => 'Nama Ibu Hamil wajib diisi',
+      ]
+    );
+    $pemeriksaan = new Pemeriksaan;
+    $pemeriksaan->id_pemeriksaan = $request->get('id_pemeriksaan');
+    $pemeriksaan->tanggal = $request->get('tanggal');
+    $pemeriksaan->catatan = $request->get('catatan');
 
-  $ibu_hamils = new IbuHamil;
-  $ibu_hamils->id_ibu_hamil = $request->get('id_ibu_hamil');
+    $ibu_hamils = new IbuHamil;
+    $ibu_hamils->id_ibu_hamil = $request->get('id_ibu_hamil');
 
-  //fungsi eloquent untuk menambah data dengan relasi belongsTo
-  $pemeriksaan->ibu_hamil()->associate($ibu_hamils);
-  $pemeriksaan->save();
-  //jika data berhasil ditambahkan, akan kembali ke halaman utama
-  return redirect()->route('pemeriksaan.index')
+    //fungsi eloquent untuk menambah data dengan relasi belongsTo
+    $pemeriksaan->ibu_hamil()->associate($ibu_hamils);
+    $pemeriksaan->save();
+    //jika data berhasil ditambahkan, akan kembali ke halaman utama
+    return redirect()->route('pemeriksaan.index')
       ->with('msg-success', 'Data Berhasil ditambahkan');
   }
 
@@ -72,9 +74,9 @@ class PemeriksaanController extends Controller
    */
   public function show($id_pemeriksaan)
   {
-      //menampilkan detail data dengan menemukan berdasarkan id_pemeriksaan
-      $pemeriksaans = Pemeriksaan::with('ibu_hamil')->where('id_pemeriksaan', $id_pemeriksaan)->first();
-      return view('pages.pemeriksaan.show', ['pemeriksaans' => $pemeriksaans]);
+    //menampilkan detail data dengan menemukan berdasarkan id_pemeriksaan
+    $pemeriksaans = Pemeriksaan::with('ibu_hamil')->where('id_pemeriksaan', $id_pemeriksaan)->first();
+    return view('pages.pemeriksaan.show', ['pemeriksaans' => $pemeriksaans]);
   }
 
   /**
@@ -87,9 +89,9 @@ class PemeriksaanController extends Controller
   {
     //menampilkan detail data dengan menemukan berdasarkan id_pemeriksaan 
     //Pemriksaan untuk diedit
-    $pemeriksaans = Pemeriksaan::with('ibu_hamil')->where('id_pemeriksaan', $id_pemeriksaan)->first();
+    $pemeriksaan = Pemeriksaan::with('ibu_hamil')->where('id_pemeriksaan', $id_pemeriksaan)->first();
     $ibu_hamils = IbuHamil::all(); //mendapatkan data dari ibu hamil
-    return view('pages.pemeriksaan.edit', compact('pemeriksaans','ibu_hamils'));
+    return view('pages.pemeriksaan.edit', compact('pemeriksaan', 'ibu_hamils'));
   }
 
   /**
@@ -102,29 +104,31 @@ class PemeriksaanController extends Controller
   public function update(Request $request, $id_pemeriksaan)
   {
     //melakukan validasi data
-    $request->validate([
-      'tanggal' => 'required',
-      'id_ibu_hamil' => 'required',
-      'catatan' => 'required',
-  ],
-  [
-      'tanggal.required' => 'Tanggal wajib diisi',
-      'catatan.required' => 'Catatan wajib diisi',
-      'id_ibu_hamil.required' => 'Nama Ibu Hamil wajib diisi',
-  ]);
-  $pemeriksaan = Pemeriksaan::with('ibu_hamil')->where('id_pemeriksaan', $id_pemeriksaan)->first();
-  $pemeriksaan->tanggal = $request->get('tanggal');
-  $pemeriksaan->catatan = $request->get('catatan');
+    $request->validate(
+      [
+        'tanggal' => 'required',
+        'id_ibu_hamil' => 'required',
+        'catatan' => 'required',
+      ],
+      [
+        'tanggal.required' => 'Tanggal wajib diisi',
+        'catatan.required' => 'Catatan wajib diisi',
+        'id_ibu_hamil.required' => 'Nama Ibu Hamil wajib diisi',
+      ]
+    );
+    $pemeriksaan = Pemeriksaan::with('ibu_hamils')->where('id_pemeriksaan', $id_pemeriksaan)->first();
+    $pemeriksaan->tanggal = $request->get('tanggal');
+    $pemeriksaan->catatan = $request->get('catatan');
 
-  $ibu_hamils = new IbuHamil;
-  $ibu_hamils->id_ibu_hamil = $request->get('id_ibu_hamil');
+    $ibu_hamils = new IbuHamil;
+    $ibu_hamils->id_ibu_hamil = $request->get('id_ibu_hamil');
 
-  //fungsi eloquent untuk menambah data dengan relasi belongsTo
-  $pemeriksaan->ibu_hamil()->associate($ibu_hamils);
-  $pemeriksaan->save();
-  //jika data berhasil ditambahkan, akan kembali ke halaman utama
-  return redirect()->route('pemeriksaan.index')
-      ->with('msg-success', 'Data Berhasil diubah');
+    //fungsi eloquent untuk menambah data dengan relasi belongsTo
+    $pemeriksaan->ibu_hamil()->associate($ibu_hamils);
+    $pemeriksaan->save();
+    //jika data berhasil ditambahkan, akan kembali ke halaman utama
+    return redirect()->route('pemeriksaan.index')
+      ->with('msg-success', 'Data Berhasil ditambahkan');
   }
 
   /**
@@ -138,6 +142,6 @@ class PemeriksaanController extends Controller
     //fungsi eloquent untuk menghapus data
     Pemeriksaan::find($id_pemeriksaan)->delete();
     return redirect()->route('pemeriksaan.index')
-        -> with('msg-success', 'Data Berhasil Dihapus');
+      ->with('msg-success', 'Data Berhasil Dihapus');
   }
 }

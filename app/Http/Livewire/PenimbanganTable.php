@@ -3,7 +3,7 @@
 namespace App\Http\Livewire;
 
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
-use Rappasoft\LaravelLivewireTables\Views\Column;
+use Rappasoft\LaravelLivewireTables\Views\Colohumn;
 use App\Models\Penimbangan;
 
 class PenimbanganTable extends DataTableComponent
@@ -33,23 +33,23 @@ class PenimbanganTable extends DataTableComponent
       // Column::make("Updated at", "updated_at")
       //   ->sortable(),
       Column::make('Actions')
-                ->label(
-                    function ($row) {
-                        $delete =
-                            '<a href="' . route('penimbangan.destroy', ['penimbangan' => $row->id_penimbangan]) . '" class="btn btn-icon icon-center btn-danger delete-btn">
+        ->label(
+          function ($row) {
+            $delete =
+              '<a href="' . route('penimbangan.destroy', ['penimbangan' => $row->id_penimbangan]) . '" class="btn btn-icon icon-center btn-danger delete-btn">
                                 <i class="fas fa-trash"></i>
                             </a>';
-                        $edit =
-                            '<a href="' . route('penimbangan.edit', ['penimbangan' => $row->id_penimbangan]) . '" class="btn btn-icon icon-center btn-warning">
+            $edit =
+              '<a href="' . route('penimbangan.edit', ['penimbangan' => $row->id_penimbangan]) . '" class="btn btn-icon icon-center btn-warning">
                                 <i class="fas fa-pencil-alt"></i>
                             </a>';
-                        $detail =
-                            '<a href="' . route('penimbangan.show', ['penimbangan' => $row->id_penimbangan]) . '" class="btn btn-icon icon-center btn-primary">
+            $detail =
+              '<a href="' . route('penimbangan.show', ['penimbangan' => $row->id_penimbangan]) . '" class="btn btn-icon icon-center btn-primary">
                                 <i class="fas fa-circle-info"></i>
                             </a>';
-                        return $detail . $edit . $delete;
-                    }
-                )->html(),
+            return $detail . $edit . $delete;
+          }
+        )->html(),
     ];
   }
 }

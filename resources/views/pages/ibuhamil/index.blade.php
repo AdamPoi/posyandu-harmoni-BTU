@@ -39,7 +39,8 @@
                                 <h4>Data Ibu Hamil</h4>
                                 <div class="card-header-action">
 
-                                    <a href="#" class="btn btn-icon btn-primary icon-left"><i class="fas fa-plus"></i>
+                                    <a href="{{ route('ibuhamil.create') }}" class="btn btn-icon btn-primary icon-left"><i
+                                            class="fas fa-plus"></i>
                                         Tambah</a>
 
                                 </div>
