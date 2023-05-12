@@ -13,7 +13,7 @@
         }
     </style>
     <center>
-        <h5>Laporan Artikel</h4>
+        <h5>Laporan Data Vitamin</h4>
     </center>
     <table class='table table-bordered'>
         <thead>
