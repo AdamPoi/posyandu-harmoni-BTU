@@ -55,6 +55,9 @@ Route::get('/dashboard-ecommerce-dashboard', function () {
 
 // Cetak PDF
 Route::get('/vitamin/cetak_pdf', [VitaminController::class, 'cetak_pdf']);
+// Cetak PDF Pemriksaan
+// Data Pemeriksaan
+Route::get('/pemeriksaan/cetak_pdf', [PemeriksaanController::class, 'cetak_pdf']);
 
 // Data User
 Route::resource('user', UserController::class);

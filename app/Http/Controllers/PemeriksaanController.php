@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\IbuHamil;
 use App\Models\Pemeriksaan;
 use Illuminate\Http\Request;
+use PDF;
 
 class PemeriksaanController extends Controller
 {
@@ -139,5 +140,12 @@ class PemeriksaanController extends Controller
     Pemeriksaan::find($id_pemeriksaan)->delete();
     return redirect()->route('pemeriksaan.index')
         -> with('msg-success', 'Data Berhasil Dihapus');
+  }
+
+  public function cetak_pdf()
+  {
+    $pemeriksaan = Pemeriksaan::all();
+    $pdf = PDF::loadview('pages.pemeriksaan.pemeriksaan_pdf',['pemeriksaan'=>$pemeriksaan]);
+    return $pdf->stream();
   }
 }
