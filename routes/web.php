@@ -51,6 +51,9 @@ Route::get('/dashboard-ecommerce-dashboard', function () {
   return view('pages.dashboard-ecommerce-dashboard', ['type_menu' => 'dashboard']);
 });
 
+// Cetak PDF
+Route::get('/vitamin/cetak_pdf', [VitaminController::class, 'cetak_pdf']);
+
 // Data User
 Route::resource('user', UserController::class);
 // Data Ibu hamil
@@ -61,6 +64,7 @@ Route::resource('balita', BalitaController::class);
 Route::resource('jadwal', JadwalController::class);
 // Data Vitamin
 Route::resource('vitamin', VitaminController::class);
+
 // Data Imunisasi
 Route::resource('imunisasi', ImunisasiController::class);
 // Data Imunisasi
