@@ -67,7 +67,7 @@
                                     </div>
                                 </div>
                                 <div class="card-footer text-right">
-                                    <a class="btn btn-primary float-left" href="{{ route('pemeriksaan.index') }}">Kembali</a></div>
+                                    <a class="btn btn-primary float-left" href="{{ route('penimbangan.index') }}">Kembali</a></div>
                                 </div>
                         </div>
                     </div>
