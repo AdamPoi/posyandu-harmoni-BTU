@@ -12,11 +12,11 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Data Imunisasi</h1>
+                <h1>Imunisasi</h1>
 
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="{{ url('dashboard-general-dashboard') }}">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="{{ route('imunisasi.index') }}">Imunisasi</a></div>
+                    <div class="breadcrumb-item"><a href="{{ route('pemeriksaan.index') }}">Imunisasi</a></div>
                 </div>
             </div>
             <div class="section-body">
@@ -39,47 +39,24 @@
                                 <h4>Data Imunisasi</h4>
                                 <div class="card-header-action">
 
-                                    <a href="{{ route('imunisasi.create') }}" class="btn btn-icon btn-primary icon-left"><i
-                                            class="fas fa-plus"></i>
+                                    <a href="imunisasi/cetak_pdf" class="btn btn-icon btn-primary icon-left"><i class="fas fa-file-export"></i>
+                                        Ekspor PDF</a>
+                                    <a href="{{ route('imunisasi.create') }}" class="btn btn-icon btn-primary icon-left"><i class="fas fa-plus"></i>
                                         Tambah</a>
 
                                 </div>
                             </div>
                             <div class="card-body">
-                                {{-- <div class="table-responsive">
-                                    <table class="table-striped table" id="imunisasis-table">
-                                        <thead>
-                                            <tr>
-                                            <th>No</th>
-                                                <th>Nama Balita</th>
-                                                <th>Jenis Imunisasi</th>
-                                                <th>Tanggal</th>
-                                                <th>Deskripsi</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                        </tbody>
-                                    </table> --}}
                                 <livewire:imunisasi-table theme='bootstrap-4' />
-
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-    </div>
-    </section>
+        </section>
+        {{-- <x-modal.confirm-delete /> --}}
     </div>
 @endsection
-
 @push('scripts')
     @livewireScripts()
-
-    <script src="{{ asset('library/datatables/media/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('library/datatables/media/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('library/datatables/media/js/select.bootstrap4.min.js') }}"></script>
-
-    <script src="{{ asset('js/page/modules-datatables.js') }}"></script>
 @endpush

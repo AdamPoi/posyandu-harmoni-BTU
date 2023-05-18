@@ -60,7 +60,8 @@ Route::get('/vitamin/cetak_pdf', [VitaminController::class, 'cetak_pdf']);
 Route::get('/pemeriksaan/cetak_pdf', [PemeriksaanController::class, 'cetak_pdf']);
 // Cetak Data Penimbangan
 Route::get('/penimbangan/cetak_pdf', [PenimbanganController::class, 'cetak_pdf']);
-
+// Cetak PDF Imunisasi
+Route::get('/imunisasi/cetak_pdf', [ImunisasiController::class, 'cetak_pdf']);
 // Data User
 Route::resource('user', UserController::class);
 // Data Ibu hamil
