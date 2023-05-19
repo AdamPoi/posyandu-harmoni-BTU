@@ -16,7 +16,7 @@ class UserController extends Controller
   public function index(Request $request)
   {
     if ($request->ajax()) {
-        return DataTables::of(User::query())->toJson();
+      return DataTables::of(User::query())->toJson();
     }
     return view('pages.user.index');
   }
@@ -39,22 +39,25 @@ class UserController extends Controller
    */
   public function store(Request $request)
   {
-    $request->validate([
+    $request->validate(
+      [
         'nama' => 'required',
         'umur' => 'required',
         'role' => 'required',
         'alamat' => 'required',
         'email' => 'required',
         'password' => 'required',
-    ],
-    [
+        'profile_picture' => 'required'
+      ],
+      [
         'nama.required' => 'Nama User wajib diisi',
         'umur.required' => 'Umur User wajib diisi',
         'role.required' => 'Role User wajib diisi',
         'alamat.required' => 'Alamat User wajib diisi',
         'email.required' => 'Email User wajib diisi',
         'password.required' => 'Password User wajib diisi',
-    ]);
+      ]
+    );
 
     $nama = $request->nama;
     $umur = $request->umur;
@@ -62,20 +65,24 @@ class UserController extends Controller
     $alamat = $request->alamat;
     $email = $request->email;
     $password = $request->password;
+    $profile_picture = $this->uploadImage($request->file('profile_picture'));
+
+
 
     try {
-        $user = new User();
-        $user->nama = $nama;
-        $user->umur = $umur;
-        $user->role = $role;
-        $user->alamat = $alamat;
-        $user->email = $email;
-        $user->password = bcrypt($password);
-        $user->save();
+      $user = new User();
+      $user->nama = $nama;
+      $user->umur = $umur;
+      $user->role = $role;
+      $user->alamat = $alamat;
+      $user->email = $email;
+      $user->password = bcrypt($password);
+      $user->profile_picture = $profile_picture;
+      $user->save();
 
-        return redirect()->to('user')->with('msg-success', 'Berhasil menambahkan data');
+      return redirect()->to('user')->with('msg-success', 'Berhasil menambahkan data');
     } catch (\Throwable $th) {
-        echo $th;
+      echo $th;
     }
   }
 
@@ -87,7 +94,7 @@ class UserController extends Controller
    */
   public function show(User $user)
   {
-    return view('pages.user.show',compact('user'));
+    return view('pages.user.show', compact('user'));
   }
 
   /**
@@ -110,15 +117,16 @@ class UserController extends Controller
    */
   public function update(Request $request, User $user)
   {
-    $request->validate([
+    $request->validate(
+      [
         'nama' => 'required',
         'umur' => 'required',
         'role' => 'required',
         'alamat' => 'required',
-        'email' => 'required|unique:users,email',
+        'email' => 'required',
         'password' => 'required',
-    ],
-    [
+      ],
+      [
         'nama.required' => 'Nama User wajib diisi',
         'umur.required' => 'Umur User wajib diisi',
         'role.required' => 'Role User wajib diisi',
@@ -126,7 +134,8 @@ class UserController extends Controller
         'email.required' => 'Email User wajib diisi',
         'email.unique' => 'Email User yang diisikan sudah ada dalam database',
         'password.required' => 'Password User wajib diisi',
-    ]);
+      ]
+    );
 
     $nama = $request->nama;
     $umur = $request->umur;
@@ -134,19 +143,23 @@ class UserController extends Controller
     $alamat = $request->alamat;
     $email = $request->email;
     $password = $request->password;
+    $profile_picture = $this->uploadImage($request->file('profile_picture'));
+
 
     try {
-        $user->nama = $nama;
-        $user->umur = $umur;
-        $user->role = $role;
-        $user->alamat = $alamat;
-        $user->email = $email;
-        $user->password = bcrypt($password);
-        $user->save();
+      $user->nama = $nama;
+      $user->umur = $umur;
+      $user->role = $role;
+      $user->alamat = $alamat;
+      $user->email = $email;
+      $user->password = bcrypt($password);
+      $user->profile_picture = $profile_picture;
 
-        return redirect()->to('user')->with('msg-success', 'Berhasil melakukan update data');
+      $user->save();
+
+      return redirect()->to('user')->with('msg-success', 'Berhasil melakukan update data');
     } catch (\Throwable $th) {
-        echo $th;
+      echo $th;
     }
   }
 
@@ -159,6 +172,14 @@ class UserController extends Controller
   public function destroy(User $user)
   {
     $user->delete();
-        return redirect()->route('user.index')->with('msg-success', 'Berhasil menghapus data user' . $user->nama);
+    return redirect()->route('user.index')->with('msg-success', 'Berhasil menghapus data user' . $user->nama);
+  }
+
+  protected function uploadImage($file)
+  {
+    $imageName = time() . '.' . $file->getClientOriginalExtension();
+
+    $file->move(public_path('images/user'), $imageName);
+    return $imageName;
   }
 }

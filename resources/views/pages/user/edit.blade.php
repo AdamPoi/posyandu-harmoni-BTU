@@ -20,25 +20,25 @@
 
             <div class="section-body">
                 @if ($errors->any())
-                <div class="pt-3">
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <ul>
-                        @foreach ($errors->all() as $item)
-                            <li>{{ $item }}</li>
-                        @endforeach
-                        </ul>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                    <div class="pt-3">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <ul>
+                                @foreach ($errors->all() as $item)
+                                    <li>{{ $item }}</li>
+                                @endforeach
+                            </ul>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     </div>
-                </div>
                 @endif
                 <div class="card">
                     <div class="card-header">
                         <h4>Edit User</h4>
 
                     </div>
-                    <form action="{{ route('user.update', $user->id_user) }}" method="POST">
+                    <form action="{{ route('user.update', $user->id_user) }}" method="POST" enctype="multipart/form-data">
                         <div class="card-body">
                             @csrf
                             @method('PUT')
@@ -88,6 +88,13 @@
                                 @error('password') is-invalid @enderror"
                                     value="{{ old('password', $user->password) }}">
                             </div>
+                            <div class="form-group">
+                                <label for="profile_picture">Profil Picture</label>
+                                <input type="file" id="image-input" class="form-control" required="required"
+                                    name="profile_picture" value="{{ old('profile_picture') }}">
+                                <img width="150px" id="image-preview"
+                                    src="{{ asset('images/user/' . old('profile_picture', $user->profile_picture)) }}">
+                            </div>
                         </div>
                         <div class="card-footer text-right">
                             <button type="submit" class="btn btn-primary">Submit</button>
@@ -100,3 +107,24 @@
 
     </div>
 @endsection
+@push('scripts')
+    <script>
+        const imageInput = document.querySelector('#image-input');
+        const imagePreview = document.querySelector('#image-preview');
+
+        imageInput.addEventListener('change', () => {
+            const file = imageInput.files[0];
+            const reader = new FileReader();
+
+            reader.addEventListener('load', () => {
+                imagePreview.src = reader.result;
+            });
+
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                imagePreview.src = '';
+            }
+        });
+    </script>
+@endpush

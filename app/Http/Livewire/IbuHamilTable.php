@@ -14,7 +14,9 @@ class IbuHamilTable extends DataTableComponent
   {
     $this->setPrimaryKey('id');
   }
-
+  public function deleteId($id)
+  {
+  }
   public function columns(): array
   {
     return [
@@ -29,7 +31,7 @@ class IbuHamilTable extends DataTableComponent
       Column::make('Actions')
         ->label(
           function ($row) {
-            $delete = ' <button type="button" wire:click="deleteId(' . $row->id_ibu_hamil . ')" class="btn btn-icon icon-center btn-danger delete-btn" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-pencil-alt"></i></button>';
+            $delete = ' <button type="button" wire:click="deleteId(' . $row->id_ibu_hamil . ')" class="btn btn-icon icon-center btn-danger delete-btn" data-toggle="modal" data-target="#exampleModal"> <i class="fas fa-trash"></i></button>';
 
 
             // '<a href="' . route('ibuhamil.destroy', ['ibuhamil' => $row->id_ibu_hamil]) . ' wire:click="deleteId('$row->id_ibu_hamil' )" class="btn btn-icon icon-center btn-danger delete-btn">

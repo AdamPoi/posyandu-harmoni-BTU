@@ -54,6 +54,8 @@
                 </div>
             </div>
         </section>
+        <x-modal.confirm-delete />
+
         {{-- <x-modal.confirm-delete /> --}}
     </div>
 @endsection

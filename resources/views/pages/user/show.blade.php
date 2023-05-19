@@ -26,55 +26,54 @@
                 <div class="row mt-sm-4">
                     <div class="col-12 col-md-12">
                         <div class="card">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="form-group col-12">
-                                            <label>Nama</label>
-                                            <input readonly type="text"
-                                                class="form-control"
-                                                value="{{ $user->nama }}">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-md-7 col-12">
-                                            <label>Umur</label>
-                                            <input readonly type="number"
-                                                class="form-control"
-                                                value="{{ $user->umur }}">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-12">
-                                            <label>Role</label>
-                                            <input readonly type="text"
-                                                class="form-control"
-                                                value="{{ $user->role }}">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-12">
-                                            <label>Alamat</label>
-                                            <textarea readonly class="form-control summernote-simple">{{ $user->alamat }}</textarea>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-12">
-                                            <label>Email</label>
-                                            <input readonly type="email"
-                                                class="form-control"
-                                                value="{{ $user->email }}">
-                                        </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <label>Nama</label>
+                                        <input readonly type="text" class="form-control" value="{{ $user->nama }}">
                                     </div>
                                 </div>
-                                <div class="card-footer text-right">
-                                    <a class="btn btn-primary float-left" href="{{ route('user.index') }}">Kembali</a></div>
+                                <div class="row">
+                                    <div class="form-group col-md-7 col-12">
+                                        <label>Umur</label>
+                                        <input readonly type="number" class="form-control" value="{{ $user->umur }}">
+                                    </div>
                                 </div>
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <label>Role</label>
+                                        <input readonly type="text" class="form-control" value="{{ $user->role }}">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <label>Alamat</label>
+                                        <textarea readonly class="form-control summernote-simple">{{ $user->alamat }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <label>Email</label>
+                                        <input readonly type="email" class="form-control" value="{{ $user->email }}">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <img width="150px" src="{{ asset('images/user/' . $user->profile_picture) }}">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="card-footer text-right">
+                                <a class="btn btn-primary float-left" href="{{ route('user.index') }}">Kembali</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-        {{-- <x-modal.confirm-delete /> --}}
+    </div>
+    </section>
+    {{-- <x-modal.confirm-delete /> --}}
 
     </div>
 @endsection

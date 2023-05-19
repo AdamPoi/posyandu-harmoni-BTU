@@ -20,25 +20,25 @@
 
             <div class="section-body">
                 @if ($errors->any())
-                <div class="pt-3">
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <ul>
-                        @foreach ($errors->all() as $item)
-                            <li>{{ $item }}</li>
-                        @endforeach
-                        </ul>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                    <div class="pt-3">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <ul>
+                                @foreach ($errors->all() as $item)
+                                    <li>{{ $item }}</li>
+                                @endforeach
+                            </ul>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     </div>
-                </div>
                 @endif
                 <div class="card">
                     <div class="card-header">
                         <h4>Tambah User</h4>
 
                     </div>
-                    <form action="{{ route('user.store') }}" method="POST">
+                    <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">>
                         <div class="card-body">
                             @csrf
                             <div class="form-group">
@@ -88,6 +88,12 @@
                                     value="{{ old('password') }}">
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="profile_picture">Profil Picture</label>
+                            <input type="file" id="image-input" class="form-control" required="required"
+                                name="profile_picture" value="{{ old('password') }}">
+                            <img width="150px" id="image-preview" src="{{ asset('storage/' . old('password')) }}">
+                        </div>
                         <div class="card-footer text-right">
                             <button type="submit" class="btn btn-primary">Submit</button>
                             <button type="reset" class="btn btn-warning">Reset</button>
@@ -104,4 +110,23 @@
     <script src="{{ asset('library/cleave.js/dist/cleave.min.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{ asset('library/select2/dist/js/select2.full.min.js') }}"></script>
+    <script>
+        const imageInput = document.querySelector('#image-input');
+        const imagePreview = document.querySelector('#image-preview');
+
+        imageInput.addEventListener('change', () => {
+            const file = imageInput.files[0];
+            const reader = new FileReader();
+
+            reader.addEventListener('load', () => {
+                imagePreview.src = reader.result;
+            });
+
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                imagePreview.src = '';
+            }
+        });
+    </script>
 @endpush
