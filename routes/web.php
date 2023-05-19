@@ -8,6 +8,8 @@ use App\Http\Controllers\ImunisasiController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\PemeriksaanController;
 use App\Http\Controllers\PenimbanganController;
+use App\Http\Controllers\AutocompleteController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,6 +53,15 @@ Route::get('/dashboard-ecommerce-dashboard', function () {
   return view('pages.dashboard-ecommerce-dashboard', ['type_menu' => 'dashboard']);
 });
 
+// Cetak PDF
+Route::get('/vitamin/cetak_pdf', [VitaminController::class, 'cetak_pdf']);
+// Cetak PDF Pemriksaan
+// Data Pemeriksaan
+Route::get('/pemeriksaan/cetak_pdf', [PemeriksaanController::class, 'cetak_pdf']);
+// Cetak Data Penimbangan
+Route::get('/penimbangan/cetak_pdf', [PenimbanganController::class, 'cetak_pdf']);
+// Cetak PDF Imunisasi
+Route::get('/imunisasi/cetak_pdf', [ImunisasiController::class, 'cetak_pdf']);
 // Data User
 Route::resource('user', UserController::class);
 // Data Ibu hamil
@@ -61,12 +72,18 @@ Route::resource('balita', BalitaController::class);
 Route::resource('jadwal', JadwalController::class);
 // Data Vitamin
 Route::resource('vitamin', VitaminController::class);
+
 // Data Imunisasi
 Route::resource('imunisasi', ImunisasiController::class);
 // Data Imunisasi
 Route::resource('pemeriksaan', PemeriksaanController::class);
 // Data Imunisasi
 Route::resource('penimbangan', PenimbanganController::class);
+
+
+Route::prefix('autocomplete')->controller(AutocompleteController::class)->group(function () {
+  Route::get('ibuHamil', 'getIbuHamil')->name('autocomplete.ibuHamil');
+})->name('autocomplete');
 // Layout
 Route::get('/layout-default-layout', function () {
   return view('pages.layout-default-layout', ['type_menu' => 'layout']);

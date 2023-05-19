@@ -39,6 +39,8 @@
                                 <h4>Data Vitamin</h4>
                                 <div class="card-header-action">
 
+                                    <a href="{{ url('vitamin/cetak_pdf') }}" class="btn btn-icon btn-primary icon-left"><i class="fas fa-print"></i>
+                                        Print PDF</a>
                                     <a href="{{ route('vitamin.create') }}" class="btn btn-icon btn-primary icon-left"><i class="fas fa-plus"></i>
                                         Tambah</a>
 

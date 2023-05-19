@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Vitamin;
 use Illuminate\Http\Request;
 
+use PDF;
+
 class VitaminController extends Controller
 {
   /**
@@ -117,5 +119,12 @@ class VitaminController extends Controller
   public function destroy(Vitamin $vitamin)
   {
     //
+  }
+
+  public function cetak_pdf()
+  {
+    $vitamin = Vitamin::all();
+    $pdf = PDF::loadview('pages.vitamin.vitamin_pdf',['vitamin'=>$vitamin]);
+    return $pdf->stream();
   }
 }

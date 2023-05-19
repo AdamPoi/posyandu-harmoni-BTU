@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Halaman Tambah Imunisasi')
+@section('title', 'Halaman Edit Data Imunisasi')
 
 @push('style')
     <link rel="stylesheet" href="{{ asset('library/select2/dist/css/select2.min.css') }}">
@@ -10,11 +10,11 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Tambah Imunisasi</h1>
+                <h1>Edit Data Imunisasi</h1>
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="{{ url('dashboard-general-dashboard') }}">Dashboard</a></div>
                     <div class="breadcrumb-item active"><a href="{{ route('imunisasi.index') }}">Imunisasi</a></div>
-                    <div class="breadcrumb-item"><a href="{{ route('imunisasi.create') }}">Tambah Imunisasi</a></div>
+                    <div class="breadcrumb-item">Edit Imunisasi</div>
                 </div>
             </div>
 
@@ -35,47 +35,46 @@
                 @endif
                 <div class="card">
                     <div class="card-header">
-                        <h4>Tambah Imunisasi</h4>
+                        <h4>Edit Data Imunisasi</h4>
 
                     </div>
-                    <form action="{{ route('imunisasi.store') }}" method="POST">
+                    <form action="{{ route('imunisasi.update', $imunisasis->id_imunisasi) }}" method="POST">
                         <div class="card-body">
                             @csrf
+                            @method('PUT')
                             <div class="form-group">
-                                <label for="id_balita">Nama Balita</label>
+                                <label for="id_ibu_hamil">Nama Balita</label>
                                 <select class="form-control" name="id_balita" id="id_balita">
-                                    @foreach ($balitas as $bal)
-                                        <option value="{{$bal->id_balita}}">{{$bal->nama}}</option>
+                                    @foreach ($balitas as $prk)
+                                        <option value="{{$prk->id_balita}}" {{$prk->id_balita == $prk->id_balita ? 'selected' : ''}}>{{$prk->nama}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Jenis Imunisasi</label>
                                 <input type="text" name="jenis_imunisasi"
-                                    class="form-control @if (old('jenis_imunisasi')) is-valid @endif
+                                    class="form-control @if (old('jenis_imunisasi')) is-valid @endif 
                                 @error('jenis_imunisasi') is-invalid @enderror"
-                                    value="{{ old('jenis_imunisasi') }}">
+                                value="{{ old('jenis_imunisasi', $imunisasis->jenis_imunisasi) }}">
                             </div>
                             <div class="form-group">
                                 <label>Tanggal</label>
                                 <input type="date" name="tanggal"
-                                    class="form-control @if (old('tanggal')) is-valid @endif
+                                    class="form-control @if (old('tanggal')) is-valid @endif 
                                 @error('tanggal') is-invalid @enderror"
-                                    value="{{ old('tanggal') }}">
+                                value="{{ old('tanggal', $imunisasis->tanggal) }}">
                             </div>
                             <div class="form-group">
                                 <label>Deskripsi</label>
                                 <textarea name="deskripsi"
                                 class="form-control @if (old('deskripsi')) is-valid @endif
                                 @error('deskripsi') is-invalid @enderror"
-                                value="{{ old('deskripsi') }}"class="form-control"
-                                data-height="150">
-                                </textarea>
+                                data-height="150">{{ old('deskripsi', $imunisasis->deskripsi) }}
+                            </textarea>
                             </div>
                         </div>
                         <div class="card-footer text-right">
                             <button type="submit" class="btn btn-primary">Submit</button>
-                            <button type="reset" class="btn btn-warning">Reset</button>
                         </div>
                     </form>
                 </div>
