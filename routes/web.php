@@ -9,6 +9,7 @@ use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\PemeriksaanController;
 use App\Http\Controllers\PenimbanganController;
 use App\Http\Controllers\AutocompleteController;
+use App\Http\Controllers\LoginController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -28,22 +29,22 @@ Route::redirect('/', '/dashboard-general-dashboard');
 
 
 // Login & Logout
-// Route::controller(LoginController::class)->group(function () {
-//   Route::get('login', 'index')->name('login');
-//   Route::post('login/proses', 'proses');
-//   Route::get('logout', 'logout');
-// });
+Route::controller(LoginController::class)->group(function () {
+  Route::get('login', 'index')->name('login');
+  Route::post('login/proses', 'proses');
+  Route::get('logout', 'logout');
+});
 
 Route::get('login', function () {
   return view('pages.auth-login');
 });
 
 // Middleware Login
-// Route::group(['middleware' => ['auth']], function () {
-//   Route::group(['middleware' => ['CekUserLogin:admin']], function () {
-//     Route::resource('dashboard', DashboardController::class);
-//   });
-// });
+Route::group(['middleware' => ['auth']], function () {
+  Route::group(['middleware' => ['CekUserLogin:admin']], function () {
+    Route::resource('dashboard', DashboardController::class);
+  });
+});
 
 // Dashboard
 Route::get('/dashboard-general-dashboard', function () {
