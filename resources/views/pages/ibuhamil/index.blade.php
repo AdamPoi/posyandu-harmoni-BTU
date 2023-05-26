@@ -38,7 +38,9 @@
                             <div class="card-header">
                                 <h4>Data Ibu Hamil</h4>
                                 <div class="card-header-action">
-
+                                    <a href="{{ route('cetak.pdf.ibuhamil') }}"
+                                        class="btn btn-icon btn-primary icon-left"><i class="fas fa-print"></i>
+                                        Print PDF</a>
                                     <a href="{{ route('ibuhamil.create') }}" class="btn btn-icon btn-primary icon-left"><i
                                             class="fas fa-plus"></i>
                                         Tambah</a>
@@ -47,16 +49,13 @@
                             </div>
                             <div class="card-body">
                                 <livewire:ibu-hamil-table theme='bootstrap-4' />
-                                {{-- {{ $mahasiswas->links(); }} --}}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <x-modal.confirm-delete />
 
-        {{-- <x-modal.confirm-delete /> --}}
     </div>
 @endsection
 @push('scripts')

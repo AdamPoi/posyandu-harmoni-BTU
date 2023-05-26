@@ -24,7 +24,7 @@ class JadwalController extends Controller
    */
   public function create()
   {
-    //
+    return view('pages.jadwal.create');
   }
 
   /**
@@ -35,7 +35,20 @@ class JadwalController extends Controller
    */
   public function store(Request $request)
   {
-    //
+    $request->validate([
+      'kegiatan' => 'required|string|max:255',
+      'tanggal' => 'required|date',
+      'deskripsi' => 'required|string',
+
+    ], [
+      'kegiatan.required' => 'Kegiatan harus diisi',
+      'tanggal.required' => 'Tanggal harus diisi',
+      'deskripsi.required' => 'Deskripsi harus diisi',
+
+    ]);
+    Jadwal::create($request->all());
+    return redirect()->route('jadwal.index')
+      ->with('msg-success', 'Berhasil menambahkan data Jadwal ');
   }
 
   /**
@@ -46,7 +59,7 @@ class JadwalController extends Controller
    */
   public function show(Jadwal $jadwal)
   {
-    //
+    return view('pages.jadwal.show', compact('jadwal'));
   }
 
   /**
@@ -57,7 +70,7 @@ class JadwalController extends Controller
    */
   public function edit(Jadwal $jadwal)
   {
-    //
+    return view('pages.jadwal.edit', compact('jadwal'));
   }
 
   /**
@@ -69,7 +82,20 @@ class JadwalController extends Controller
    */
   public function update(Request $request, Jadwal $jadwal)
   {
-    //
+    $request->validate([
+      'kegiatan' => 'required|string|max:255',
+      'tanggal' => 'required|date',
+      'deskripsi' => 'required|string',
+
+    ], [
+      'kegiatan.required' => 'Kegiatan harus diisi',
+      'tanggal.required' => 'Tanggal harus diisi',
+      'deskripsi.required' => 'Deskripsi harus diisi',
+
+    ]);
+    $jadwal->update($request->all());
+    return redirect()->route('jadwal.index')
+      ->with('msg-success', 'Berhasil mengubah data Jadwal ');
   }
 
   /**
@@ -80,6 +106,7 @@ class JadwalController extends Controller
    */
   public function destroy(Jadwal $jadwal)
   {
-    //
+    $jadwal->delete();
+    return redirect()->route('jadwal.index')->with('msg-success', 'Berhasil menghapus data Jadwal');
   }
 }

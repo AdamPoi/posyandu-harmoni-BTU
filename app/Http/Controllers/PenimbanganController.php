@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Balita;
 use App\Models\Penimbangan;
 use Illuminate\Http\Request;
@@ -27,7 +28,7 @@ class PenimbanganController extends Controller
   {
     $balitas = Balita::all(); //mendapatkan data dari tabel balitas
 
-    return view('pages.penimbangan.create' , ['balitas' => $balitas]);
+    return view('pages.penimbangan.create', ['balitas' => $balitas]);
   }
 
   /**
@@ -39,36 +40,38 @@ class PenimbanganController extends Controller
   public function store(Request $request)
   {
     //melakukan validasi data
-    $request->validate([
-      'tinggi_badan' => 'required',
-      'id_balita' => 'required',
-      'berat_badan' => 'required',
-      'tanggal' => 'required',
-  ],
-  [
-      'tinggi_badan.required' => 'Tinngi badan wajib diisi',
-      'berat_badan.required' => 'Berat badan wajib diisi',
-      'id_balita.required' => 'Id Balita wajib diisi',
-      'tanggal.required' => 'Id Balita wajib diisi',
-  ]);
-  $penimbangan = new Penimbangan;
-  $penimbangan->id_balita = $request->get('id_penimbangan');
-  $penimbangan->tinggi_badan = $request->get('tinggi_badan');
-  $penimbangan->berat_badan = $request->get('berat_badan');
-  $penimbangan->tanggal = $request->get('tanggal');
+    $request->validate(
+      [
+        'tinggi_badan' => 'required',
+        'id_balita' => 'required',
+        'berat_badan' => 'required',
+        'tanggal' => 'required',
+      ],
+      [
+        'tinggi_badan.required' => 'Tinngi badan wajib diisi',
+        'berat_badan.required' => 'Berat badan wajib diisi',
+        'id_balita.required' => 'Id Balita wajib diisi',
+        'tanggal.required' => 'Id Balita wajib diisi',
+      ]
+    );
+    $penimbangan = new Penimbangan;
+    $penimbangan->id_balita = $request->get('id_penimbangan');
+    $penimbangan->tinggi_badan = $request->get('tinggi_badan');
+    $penimbangan->berat_badan = $request->get('berat_badan');
+    $penimbangan->tanggal = $request->get('tanggal');
 
 
-  $balitas = new Balita;
-  $balitas->id_balita = $request->get('id_balita');
+    $balitas = new Balita;
+    $balitas->id_balita = $request->get('id_balita');
 
-  //fungsi eloquent untuk menambah data dengan relasi belongsTo
-  $penimbangan->balita()->associate($balitas);
-  $penimbangan->save();
-  //jika data berhasil ditambahkan, akan kembali ke halaman utama
-  return redirect()->route('penimbangan.index')
+    //fungsi eloquent untuk menambah data dengan relasi belongsTo
+    $penimbangan->balita()->associate($balitas);
+    $penimbangan->save();
+    //jika data berhasil ditambahkan, akan kembali ke halaman utama
+    return redirect()->route('penimbangan.index')
       ->with('success', 'Data Berhasil ditambahkan');
   }
-  
+
 
   /**
    * Display the specified resource.
@@ -91,9 +94,9 @@ class PenimbanganController extends Controller
    */
   public function edit($id_penimbangan)
   {
-    $penimbangans = Penimbangan::with('balita')->where('id_penimbangan', $id_penimbangan)->first();
+    $penimbangan = Penimbangan::with('balita')->where('id_penimbangan', $id_penimbangan)->first();
     $balitas = Balita::all(); //mendapatkan data dari balita
-    return view('pages.penimbangan.edit', compact('penimbangans','balitas'));
+    return view('pages.penimbangan.edit', compact('penimbangan', 'balitas'));
   }
 
   /**
@@ -106,32 +109,34 @@ class PenimbanganController extends Controller
   public function update(Request $request, Penimbangan $penimbangan)
   {
     //melakukan validasi data
-    $request->validate([
-      'tinggi_badan' => 'required',
-      'id_balita' => 'required',
-      'berat_badan' => 'required',
-      'tanggal' => 'required',
-  ],
-  [
-      'tinggi_badan.required' => 'Tinngi badan wajib diisi',
-      'berat_badan.required' => 'Berat badan wajib diisi',
-      'id_balita.required' => 'Id Balita wajib diisi',
-      'tanggal.required' => 'Tanggal wajib diisi',
-  ]);
-  $penimbangan = new Penimbangan;
-  $penimbangan->id_balita = $request->get('id_penimbangan');
-  $penimbangan->tinggi_badan = $request->get('tinggi_badan');
-  $penimbangan->berat_badan = $request->get('berat_badan');
-  $penimbangan->tanggal = $request->get('tanggal');
+    $request->validate(
+      [
+        'tinggi_badan' => 'required',
+        'id_balita' => 'required',
+        'berat_badan' => 'required',
+        'tanggal' => 'required',
+      ],
+      [
+        'tinggi_badan.required' => 'Tinngi badan wajib diisi',
+        'berat_badan.required' => 'Berat badan wajib diisi',
+        'id_balita.required' => 'Id Balita wajib diisi',
+        'tanggal.required' => 'Tanggal wajib diisi',
+      ]
+    );
+    $penimbangan = new Penimbangan;
+    $penimbangan->id_balita = $request->get('id_penimbangan');
+    $penimbangan->tinggi_badan = $request->get('tinggi_badan');
+    $penimbangan->berat_badan = $request->get('berat_badan');
+    $penimbangan->tanggal = $request->get('tanggal');
 
-  $balitas = new Balita;
-  $balitas->id_balita = $request->get('id_balita');
+    $balitas = new Balita;
+    $balitas->id_balita = $request->get('id_balita');
 
-  //fungsi eloquent untuk menambah data dengan relasi belongsTo
-  $penimbangan->balita()->associate($balitas);
-  $penimbangan->save();
-  //jika data berhasil ditambahkan, akan kembali ke halaman utama
-  return redirect()->route('penimbangan.index')
+    //fungsi eloquent untuk menambah data dengan relasi belongsTo
+    $penimbangan->balita()->associate($balitas);
+    $penimbangan->save();
+    //jika data berhasil ditambahkan, akan kembali ke halaman utama
+    return redirect()->route('penimbangan.index')
       ->with('msg-success', 'Data Berhasil diubah');
   }
 
@@ -143,14 +148,14 @@ class PenimbanganController extends Controller
    */
   public function destroy(Penimbangan $penimbangan)
   {
-    Penimbangan::find($id_penimbangan)->delete();
+    $penimbangan->delete();
     return redirect()->route('penimbangan.index')
-        -> with('success', 'Data Berhasil Dihapus');
+      ->with('msg-success', 'Data Berhasil Dihapus');
   }
   public function cetak_pdf()
   {
     $penimbangan = Penimbangan::all();
-    $pdf = PDF::loadview('pages.penimbangan.penimbangan_pdf',['penimbangan'=>$penimbangan]);
+    $pdf = PDF::loadview('pages.penimbangan.penimbangan_pdf', ['penimbangan' => $penimbangan]);
     return $pdf->stream();
   }
 }

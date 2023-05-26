@@ -37,27 +37,29 @@ class VitaminController extends Controller
    */
   public function store(Request $request)
   {
-    $request->validate([
+    $request->validate(
+      [
         'jenis_vitamin' => 'required',
         'deskripsi' => 'required',
-    ],
-    [
+      ],
+      [
         'jenis_vitamin.required' => 'Jenis Vitamin wajib diisi',
         'deskripsi.required' => 'Deskripsi Vitamin wajib diisi',
-    ]);
+      ]
+    );
 
     $jenis_vitamin = $request->jenis_vitamin;
     $deskripsi = $request->deskripsi;
 
     try {
-        $vitamin = new Vitamin();
-        $vitamin->jenis_vitamin = $jenis_vitamin;
-        $vitamin->deskripsi = $deskripsi;
-        $vitamin->save();
+      $vitamin = new Vitamin();
+      $vitamin->jenis_vitamin = $jenis_vitamin;
+      $vitamin->deskripsi = $deskripsi;
+      $vitamin->save();
 
-        return redirect()->to('vitamin')->with('msg-success', 'Berhasil menambahkan data');
+      return redirect()->to('vitamin')->with('msg-success', 'Berhasil menambahkan data');
     } catch (\Throwable $th) {
-        echo $th;
+      echo $th;
     }
   }
 
@@ -69,7 +71,7 @@ class VitaminController extends Controller
    */
   public function show(Vitamin $vitamin)
   {
-    return view('pages.vitamin.show',compact('vitamin'));
+    return view('pages.vitamin.show', compact('vitamin'));
   }
 
   /**
@@ -93,21 +95,21 @@ class VitaminController extends Controller
   public function update(Request $request, $id)
   {
     $request->validate([
-        'jenis_vitamin' => 'required|unique:vitamins,jenis_vitamin',
-        'deskripsi' => 'required',
-      ],[
-        'jenis_vitamin.required' => 'Jenis Vitamin wajib diisi',
-        'jenis_vitamin.unique' => 'Jenis Vitamin yang diisikan sudah ada dalam database',
-        'deskripsi.required' => 'Deskripsi Vitamin wajib diisi',
-      ]);
+      'jenis_vitamin' => 'required|unique:vitamins,jenis_vitamin',
+      'deskripsi' => 'required',
+    ], [
+      'jenis_vitamin.required' => 'Jenis Vitamin wajib diisi',
+      'jenis_vitamin.unique' => 'Jenis Vitamin yang diisikan sudah ada dalam database',
+      'deskripsi.required' => 'Deskripsi Vitamin wajib diisi',
+    ]);
 
-      $data = [
-        'jenis_vitamin' => $request->jenis_vitamin,
-        'deskripsi' => $request->deskripsi,
-      ];
+    $data = [
+      'jenis_vitamin' => $request->jenis_vitamin,
+      'deskripsi' => $request->deskripsi,
+    ];
 
-      Vitamin::where('id_vitamin', $id)->update($data);
-      return redirect()->to('vitamin')->with('msg-success', 'Berhasil melakukan update data');
+    Vitamin::where('id_vitamin', $id)->update($data);
+    return redirect()->to('vitamin')->with('msg-success', 'Berhasil melakukan update data');
   }
 
   /**
@@ -118,13 +120,14 @@ class VitaminController extends Controller
    */
   public function destroy(Vitamin $vitamin)
   {
-    //
+    $vitamin->delete();
+    return redirect()->route('vitamin.index')->with('msg-success', 'Berhasil menghapus data Vitamin');
   }
 
   public function cetak_pdf()
   {
     $vitamin = Vitamin::all();
-    $pdf = PDF::loadview('pages.vitamin.vitamin_pdf',['vitamin'=>$vitamin]);
+    $pdf = PDF::loadview('pages.vitamin.vitamin_pdf', ['vitamin' => $vitamin]);
     return $pdf->stream();
   }
 }

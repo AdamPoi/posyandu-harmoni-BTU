@@ -27,7 +27,8 @@
                                         class="btn btn-icon btn-warning icon-left"><i class="far fa-edit"></i>
                                         Edit</a>
                                     <button class="btn btn-danger btn-icon icon-left"
-                                        data-action="{{ route('ibuhamil.destroy', $ibuhamil->id_ibu_hamil) }}"><i
+                                        data-action="{{ route('ibuhamil.destroy', $ibuhamil->id_ibu_hamil) }}"
+                                        data-toggle="modal" data-target="#confirm-delete-modal"> <i
                                             class="fas fa-trash"></i>
                                         Delete</button>
 
@@ -50,7 +51,7 @@
 
                                 <div class="form-group col-12">
                                     <label>Alamat</label>
-                                    <textarea readonly class="form-control" data-height="80">{{ $ibuhamil->alamat }}</textarea>
+                                    <textarea readonly class="form-control" data-height="160">{{ $ibuhamil->alamat }}</textarea>
                                 </div>
                                 <div class="form-group col-12">
                                     <label>Usia Kandungan</label>

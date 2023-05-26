@@ -76,8 +76,8 @@ class PemeriksaanController extends Controller
   public function show($id_pemeriksaan)
   {
     //menampilkan detail data dengan menemukan berdasarkan id_pemeriksaan
-    $pemeriksaans = Pemeriksaan::with('ibu_hamil')->where('id_pemeriksaan', $id_pemeriksaan)->first();
-    return view('pages.pemeriksaan.show', ['pemeriksaans' => $pemeriksaans]);
+    $pemeriksaan = Pemeriksaan::with('ibu_hamil')->where('id_pemeriksaan', $id_pemeriksaan)->first();
+    return view('pages.pemeriksaan.show', compact('pemeriksaan'));
   }
 
   /**
@@ -149,7 +149,7 @@ class PemeriksaanController extends Controller
   public function cetak_pdf()
   {
     $pemeriksaan = Pemeriksaan::all();
-    $pdf = PDF::loadview('pages.pemeriksaan.pemeriksaan_pdf',['pemeriksaan'=>$pemeriksaan]);
+    $pdf = PDF::loadview('pages.pemeriksaan.pemeriksaan_pdf', ['pemeriksaan' => $pemeriksaan]);
     return $pdf->stream();
   }
 }
