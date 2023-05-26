@@ -21,16 +21,16 @@
             </div>
             <div class="section-body">
                 @if (session('msg-success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
-                    <div class="alert-body">
-                        <div class="alert-title">Sukses</div>
-                        {{ session('msg-success') }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
+                        <div class="alert-body">
+                            <div class="alert-title">Sukses</div>
+                            {{ session('msg-success') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     </div>
-                </div>
                 @endif
                 <div class="row">
                     <div class="col-12">
@@ -38,8 +38,11 @@
                             <div class="card-header">
                                 <h4>Data Balita</h4>
                                 <div class="card-header-action">
-
-                                    <a href="{{ route('balita.create') }}" class="btn btn-icon btn-primary icon-left"><i class="fas fa-plus"></i>
+                                    <a href="{{ route('cetak.pdf.balita') }}" class="btn btn-icon btn-primary icon-left"><i
+                                            class="fas fa-print"></i>
+                                        Print PDF</a>
+                                    <a href="{{ route('balita.create') }}" class="btn btn-icon btn-primary icon-left"><i
+                                            class="fas fa-plus"></i>
                                         Tambah</a>
 
                                 </div>
@@ -58,7 +61,7 @@
                                         <th width="200px">Action</th>
                                     </tr>
                                     {{-- @foreach ($mahasiswas as $Mahasiswa) --}}
-                                    {{-- <tr>
+                            {{-- <tr>
                                         <td>1</td>
                                         <td>B001</td>
                                         <td>I001</td>
@@ -74,14 +77,14 @@
                                                 <a class="btn btn-primary" href="#">Edit</a>
                                                 {{-- @csrf
                                                 @method('DELETE') --}}
-                                                {{-- <button type="submit" class="btn btn-danger">Delete</button>
+                            {{-- <button type="submit" class="btn btn-danger">Delete</button>
                                             </form>
                                         </td>
                                     </tr>
                                     {{-- @endforeach --}}
-                                </table>
+                            </table>
 
-                                {{-- {{ $mahasiswas->links(); }} --}}
+                            {{-- {{ $mahasiswas->links(); }} --}}
                             {{-- </div>  --}}
                             <div class="card-body">
                                 <livewire:balita-table theme='bootstrap-4' />
@@ -92,7 +95,6 @@
                 </div>
             </div>
         </section>
-        {{-- <x-modal.confirm-delete /> --}}
     </div>
 @endsection
 @push('scripts')

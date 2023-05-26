@@ -79,11 +79,10 @@ class BalitaController extends Controller
    * @param  \App\Models\Balita  $balita
    * @return \Illuminate\Http\Response
    */
-  public function show(Balita $id_balita)
+  public function show(Balita $balita)
   {
-    //menampilkan detail data dengan menemukan berdasarkan id_balita
-    $balitas = Balita::with('ibu_hamils')->where('id_balita', $id_balita)->first();
-    return view('pages.balita.show', ['balitas' => $balitas]);
+    $balita = $balita->load('ibu_hamil');
+    return view('pages.balita.show', compact('balita'));
   }
 
   /**
@@ -92,13 +91,10 @@ class BalitaController extends Controller
    * @param  \App\Models\Balita  $balita
    * @return \Illuminate\Http\Response
    */
-  public function edit(Balita $id_balita)
+  public function edit(Balita $balita)
   {
-    //menampilkan detail data dengan menemukan berdasarkan id_balita 
-
-    $balitas = Balita::with('ibu_hamils')->where('id_balita', $id_balita)->first(); //Balita untuk diedit
-    $ibu_hamils = IbuHamil::all(); //mendapatkan data dari ibu hamil
-    return view('pages.balita.edit', compact('balitas', 'ibu_hamils'));
+    $balita = $balita->load('ibu_hamil');
+    return view('pages.balita.show', compact('balita'));
   }
 
   /**
@@ -142,11 +138,11 @@ class BalitaController extends Controller
    * @param  \App\Models\Balita  $balita
    * @return \Illuminate\Http\Response
    */
-  public function destroy(Balita $id_balita)
+  public function destroy(Balita $balita)
   {
     //fungsi eloquent untuk menghapus data
-    Balita::find($id_balita)->delete();
+    $balita->delete();
     return redirect()->route('balita.index')
-      ->with('success', 'Data Berhasil Dihapus');
+      ->with('msg-success', 'Data Berhasil Dihapus');
   }
 }
