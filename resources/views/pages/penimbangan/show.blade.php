@@ -22,58 +22,57 @@
                     <div class="col-12 col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <div class="card-header-action">    
-                                    <a href="{{ route('penimbangan.edit', $penimbangans->id_penimbangan) }}" class="btn btn-icon btn-warning icon-left"><i
-                                            class="far fa-edit"></i>
+                                <div class="card-header-action">
+                                    <a href="{{ route('penimbangan.edit', $penimbangan->id_penimbangan) }}"
+                                        class="btn btn-icon btn-warning icon-left"><i class="far fa-edit"></i>
                                         Edit</a>
                                     <button class="btn btn-danger btn-icon icon-left"
-                                        data-action="{{ route('penimbangan.destroy', $penimbangans->id_penimbangan) }}"><i class="fas fa-trash"></i>
+                                        data-action="{{ route('penimbangan.destroy', $penimbangan->id_penimbangan) }}"
+                                        data-toggle="modal" data-target="#confirm-delete-modal"> <i
+                                            class="fas fa-trash"></i>
                                         Delete</button>
-        
+
                                 </div>
                             </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="form-group col-12">
-                                            <label>Nama Balita</label>
-                                            <input readonly type="text"
-                                                class="form-control"
-                                                value="{{ $penimbangans->balita->nama }}">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-12">
-                                            <label>Berat Badan</label>
-                                            <input readonly type="text"
-                                                class="form-control"
-                                                value="{{ $penimbangans->berat_badan }}">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-12">
-                                            <label>Tinggi Badan</label>
-                                            <input readonly type="text"
-                                                class="form-control"
-                                                value="{{ $penimbangans->tinggi_badan }}">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-12">
-                                            <label>Tanggal</label>
-                                            <input readonly type="date"
-                                                class="form-control"
-                                                value="{{ $penimbangans->tanggal }}">
-                                        </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <label>Nama Balita</label>
+                                        <input readonly type="text" class="form-control"
+                                            value="{{ $penimbangan->balita->nama }}">
                                     </div>
                                 </div>
-                                <div class="card-footer text-right">
-                                    <a class="btn btn-primary float-left" href="{{ route('penimbangan.index') }}">Kembali</a></div>
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <label>Berat Badan</label>
+                                        <input readonly type="text" class="form-control"
+                                            value="{{ $penimbangan->berat_badan }}">
+                                    </div>
                                 </div>
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <label>Tinggi Badan</label>
+                                        <input readonly type="text" class="form-control"
+                                            value="{{ $penimbangan->tinggi_badan }}">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <label>Tanggal</label>
+                                        <input readonly type="date" class="form-control"
+                                            value="{{ $penimbangan->tanggal }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer text-right">
+                                <a class="btn btn-primary float-left" href="{{ route('penimbangan.index') }}">Kembali</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+    </div>
+    </section>
 
     </div>
 @endsection

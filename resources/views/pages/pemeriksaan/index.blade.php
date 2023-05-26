@@ -39,9 +39,11 @@
                                 <h4>Data Pemeriksaan</h4>
                                 <div class="card-header-action">
 
-                                    <a href="pemeriksaan/cetak_pdf" class="btn btn-icon btn-primary icon-left"><i class="fas fa-file-export"></i>
-                                        Ekspor PDF</a>
-                                    <a href="{{ route('pemeriksaan.create') }}" class="btn btn-icon btn-primary icon-left"><i class="fas fa-plus"></i>
+                                    <a href="{{ route('cetak.pdf.pemeriksaan') }}"
+                                        class="btn btn-icon btn-primary icon-left"><i class="fas fa-print"></i>
+                                        Print PDF</a>
+                                    <a href="{{ route('pemeriksaan.create') }}"
+                                        class="btn btn-icon btn-primary icon-left"><i class="fas fa-plus"></i>
                                         Tambah</a>
 
                                 </div>
@@ -66,7 +68,6 @@
                 </div>
             </div>
         </section>
-        {{-- <x-modal.confirm-delete /> --}}
     </div>
 @endsection
 @push('scripts')

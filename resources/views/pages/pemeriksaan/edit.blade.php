@@ -64,7 +64,7 @@
                                 <textarea name="catatan"
                                     class="form-control @if (old('catatan')) is-valid @endif
                                 @error('catatan') is-invalid @enderror"
-                                    value="{{ old('catatan', $pemeriksaan->catatan) }}"class="form-control" data-height="150">
+                                    class="form-control" data-height="160">{{ old('catatan', $pemeriksaan->catatan) }}
                                 </textarea>
                             </div>
                         </div>

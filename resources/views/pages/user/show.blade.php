@@ -26,6 +26,19 @@
                 <div class="row mt-sm-4">
                     <div class="col-12 col-md-12">
                         <div class="card">
+                           <div class="card-header">
+                                <div class="card-header-action">
+                                    <a href="{{ route('user.edit', $user->id_user) }}"
+                                        class="btn btn-icon btn-warning icon-left"><i class="far fa-edit"></i>
+                                        Edit</a>
+                                    <button class="btn btn-danger btn-icon icon-left"
+                                        data-action="{{ route('user.destroy', $user->id_user) }}"
+                                        data-toggle="modal" data-target="#confirm-delete-modal"> <i
+                                            class="fas fa-trash"></i>
+                                        Delete</button>
+
+                                </div>
+                            </div>
                             <div class="card-body">
                                 <div class="row">
                                     <div class="form-group col-12">
@@ -48,7 +61,7 @@
                                 <div class="row">
                                     <div class="form-group col-12">
                                         <label>Alamat</label>
-                                        <textarea readonly class="form-control summernote-simple">{{ $user->alamat }}</textarea>
+                                        <textarea readonly class="form-control summernote-simple" data-height="160">{{ $user->alamat }}</textarea>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -73,7 +86,6 @@
             </div>
     </div>
     </section>
-    {{-- <x-modal.confirm-delete /> --}}
 
     </div>
 @endsection

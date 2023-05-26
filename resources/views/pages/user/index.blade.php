@@ -38,8 +38,11 @@
                             <div class="card-header">
                                 <h4>Data User</h4>
                                 <div class="card-header-action">
-
-                                    <a href="{{ route('user.create') }}" class="btn btn-icon btn-primary icon-left"><i class="fas fa-plus"></i>
+                                    <a href="{{ route('cetak.pdf.user') }}"
+                                        class="btn btn-icon btn-primary icon-left"><i class="fas fa-print"></i>
+                                        Print PDF</a>
+                                    <a href="{{ route('user.create') }}" class="btn btn-icon btn-primary icon-left"><i
+                                            class="fas fa-plus"></i>
                                         Tambah</a>
 
                                 </div>
@@ -54,11 +57,9 @@
                 </div>
             </div>
         </section>
-        {{-- <x-modal.confirm-delete /> --}}
     </div>
 @endsection
 @push('scripts')
-
     {{-- <script>
         $(document).on('click', '.delete-btn', function (event) {
             event.preventDefault();

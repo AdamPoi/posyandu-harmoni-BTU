@@ -38,7 +38,7 @@
                         <h4>Tambah User</h4>
 
                     </div>
-                    <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">>
+                    <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
                         <div class="card-body">
                             @csrf
                             <div class="form-group">
@@ -57,11 +57,11 @@
                             </div>
                             <div class="form-group">
                                 <label>Role</label>
-                                <select class="form-control" name="role"
+                                <select name="role"
                                     class="form-control @if (old('role')) is-valid @endif
                                 @error('role') is-invalid @enderror"
                                     value="{{ old('role') }}">
-                                    <option selected>Pilih role</option>
+                                    <option value="" disabled selected>Pilih role</option>
                                     <option value="Admin">Admin</option>
                                     <option value="Owner">Owner</option>
                                 </select>
@@ -87,13 +87,14 @@
                                 @error('password') is-invalid @enderror"
                                     value="{{ old('password') }}">
                             </div>
+                            <div class="form-group">
+                                <label for="profile_picture">Profil Picture</label>
+                                <input type="file" id="image-input" class="form-control" required="required"
+                                    name="profile_picture" value="{{ old('password') }}">
+                                <img width="150px" id="image-preview" src="{{ asset('storage/' . old('password')) }}">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="profile_picture">Profil Picture</label>
-                            <input type="file" id="image-input" class="form-control" required="required"
-                                name="profile_picture" value="{{ old('password') }}">
-                            <img width="150px" id="image-preview" src="{{ asset('storage/' . old('password')) }}">
-                        </div>
+
                         <div class="card-footer text-right">
                             <button type="submit" class="btn btn-primary">Submit</button>
                             <button type="reset" class="btn btn-warning">Reset</button>

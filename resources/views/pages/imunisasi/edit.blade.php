@@ -20,25 +20,25 @@
 
             <div class="section-body">
                 @if ($errors->any())
-                <div class="pt-3">
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <ul>
-                        @foreach ($errors->all() as $item)
-                            <li>{{ $item }}</li>
-                        @endforeach
-                        </ul>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                    <div class="pt-3">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <ul>
+                                @foreach ($errors->all() as $item)
+                                    <li>{{ $item }}</li>
+                                @endforeach
+                            </ul>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     </div>
-                </div>
                 @endif
                 <div class="card">
                     <div class="card-header">
                         <h4>Edit Data Imunisasi</h4>
 
                     </div>
-                    <form action="{{ route('imunisasi.update', $imunisasis->id_imunisasi) }}" method="POST">
+                    <form action="{{ route('imunisasi.update', $imunisasi->id_imunisasi) }}" method="POST">
                         <div class="card-body">
                             @csrf
                             @method('PUT')
@@ -46,7 +46,9 @@
                                 <label for="id_ibu_hamil">Nama Balita</label>
                                 <select class="form-control" name="id_balita" id="id_balita">
                                     @foreach ($balitas as $prk)
-                                        <option value="{{$prk->id_balita}}" {{$prk->id_balita == $prk->id_balita ? 'selected' : ''}}>{{$prk->nama}}</option>
+                                        <option value="{{ $prk->id_balita }}"
+                                            {{ $prk->id_balita == $prk->id_balita ? 'selected' : '' }}>{{ $prk->nama }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -55,21 +57,21 @@
                                 <input type="text" name="jenis_imunisasi"
                                     class="form-control @if (old('jenis_imunisasi')) is-valid @endif 
                                 @error('jenis_imunisasi') is-invalid @enderror"
-                                value="{{ old('jenis_imunisasi', $imunisasis->jenis_imunisasi) }}">
+                                    value="{{ old('jenis_imunisasi', $imunisasi->jenis_imunisasi) }}">
                             </div>
                             <div class="form-group">
                                 <label>Tanggal</label>
                                 <input type="date" name="tanggal"
                                     class="form-control @if (old('tanggal')) is-valid @endif 
                                 @error('tanggal') is-invalid @enderror"
-                                value="{{ old('tanggal', $imunisasis->tanggal) }}">
+                                    value="{{ old('tanggal', $imunisasi->tanggal) }}">
                             </div>
                             <div class="form-group">
                                 <label>Deskripsi</label>
                                 <textarea name="deskripsi"
-                                class="form-control @if (old('deskripsi')) is-valid @endif
+                                    class="form-control @if (old('deskripsi')) is-valid @endif
                                 @error('deskripsi') is-invalid @enderror"
-                                data-height="150">{{ old('deskripsi', $imunisasis->deskripsi) }}
+                                    data-height="150">{{ old('deskripsi', $imunisasi->deskripsi) }}
                             </textarea>
                             </div>
                         </div>

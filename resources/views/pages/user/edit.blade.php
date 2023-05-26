@@ -58,11 +58,11 @@
                             </div>
                             <div class="form-group">
                                 <label>Role</label>
-                                <select class="form-control" name="role"
-                                    class="form-control @if (old('role')) is-valid @endif
+                                <select name="role"
+                                    class="form-control select @if (old('role')) is-valid @endif
                                 @error('role') is-invalid @enderror"
                                     value="{{ old('role', $user->role) }}">
-                                    <option selected>Pilih role</option>
+                                    <option value="" disabled selected>Pilih role</option>
                                     <option value="admin">Admin</option>
                                     <option value="owner">Owner</option>
                                 </select>

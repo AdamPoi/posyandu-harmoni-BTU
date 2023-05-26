@@ -20,18 +20,18 @@
 
             <div class="section-body">
                 @if ($errors->any())
-                <div class="pt-3">
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <ul>
-                        @foreach ($errors->all() as $item)
-                            <li>{{ $item }}</li>
-                        @endforeach
-                        </ul>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                    <div class="pt-3">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <ul>
+                                @foreach ($errors->all() as $item)
+                                    <li>{{ $item }}</li>
+                                @endforeach
+                            </ul>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     </div>
-                </div>
                 @endif
                 <div class="card">
                     <div class="card-header">
@@ -45,7 +45,7 @@
                                 <label for="id_ibu_hamil">Nama Ibu</label>
                                 <select class="form-control" name="id_ibu_hamil" id="id_ibu_hamil">
                                     @foreach ($ibu_hamils as $ibu)
-                                        <option value="{{$ibu->id_ibu_hamil}}">{{$ibu->nama}}</option>
+                                        <option value="{{ $ibu->id_ibu_hamil }}">{{ $ibu->nama }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -59,10 +59,9 @@
                             <div class="form-group">
                                 <label>Catatan</label>
                                 <textarea name="catatan"
-                                class="form-control @if (old('catatan')) is-valid @endif
+                                    class="form-control @if (old('catatan')) is-valid @endif
                                 @error('catatan') is-invalid @enderror"
-                                value="{{ old('catatan') }}"class="form-control"
-                                data-height="150">
+                                    class="form-control" data-height="160">{{ old('catatan') }}
                                 </textarea>
                             </div>
                         </div>

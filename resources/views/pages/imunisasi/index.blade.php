@@ -39,9 +39,11 @@
                                 <h4>Data Imunisasi</h4>
                                 <div class="card-header-action">
 
-                                    <a href="imunisasi/cetak_pdf" class="btn btn-icon btn-primary icon-left"><i class="fas fa-file-export"></i>
-                                        Ekspor PDF</a>
-                                    <a href="{{ route('imunisasi.create') }}" class="btn btn-icon btn-primary icon-left"><i class="fas fa-plus"></i>
+                                    <a href="{{ route('cetak.pdf.imunisasi') }}"
+                                        class="btn btn-icon btn-primary icon-left"><i class="fas fa-print"></i>
+                                        Print PDF</a>
+                                    <a href="{{ route('imunisasi.create') }}" class="btn btn-icon btn-primary icon-left"><i
+                                            class="fas fa-plus"></i>
                                         Tambah</a>
 
                                 </div>
@@ -54,7 +56,6 @@
                 </div>
             </div>
         </section>
-        {{-- <x-modal.confirm-delete /> --}}
     </div>
 @endsection
 @push('scripts')

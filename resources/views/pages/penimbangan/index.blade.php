@@ -38,10 +38,12 @@
                             <div class="card-header">
                                 <h4>Data Penimbangan</h4>
                                 <div class="card-header-action">
-                                    <a href="{{ url('penimbangan/cetak_pdf') }}" class="btn btn-icon btn-primary icon-left"><i class="fas fa-print"></i>
+                                    <a href="{{ route('cetak.pdf.penimbangan') }}"
+                                        class="btn btn-icon btn-primary icon-left"><i class="fas fa-print"></i>
                                         Print PDF</a>
-                                    <a href="{{ route('penimbangan.create') }}" class="btn btn-icon btn-primary icon-left"><i class="fas fa-plus"></i>
-                                    Tambah</a>
+                                    <a href="{{ route('penimbangan.create') }}"
+                                        class="btn btn-icon btn-primary icon-left"><i class="fas fa-plus"></i>
+                                        Tambah</a>
 
                                 </div>
                             </div>
@@ -54,7 +56,6 @@
                 </div>
             </div>
         </section>
-        {{-- <x-modal.confirm-delete /> --}}
     </div>
 @endsection
 @push('scripts')
