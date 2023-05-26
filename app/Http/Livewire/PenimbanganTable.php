@@ -3,7 +3,7 @@
 namespace App\Http\Livewire;
 
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
-use Rappasoft\LaravelLivewireTables\Views\Colohumn;
+use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Penimbangan;
 
 class PenimbanganTable extends DataTableComponent
@@ -36,9 +36,10 @@ class PenimbanganTable extends DataTableComponent
         ->label(
           function ($row) {
             $delete =
-              '<a href="' . route('penimbangan.destroy', ['penimbangan' => $row->id_penimbangan]) . '" class="btn btn-icon icon-center btn-danger delete-btn">
-                                <i class="fas fa-trash"></i>
-                            </a>';
+              ' <button class="btn btn-danger btn-icon icon-center"
+                                data-action="' . route('penimbangan.destroy', ['penimbangan' => $row->id_penimbangan]) . '" data-toggle="modal"
+                                data-target="#confirm-delete-modal"> <i class="fas fa-trash"></i>
+                                </button>';
             $edit =
               '<a href="' . route('penimbangan.edit', ['penimbangan' => $row->id_penimbangan]) . '" class="btn btn-icon icon-center btn-warning">
                                 <i class="fas fa-pencil-alt"></i>

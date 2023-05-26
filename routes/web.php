@@ -42,7 +42,7 @@ Route::get('login', function () {
 // Middleware Login
 Route::group(['middleware' => ['auth']], function () {
   Route::group(['middleware' => ['CekUserLogin:admin']], function () {
-    Route::resource('dashboard', DashboardController::class);
+    // Route::resource('dashboard', DashboardController::class);
   });
 });
 
@@ -55,20 +55,25 @@ Route::get('/dashboard-ecommerce-dashboard', function () {
 });
 
 // Cetak PDF
-Route::get('/vitamin/cetak_pdf', [VitaminController::class, 'cetak_pdf']);
-// Cetak PDF Pemriksaan
-// Data Pemeriksaan
-Route::get('/pemeriksaan/cetak_pdf', [PemeriksaanController::class, 'cetak_pdf']);
-// Cetak Data Penimbangan
-Route::get('/penimbangan/cetak_pdf', [PenimbanganController::class, 'cetak_pdf']);
-// Cetak PDF Imunisasi
-Route::get('/imunisasi/cetak_pdf', [ImunisasiController::class, 'cetak_pdf']);
+
+Route::prefix('cetak/pdf/')->group(function () {
+  Route::get('user', [ImunisasiController::class, 'cetak_pdf'])->name('cetak.pdf.user');
+  Route::get('ibuhamil', [ImunisasiController::class, 'cetak_pdf'])->name('cetak.pdf.ibuhamil');
+  Route::get('balita', [ImunisasiController::class, 'cetak_pdf'])->name('cetak.pdf.balita');
+  Route::get('jadwal', [ImunisasiController::class, 'cetak_pdf'])->name('cetak.pdf.jadwal');
+  Route::get('vitamin', [VitaminController::class, 'cetak_pdf'])->name('cetak.pdf.vitamin');
+  Route::get('pemeriksaan', [PemeriksaanController::class, 'cetak_pdf'])->name('cetak.pdf.pemeriksaan');
+  Route::get('penimbangan', [PenimbanganController::class, 'cetak_pdf'])->name('cetak.pdf.penimbangan');
+  Route::get('imunisasi', [ImunisasiController::class, 'cetak_pdf'])->name('cetak.pdf.imunisasi');
+});
 // Data User
 Route::resource('user', UserController::class);
 // Data Ibu hamil
 Route::resource('ibuhamil', IbuHamilController::class);
 // Data Balita
-Route::resource('balita', BalitaController::class);
+Route::resource('balita', BalitaController::class)->parameters([
+  'balita' => 'balita'
+]);;
 // Data Jadwal
 Route::resource('jadwal', JadwalController::class);
 // Data Vitamin

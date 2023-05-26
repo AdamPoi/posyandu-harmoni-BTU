@@ -31,12 +31,10 @@ class IbuHamilTable extends DataTableComponent
       Column::make('Actions')
         ->label(
           function ($row) {
-            $delete = ' <button type="button" wire:click="deleteId(' . $row->id_ibu_hamil . ')" class="btn btn-icon icon-center btn-danger delete-btn" data-toggle="modal" data-target="#exampleModal"> <i class="fas fa-trash"></i></button>';
-
-
-            // '<a href="' . route('ibuhamil.destroy', ['ibuhamil' => $row->id_ibu_hamil]) . ' wire:click="deleteId('$row->id_ibu_hamil' )" class="btn btn-icon icon-center btn-danger delete-btn">
-            //                   <i class="fas fa-trash"></i>
-            //               </a>';
+            $delete = ' <button class="btn btn-danger btn-icon icon-center"
+                                data-action="' . route('ibuhamil.destroy', ['ibuhamil' => $row->id_ibu_hamil]) . '" data-toggle="modal"
+                                data-target="#confirm-delete-modal"> <i class="fas fa-trash"></i>
+                                </button>';
             $edit =
               '<a href="' . route('ibuhamil.edit', ['ibuhamil' => $row->id_ibu_hamil]) . '" class="btn btn-icon icon-center btn-warning">
                                 <i class="fas fa-pencil-alt"></i>

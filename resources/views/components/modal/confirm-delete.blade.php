@@ -30,7 +30,6 @@
               const action = button.data('action')
               const form = $(this).find('#confirm-delete-form')
               form.attr('action', `${action}`);
-              console.log(form)
           })
       </script>
   @endpush

@@ -24,13 +24,13 @@ class UserTable extends DataTableComponent
         ->sortable(),
       Column::make("Nama", "nama")
         ->sortable()->searchable(),
-      ImageColumn::make('Avatar', 100, 100)
+      ImageColumn::make('Avatar')
         ->location(
           fn ($row) => asset('images/user/' . $row->avatar)
         )->attributes(fn ($row) => [
           'class' => 'rounded-circle',
           'alt' => $row->name . ' Avatar',
-          'width' => 100,
+          'width' => 40,
         ]),
       Column::make("Role", "role")
         ->sortable(),
@@ -41,9 +41,10 @@ class UserTable extends DataTableComponent
         ->label(
           function ($row) {
             $delete =
-              '<a href="#" class="btn btn-icon icon-center btn-danger delete-btn" data-id="' . $row->id_user . '">
-                            <i class="fas fa-trash"></i>
-                        </a>';
+              ' <button class="btn btn-danger btn-icon icon-center"
+                                data-action="' . route('user.destroy', ['user' => $row->id_user]) . '" data-toggle="modal"
+                                data-target="#confirm-delete-modal"> <i class="fas fa-trash"></i>
+                                </button>';
             $edit =
               '<a href="' . route('user.edit', ['user' => $row->id_user]) . '" class="btn btn-icon icon-center btn-warning">
                             <i class="fas fa-pencil-alt"></i>
