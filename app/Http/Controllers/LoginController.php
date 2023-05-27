@@ -7,54 +7,51 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function index()
-    {
-        if($user = Auth::user())
-        {
-            if($user->status == 'admin')
-            {
-                return redirect()->intended('/dashboard-general-dashboard');
-            }
-        }
+  public function index()
+  {
 
-        return view('pages.auth-login');
+    if ($user = Auth::user()) {
+      if ($user->role == 'admin' || $user->role == 'owner') {
+        return redirect()->route('user.index');
+      }
     }
 
-    public function proses(Request $request)
-    {
-        $request->validate([
-            'email' => 'required',
-            'password' => 'required'
-        ]);
+    return view('pages.auth-login');
+  }
 
-        $kredensial = $request->only('email', 'password');
+  public function proses(Request $request)
+  {
+    $request->validate([
+      'email' => 'required',
+      'password' => 'required'
+    ]);
 
-        if(Auth::attempt($kredensial))
-        {
-            $request->session()->regenerate();
-            $user = Auth::user();
+    $kredensial = $request->only('email', 'password');
 
-            if($user->status == 'admin')
-            {
-                return redirect()->intended('/dashboard-general-dashboard');
-            }
+    if (Auth::attempt($kredensial)) {
+      $request->session()->regenerate();
+      $user = Auth::user();
 
-            return redirect()->intended('/');
-        }
+      if ($user->status == 'admin') {
+        return redirect()->intended('/dashboard-general-dashboard');
+      }
 
-        return back()->withErrors([
-            'email' => 'Maaf email atau password anda salah'
-        ])->onlyInput('email');
+      return redirect()->intended('/');
     }
 
-    public function logout(Request $request)
-    {
-        Auth::logout();
+    return back()->withErrors([
+      'email' => 'Maaf email atau password anda salah'
+    ])->onlyInput('email');
+  }
 
-        $request->session()->invalidate();
+  public function logout(Request $request)
+  {
+    Auth::logout();
 
-        $request->session()->regenerateToken();
+    $request->session()->invalidate();
 
-        return redirect('/login');
-    }
+    $request->session()->regenerateToken();
+
+    return redirect('/login');
+  }
 }

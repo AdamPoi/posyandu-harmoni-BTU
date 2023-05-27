@@ -29,22 +29,45 @@ Route::redirect('/', '/dashboard-general-dashboard');
 
 
 // Login & Logout
-Route::controller(LoginController::class)->group(function () {
-  Route::get('login', 'index')->name('login');
-  Route::post('login/proses', 'proses');
-  Route::get('logout', 'logout');
-});
+// Route::controller(LoginController::class)->group(function () {
+//   Route::get('login', 'index')->name('login');
+// });
 
-Route::get('login', function () {
-  return view('pages.auth-login');
-});
+
+
 
 // Middleware Login
-Route::group(['middleware' => ['auth']], function () {
-  Route::group(['middleware' => ['CekUserLogin:admin']], function () {
-    // Route::resource('dashboard', DashboardController::class);
+
+// });
+Route::get('login', [LoginController::class, 'index'])->name('login');
+Route::group(['middleware' => ['auth:sanctum', 'auth.role:admin']], function () {
+  Route::resource('user', UserController::class);
+  Route::resource('ibuhamil', IbuHamilController::class);
+  Route::resource('balita', BalitaController::class)->parameters([
+    'balita' => 'balita'
+  ]);;
+  Route::resource('jadwal', JadwalController::class);
+  Route::resource('vitamin', VitaminController::class);
+  Route::resource('imunisasi', ImunisasiController::class);
+  Route::resource('pemeriksaan', PemeriksaanController::class);
+  Route::resource('penimbangan', PenimbanganController::class);
+
+  Route::prefix('cetak/pdf/')->as('cetak.pdf.')->middleware(['cekuser'])->group(function () {
+    Route::get('user', [ImunisasiController::class, 'cetak_pdf'])->name('user');
+    Route::get('ibuhamil', [ImunisasiController::class, 'cetak_pdf'])->name('ibuhamil');
+    Route::get('balita', [ImunisasiController::class, 'cetak_pdf'])->name('balita');
+    Route::get('jadwal', [ImunisasiController::class, 'cetak_pdf'])->name('jadwal');
+    Route::get('vitamin', [VitaminController::class, 'cetak_pdf'])->name('vitamin');
+    Route::get('pemeriksaan', [PemeriksaanController::class, 'cetak_pdf'])->name('pemeriksaan');
+    Route::get('penimbangan', [PenimbanganController::class, 'cetak_pdf'])->name('penimbangan');
+    Route::get('imunisasi', [ImunisasiController::class, 'cetak_pdf'])->name('imunisasi');
+  });
+
+  Route::prefix('autocomplete')->as('autocomplete.')->controller(AutocompleteController::class)->group(function () {
+    Route::get('ibuHamil', 'getIbuHamil')->name('ibuHamil');
   });
 });
+
 
 // Dashboard
 Route::get('/dashboard-general-dashboard', function () {
@@ -56,40 +79,7 @@ Route::get('/dashboard-ecommerce-dashboard', function () {
 
 // Cetak PDF
 
-Route::prefix('cetak/pdf/')->group(function () {
-  Route::get('user', [ImunisasiController::class, 'cetak_pdf'])->name('cetak.pdf.user');
-  Route::get('ibuhamil', [ImunisasiController::class, 'cetak_pdf'])->name('cetak.pdf.ibuhamil');
-  Route::get('balita', [ImunisasiController::class, 'cetak_pdf'])->name('cetak.pdf.balita');
-  Route::get('jadwal', [ImunisasiController::class, 'cetak_pdf'])->name('cetak.pdf.jadwal');
-  Route::get('vitamin', [VitaminController::class, 'cetak_pdf'])->name('cetak.pdf.vitamin');
-  Route::get('pemeriksaan', [PemeriksaanController::class, 'cetak_pdf'])->name('cetak.pdf.pemeriksaan');
-  Route::get('penimbangan', [PenimbanganController::class, 'cetak_pdf'])->name('cetak.pdf.penimbangan');
-  Route::get('imunisasi', [ImunisasiController::class, 'cetak_pdf'])->name('cetak.pdf.imunisasi');
-});
-// Data User
-Route::resource('user', UserController::class);
-// Data Ibu hamil
-Route::resource('ibuhamil', IbuHamilController::class);
-// Data Balita
-Route::resource('balita', BalitaController::class)->parameters([
-  'balita' => 'balita'
-]);;
-// Data Jadwal
-Route::resource('jadwal', JadwalController::class);
-// Data Vitamin
-Route::resource('vitamin', VitaminController::class);
 
-// Data Imunisasi
-Route::resource('imunisasi', ImunisasiController::class);
-// Data Imunisasi
-Route::resource('pemeriksaan', PemeriksaanController::class);
-// Data Imunisasi
-Route::resource('penimbangan', PenimbanganController::class);
-
-
-Route::prefix('autocomplete')->controller(AutocompleteController::class)->group(function () {
-  Route::get('ibuHamil', 'getIbuHamil')->name('autocomplete.ibuHamil');
-})->name('autocomplete');
 // Layout
 Route::get('/layout-default-layout', function () {
   return view('pages.layout-default-layout', ['type_menu' => 'layout']);

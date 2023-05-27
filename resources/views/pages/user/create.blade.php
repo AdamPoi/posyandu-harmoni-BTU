@@ -62,8 +62,8 @@
                                 @error('role') is-invalid @enderror"
                                     value="{{ old('role') }}">
                                     <option value="" disabled selected>Pilih role</option>
-                                    <option value="Admin">Admin</option>
-                                    <option value="Owner">Owner</option>
+                                    <option value="admin">Admin</option>
+                                    <option value="owner">Owner</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -90,8 +90,8 @@
                             <div class="form-group">
                                 <label for="profile_picture">Profil Picture</label>
                                 <input type="file" id="image-input" class="form-control" required="required"
-                                    name="profile_picture" value="{{ old('password') }}">
-                                <img width="150px" id="image-preview" src="{{ asset('storage/' . old('password')) }}">
+                                    name="profile_picture" value="{{ old('profile_picture') }}">
+                                <img width="150px" id="image-preview" src="{{ old('profile_picture') }}">
                             </div>
                         </div>
 
