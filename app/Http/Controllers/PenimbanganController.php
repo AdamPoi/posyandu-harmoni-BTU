@@ -45,10 +45,12 @@ class PenimbanganController extends Controller
         'tinggi_badan' => 'required',
         'id_balita' => 'required',
         'berat_badan' => 'required',
+        'lingkar_kepala' => 'required',
         'tanggal' => 'required',
       ],
       [
         'tinggi_badan.required' => 'Tinngi badan wajib diisi',
+        'lingkar_kepala.required' => 'Tinngi badan wajib diisi',
         'berat_badan.required' => 'Berat badan wajib diisi',
         'id_balita.required' => 'Id Balita wajib diisi',
         'tanggal.required' => 'Id Balita wajib diisi',
@@ -57,6 +59,7 @@ class PenimbanganController extends Controller
     $penimbangan = new Penimbangan;
     $penimbangan->id_balita = $request->get('id_penimbangan');
     $penimbangan->tinggi_badan = $request->get('tinggi_badan');
+    $penimbangan->lingkar_kepala = $request->get('lingkar_kepala');
     $penimbangan->berat_badan = $request->get('berat_badan');
     $penimbangan->tanggal = $request->get('tanggal');
 
@@ -113,12 +116,14 @@ class PenimbanganController extends Controller
       [
         'tinggi_badan' => 'required',
         'id_balita' => 'required',
+        'lingkar_kepala' => 'required',
         'berat_badan' => 'required',
         'tanggal' => 'required',
       ],
       [
-        'tinggi_badan.required' => 'Tinngi badan wajib diisi',
+        'tinggi_badan.required' => 'Tinggi badan wajib diisi',
         'berat_badan.required' => 'Berat badan wajib diisi',
+        'lingkar_kepala.required' => 'Lingkar kepala wajib diisi',
         'id_balita.required' => 'Id Balita wajib diisi',
         'tanggal.required' => 'Tanggal wajib diisi',
       ]
@@ -126,6 +131,7 @@ class PenimbanganController extends Controller
     $penimbangan = new Penimbangan;
     $penimbangan->id_balita = $request->get('id_penimbangan');
     $penimbangan->tinggi_badan = $request->get('tinggi_badan');
+    $penimbangan->lingkar_kepala = $request->get('lingkar_kepala');
     $penimbangan->berat_badan = $request->get('berat_badan');
     $penimbangan->tanggal = $request->get('tanggal');
 

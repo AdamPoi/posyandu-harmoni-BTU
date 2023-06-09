@@ -68,10 +68,10 @@
                             </div>
                             <div class="form-group">
                                 <label>Lingkar Kepala</label>
-                                <input type="text" name="tinggi_badan"
+                                <input type="text" name="lingkar_kepala"
                                     class="form-control @if (old('lingkar_kepala')) is-valid @endif
                                 @error('lingkar_kepala') is-invalid @enderror"
-                                    value="{{ old('lingkar_kepala', $penimbangan->tinggi_badan) }}">
+                                    value="{{ old('lingkar_kepala', $penimbangan->lingkar_kepala) }}">
                             </div>
                             <div class="form-group">
                                 <label>Tanggal</label>
