@@ -67,6 +67,13 @@
                                     value="{{ old('tinggi_badan', $penimbangan->tinggi_badan) }}">
                             </div>
                             <div class="form-group">
+                                <label>Lingkar Kepala</label>
+                                <input type="text" name="tinggi_badan"
+                                    class="form-control @if (old('lingkar_kepala')) is-valid @endif
+                                @error('lingkar_kepala') is-invalid @enderror"
+                                    value="{{ old('lingkar_kepala', $penimbangan->tinggi_badan) }}">
+                            </div>
+                            <div class="form-group">
                                 <label>Tanggal</label>
                                 <input type="date" name="tanggal"
                                     class="form-control @if (old('tanggal')) is-valid @endif 

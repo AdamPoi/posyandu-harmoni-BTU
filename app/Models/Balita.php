@@ -17,9 +17,9 @@ class Balita extends Model
     'nama',
     'nama_ayah',
     'nama_ibu',
-    'tanggal_lahir',
     'usia',
-    'jenis_kelamin'
+    'jenis_kelamin',
+    'tanggal_lahir'
   ];
 
   public function penimbangan()

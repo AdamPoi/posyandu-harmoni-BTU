@@ -20,18 +20,18 @@
 
             <div class="section-body">
                 @if ($errors->any())
-                <div class="pt-3">
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <ul>
-                        @foreach ($errors->all() as $item)
-                            <li>{{ $item }}</li>
-                        @endforeach
-                        </ul>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                    <div class="pt-3">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <ul>
+                                @foreach ($errors->all() as $item)
+                                    <li>{{ $item }}</li>
+                                @endforeach
+                            </ul>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     </div>
-                </div>
                 @endif
                 <div class="card">
                     <div class="card-header">
@@ -55,12 +55,12 @@
                                 @error('nama_ayah') is-invalid @enderror"
                                     value="{{ old('nama_ayah') }}">
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="id_ibu_hamil">Nama Ibu</label>
                                 <select class="form-control" name="ibu_hamil" id="ibu_hamil">
                                     @foreach ($ibu_hamils as $ibu)
-                                        <option value="{{$ibu->id_ibu_hamil.'-'.$ibu->nama}}">{{$ibu->nama}}</option>
+                                        <option value="{{ $ibu->id_ibu_hamil . '-' . $ibu->nama }}">{{ $ibu->nama }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -71,6 +71,7 @@
                                 @error('tanggal_lahir') is-invalid @enderror"
                                     value="{{ old('tanggal_lahir') }}">
                             </div>
+                           
                             <div class="form-group">
                                 <label>Jenis Kelamin</label>
                                 <select class="form-control" name="jenis_kelamin" id="jenis_kelamin">

@@ -26,12 +26,6 @@ return new class extends Migration
 
       $table->foreign('id_ibu_hamil')->references('id_ibu_hamil')->on('ibu_hamils')->onDelete('cascade');
     });
-    DB::statement('UPDATE balitas SET usia = TIMESTAMPDIFF(YEAR, tanggal_lahir, CURDATE())');
-
-    Schema::table('balitas', function (Blueprint $table) {
-      $table->date('tanggal_lahir')->nullable(false)->change();
-      $table->integer('usia')->nullable(false)->change();
-    });
   }
 
   /**

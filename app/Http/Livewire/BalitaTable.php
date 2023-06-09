@@ -28,10 +28,11 @@ class BalitaTable extends DataTableComponent
         ->sortable(),
       Column::make("Nama ibu", "nama_ibu")
         ->sortable(),
-      Column::make("Tanggal lahir", "tanggal_lahir")
+      Column::make("Usia", "usia")
         ->sortable(),
       Column::make("Jenis kelamin", "jenis_kelamin")
         ->sortable(),
+
       // Column::make("Created at", "created_at")
       //     ->sortable(),
       // Column::make("Updated at", "updated_at")

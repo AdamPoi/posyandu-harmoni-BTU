@@ -26,15 +26,14 @@
                 <div class="row mt-sm-4">
                     <div class="col-12 col-md-12">
                         <div class="card">
-                           <div class="card-header">
+                            <div class="card-header">
                                 <div class="card-header-action">
                                     <a href="{{ route('user.edit', $user->id_user) }}"
                                         class="btn btn-icon btn-warning icon-left"><i class="far fa-edit"></i>
                                         Edit</a>
                                     <button class="btn btn-danger btn-icon icon-left"
-                                        data-action="{{ route('user.destroy', $user->id_user) }}"
-                                        data-toggle="modal" data-target="#confirm-delete-modal"> <i
-                                            class="fas fa-trash"></i>
+                                        data-action="{{ route('user.destroy', $user->id_user) }}" data-toggle="modal"
+                                        data-target="#confirm-delete-modal"> <i class="fas fa-trash"></i>
                                         Delete</button>
 
                                 </div>

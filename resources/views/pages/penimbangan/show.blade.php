@@ -56,6 +56,13 @@
                                             value="{{ $penimbangan->tinggi_badan }}">
                                     </div>
                                 </div>
+                                 <div class="row">
+                                    <div class="form-group col-12">
+                                        <label>Lingkar Kepala</label>
+                                        <input readonly type="text" class="form-control"
+                                            value="{{ $penimbangan->lingkar_kepala }}">
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="form-group col-12">
                                         <label>Tanggal</label>

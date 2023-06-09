@@ -6,6 +6,7 @@ use App\Models\Balita;
 use App\Models\IbuHamil;
 use Illuminate\Http\Request;
 use PDF;
+use Illuminate\Support\Carbon;
 
 class BalitaController extends Controller
 {
@@ -62,6 +63,7 @@ class BalitaController extends Controller
     $balita->nama_ibu = explode('-', $request->get('ibu_hamil'))[1];
     $balita->tanggal_lahir = $request->get('tanggal_lahir');
     $balita->jenis_kelamin = $request->get('jenis_kelamin');
+    $balita->usia = Carbon::parse($request->get('tanggal_lahir'))->age;
 
     $ibu_hamils = new IbuHamil;
     $ibu_hamils->id_ibu_hamil = explode('-', $request->get('ibu_hamil'))[0];
