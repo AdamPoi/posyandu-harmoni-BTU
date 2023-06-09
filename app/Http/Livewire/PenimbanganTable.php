@@ -22,9 +22,13 @@ class PenimbanganTable extends DataTableComponent
         ->sortable(),
       Column::make("Balita", "balita.nama")
         ->sortable(),
+      Column::make("Usia", "balita.usia")
+        ->sortable(),
       Column::make("Berat badan", "berat_badan")
         ->sortable(),
       Column::make("Tinggi badan", "tinggi_badan")
+        ->sortable(),
+      Column::make("Lingkar Kepala", "lingkar_kepala")
         ->sortable(),
       Column::make("Tanggal", "tanggal")
         ->sortable(),

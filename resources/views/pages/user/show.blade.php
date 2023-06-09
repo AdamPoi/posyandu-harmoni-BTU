@@ -48,8 +48,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-7 col-12">
-                                        <label>Umur</label>
-                                        <input readonly type="number" class="form-control" value="{{ $user->umur }}">
+                                        <label>Usia</label>
+                                        <input readonly type="number" class="form-control" value="{{ $user->usia }}">
                                     </div>
                                 </div>
                                 <div class="row">

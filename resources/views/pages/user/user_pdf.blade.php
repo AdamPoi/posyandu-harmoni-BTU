@@ -21,7 +21,7 @@
                 <th>No</th>
                 <th>Nama</th>
                 <th>Role</th>
-                <th>Umur</th>
+                <th>Usia</th>
                 <th>Alamat</th>
 
             </tr>
@@ -32,7 +32,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $user->nama }}</td>
                     <td>{{ $user->role }}</td>
-                    <td>{{ $user->umur }}</td>
+                    <td>{{ $user->usia }}</td>
                     <td>{{ $user->alamat }}</td>
                 </tr>
             @endforeach

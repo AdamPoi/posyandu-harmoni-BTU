@@ -20,10 +20,17 @@ return new class extends Migration
       $table->string('nama_ayah');
       $table->string('nama_ibu');
       $table->date('tanggal_lahir');
+      $table->integer('usia')->nullable();
       $table->string('jenis_kelamin');
       $table->timestamps();
 
       $table->foreign('id_ibu_hamil')->references('id_ibu_hamil')->on('ibu_hamils')->onDelete('cascade');
+    });
+    DB::statement('UPDATE balitas SET usia = TIMESTAMPDIFF(YEAR, tanggal_lahir, CURDATE())');
+
+    Schema::table('balitas', function (Blueprint $table) {
+      $table->date('tanggal_lahir')->nullable(false)->change();
+      $table->integer('usia')->nullable(false)->change();
     });
   }
 

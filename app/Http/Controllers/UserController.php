@@ -43,7 +43,7 @@ class UserController extends Controller
     $request->validate(
       [
         'nama' => 'required',
-        'umur' => 'required',
+        'usia' => 'required',
         'role' => 'required',
         'alamat' => 'required',
         'email' => 'required',
@@ -52,7 +52,7 @@ class UserController extends Controller
       ],
       [
         'nama.required' => 'Nama User wajib diisi',
-        'umur.required' => 'Umur User wajib diisi',
+        'usia.required' => 'Usia User wajib diisi',
         'role.required' => 'Role User wajib diisi',
         'alamat.required' => 'Alamat User wajib diisi',
         'email.required' => 'Email User wajib diisi',
@@ -61,7 +61,7 @@ class UserController extends Controller
     );
 
     $nama = $request->nama;
-    $umur = $request->umur;
+    $usia = $request->usia;
     $role = $request->role;
     $alamat = $request->alamat;
     $email = $request->email;
@@ -73,7 +73,7 @@ class UserController extends Controller
     try {
       $user = new User();
       $user->nama = $nama;
-      $user->umur = $umur;
+      $user->usia = $usia;
       $user->role = $role;
       $user->alamat = $alamat;
       $user->email = $email;
@@ -121,7 +121,7 @@ class UserController extends Controller
     $request->validate(
       [
         'nama' => 'required',
-        'umur' => 'required',
+        'usia' => 'required',
         'role' => 'required',
         'alamat' => 'required',
         'email' => 'required',
@@ -129,7 +129,7 @@ class UserController extends Controller
       ],
       [
         'nama.required' => 'Nama User wajib diisi',
-        'umur.required' => 'Umur User wajib diisi',
+        'usia.required' => 'Usia User wajib diisi',
         'role.required' => 'Role User wajib diisi',
         'alamat.required' => 'Alamat User wajib diisi',
         'email.required' => 'Email User wajib diisi',
@@ -139,7 +139,7 @@ class UserController extends Controller
     );
 
     $nama = $request->nama;
-    $umur = $request->umur;
+    $usia = $request->usia;
     $role = $request->role;
     $alamat = $request->alamat;
     $email = $request->email;
@@ -149,7 +149,7 @@ class UserController extends Controller
 
     try {
       $user->nama = $nama;
-      $user->umur = $umur;
+      $user->usia = $usia;
       $user->role = $role;
       $user->alamat = $alamat;
       $user->email = $email;

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Balita extends Model
 {
   use HasFactory;
-  
+
   protected $table = 'balitas';
   protected $primaryKey = 'id_balita';
 
@@ -18,6 +18,7 @@ class Balita extends Model
     'nama_ayah',
     'nama_ibu',
     'tanggal_lahir',
+    'usia',
     'jenis_kelamin'
   ];
 

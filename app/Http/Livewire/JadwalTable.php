@@ -31,6 +31,9 @@ class JadwalTable extends DataTableComponent
         ->sortable()->searchable(),
       Column::make("Kegiatan", "kegiatan")
         ->sortable()->searchable(),
+      Column::make("Deskripsi", "deskripsi")
+        ->sortable(),
+
       Column::make('Actions')
         ->label(
           function ($row) {
@@ -50,8 +53,7 @@ class JadwalTable extends DataTableComponent
           }
         )->html(),
 
-      // Column::make("Deskripsi", "deskripsi")
-      //   ->sortable(),
+
       // Column::make("Created at", "created_at")
       //     ->sortable(),
       // Column::make("Updated at", "updated_at")

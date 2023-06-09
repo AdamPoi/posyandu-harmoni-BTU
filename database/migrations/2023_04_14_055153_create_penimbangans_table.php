@@ -18,6 +18,7 @@ return new class extends Migration
       $table->unsignedInteger('id_balita');
       $table->float('berat_badan');
       $table->float('tinggi_badan');
+      $table->float('lingkar_kepala');
       $table->date('tanggal');
       $table->timestamps();
 

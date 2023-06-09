@@ -49,11 +49,11 @@
                                     value="{{ old('nama') }}">
                             </div>
                             <div class="form-group">
-                                <label>Umur</label>
-                                <input type="number" name="umur"
-                                    class="form-control @if (old('umur')) is-valid @endif
-                                @error('umur') is-invalid @enderror"
-                                    value="{{ old('umur') }}">
+                                <label>Usia</label>
+                                <input type="number" name="usia"
+                                    class="form-control @if (old('usia')) is-valid @endif
+                                @error('usia') is-invalid @enderror"
+                                    value="{{ old('usia') }}">
                             </div>
                             <div class="form-group">
                                 <label>Role</label>
