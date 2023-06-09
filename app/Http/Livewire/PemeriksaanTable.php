@@ -18,12 +18,12 @@ class PemeriksaanTable extends DataTableComponent
   public function columns(): array
   {
     return [
-      Column::make("Id pemeriksaan", "id_pemeriksaan")
+      Column::make("Id Pemeriksaan", "id_pemeriksaan")
         ->sortable(),
-      Column::make("Id ibu hamil", "id_ibu_hamil")
+      Column::make("Ibu Hamil", "ibu_hamil.nama")
         ->sortable(),
       Column::make("Tanggal", "tanggal")
-        ->sortable(),
+        ->sortable()->searchable(),
       Column::make("Catatan", "catatan")
         ->sortable(),
       // Column::make("Created at", "created_at")

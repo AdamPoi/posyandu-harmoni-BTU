@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Laporan  Data Penimbangan</title>
+    <title>Laporan Data Penimbangan</title>
 </head>
 
 <body>
@@ -27,13 +27,13 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($penimbangan as $pen)
+            @foreach ($penimbangans as $penimbangan)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $pen->balita->nama }}</td>
-                    <td>{{ $pen->berat_badan }}</td>
-                    <td>{{ $pen->tinggi_badan }}</td>
-                    <td>{{ $pen->tanggal }}</td>
+                    <td>{{ $penimbangan->balita->nama }}</td>
+                    <td>{{ $penimbangan->berat_badan }}</td>
+                    <td>{{ $penimbangan->tinggi_badan }}</td>
+                    <td>{{ $penimbangan->tanggal }}</td>
                 </tr>
             @endforeach
         </tbody>

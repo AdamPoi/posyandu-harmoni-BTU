@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Membuat Laporan PDF Dengan DOMPDF Laravel</title>
+    <title>Laporan Data Penimbangan</title>
 </head>
 
 <body>
@@ -13,22 +13,27 @@
         }
     </style>
     <center>
-        <h5>Laporan Data Vitamin</h4>
+        <h5>Laporan Artikel</h4>
     </center>
     <table class='table table-bordered'>
         <thead>
             <tr>
                 <th>No</th>
-                <th>Jenis Vitamin</th>
-                <th>Deskripsi</th>
+                <th>Nama</th>
+                <th>Role</th>
+                <th>Umur</th>
+                <th>Alamat</th>
+
             </tr>
         </thead>
         <tbody>
-            @foreach ($vitamins as $vitamin)
+            @foreach ($users as $user)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $vitamin->jenis_vitamin }}</td>
-                    <td>{{ $vitamin->deskripsi }}</td>
+                    <td>{{ $user->nama }}</td>
+                    <td>{{ $user->role }}</td>
+                    <td>{{ $user->umur }}</td>
+                    <td>{{ $user->alamat }}</td>
                 </tr>
             @endforeach
         </tbody>

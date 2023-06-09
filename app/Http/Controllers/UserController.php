@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
+use PDF;
 
 class UserController extends Controller
 {
@@ -181,5 +182,12 @@ class UserController extends Controller
 
     $file->move(public_path('images/user'), $imageName);
     return $imageName;
+  }
+
+  public function cetak_pdf()
+  {
+    $users = User::all();
+    $pdf = PDF::loadview('pages.user.user_pdf', ['users' => $users]);
+    return $pdf->stream();
   }
 }

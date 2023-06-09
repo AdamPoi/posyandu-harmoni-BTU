@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Jadwal;
 use Illuminate\Http\Request;
+use PDF;
 
 class JadwalController extends Controller
 {
@@ -108,5 +109,11 @@ class JadwalController extends Controller
   {
     $jadwal->delete();
     return redirect()->route('jadwal.index')->with('msg-success', 'Berhasil menghapus data Jadwal');
+  }
+  public function cetak_pdf()
+  {
+    $jadwals = Jadwal::all();
+    $pdf = PDF::loadview('pages.jadwal.jadwal_pdf', ['jadwals' => $jadwals]);
+    return $pdf->stream();
   }
 }

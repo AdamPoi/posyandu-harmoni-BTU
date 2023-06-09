@@ -20,7 +20,7 @@ class PenimbanganTable extends DataTableComponent
     return [
       Column::make("Id", "id_penimbangan")
         ->sortable(),
-      Column::make("Id balita", "id_balita")
+      Column::make("Balita", "balita.nama")
         ->sortable(),
       Column::make("Berat badan", "berat_badan")
         ->sortable(),

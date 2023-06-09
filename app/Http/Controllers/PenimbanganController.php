@@ -82,8 +82,8 @@ class PenimbanganController extends Controller
   public function show($id_penimbangan)
   {
     //menampilkan detail data dengan menemukan berdasarkan id_pemeriksaan
-    $penimbangans = Penimbangan::with('balita')->where('id_penimbangan', $id_penimbangan)->first();
-    return view('pages.penimbangan.show', ['penimbangans' => $penimbangans]);
+    $penimbangan = Penimbangan::with('balita')->where('id_penimbangan', $id_penimbangan)->first();
+    return view('pages.penimbangan.show', ['penimbangan' => $penimbangan]);
   }
 
   /**
@@ -154,8 +154,8 @@ class PenimbanganController extends Controller
   }
   public function cetak_pdf()
   {
-    $penimbangan = Penimbangan::all();
-    $pdf = PDF::loadview('pages.penimbangan.penimbangan_pdf', ['penimbangan' => $penimbangan]);
+    $penimbangans = Penimbangan::all();
+    $pdf = PDF::loadview('pages.penimbangan.penimbangan_pdf', ['penimbangans' => $penimbangans]);
     return $pdf->stream();
   }
 }

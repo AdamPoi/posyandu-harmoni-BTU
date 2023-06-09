@@ -126,8 +126,8 @@ class VitaminController extends Controller
 
   public function cetak_pdf()
   {
-    $vitamin = Vitamin::all();
-    $pdf = PDF::loadview('pages.vitamin.vitamin_pdf', ['vitamin' => $vitamin]);
+    $vitamins = Vitamin::all();
+    $pdf = PDF::loadview('pages.vitamin.vitamin_pdf', ['vitamins' => $vitamins]);
     return $pdf->stream();
   }
 }

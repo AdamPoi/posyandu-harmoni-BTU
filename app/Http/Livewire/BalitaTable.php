@@ -23,7 +23,7 @@ class BalitaTable extends DataTableComponent
       // Column::make("Id ibu hamil", "id_ibu_hamil")
       //     ->sortable(),
       Column::make("Nama", "nama")
-        ->sortable(),
+        ->sortable()->searchable(),
       Column::make("Nama ayah", "nama_ayah")
         ->sortable(),
       Column::make("Nama ibu", "nama_ibu")

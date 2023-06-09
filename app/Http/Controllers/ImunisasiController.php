@@ -80,8 +80,8 @@ class ImunisasiController extends Controller
   public function show($id_imunisasi)
   {
     //menampilkan detail data dengan menemukan berdasarkan id_imunisasi
-    $imunisasis = Imunisasi::with('balita')->where('id_imunisasi', $id_imunisasi)->first();
-    return view('pages.imunisasi.show', ['imunisasis' => $imunisasis]);
+    $imunisasi = Imunisasi::with('balita')->where('id_imunisasi', $id_imunisasi)->first();
+    return view('pages.imunisasi.show', ['imunisasi' => $imunisasi]);
   }
 
   /**
@@ -152,8 +152,8 @@ class ImunisasiController extends Controller
   }
   public function cetak_pdf()
   {
-    $imunisasi = Imunisasi::all();
-    $pdf = PDF::loadview('pages.imunisasi.imunisasi_pdf', ['imunisasi' => $imunisasi]);
+    $imunisasis = Imunisasi::all();
+    $pdf = PDF::loadview('pages.imunisasi.imunisasi_pdf', ['imunisasis' => $imunisasis]);
     return $pdf->stream();
   }
 }

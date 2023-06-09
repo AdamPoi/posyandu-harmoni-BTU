@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Balita;
 use App\Models\IbuHamil;
 use Illuminate\Http\Request;
+use PDF;
 
 class BalitaController extends Controller
 {
@@ -144,5 +145,12 @@ class BalitaController extends Controller
     $balita->delete();
     return redirect()->route('balita.index')
       ->with('msg-success', 'Data Berhasil Dihapus');
+  }
+
+  public function cetak_pdf()
+  {
+    $balitass = Balita::all();
+    $pdf = PDF::loadview('pages.balitas.balitas_pdf', ['balitass' => $balitass]);
+    return $pdf->stream();
   }
 }

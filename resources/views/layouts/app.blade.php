@@ -54,6 +54,7 @@
     </div>
 
     <!-- General JS Scripts -->
+    <script src="//unpkg.com/alpinejs" defer></script>
     <script src="{{ asset('library/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('library/popper.js/dist/umd/popper.js') }}"></script>
     <script src="{{ asset('library/tooltip.js/dist/umd/tooltip.js') }}"></script>

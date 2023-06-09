@@ -148,8 +148,8 @@ class PemeriksaanController extends Controller
 
   public function cetak_pdf()
   {
-    $pemeriksaan = Pemeriksaan::all();
-    $pdf = PDF::loadview('pages.pemeriksaan.pemeriksaan_pdf', ['pemeriksaan' => $pemeriksaan]);
+    $pemeriksaans = Pemeriksaan::all();
+    $pdf = PDF::loadview('pages.pemeriksaan.pemeriksaan_pdf', ['pemeriksaans' => $pemeriksaans]);
     return $pdf->stream();
   }
 }

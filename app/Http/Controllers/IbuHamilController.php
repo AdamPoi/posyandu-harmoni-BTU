@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\IbuHamil;
 use Illuminate\Http\Request;
+use PDF;
 
 class IbuHamilController extends Controller
 {
@@ -108,5 +109,12 @@ class IbuHamilController extends Controller
   {
     $ibuhamil->delete();
     return redirect()->route('ibuhamil.index')->with('msg-success', 'Berhasil menghapus data Ibu Hamil ' . $ibuhamil->nama);
+  }
+
+  public function cetak_pdf()
+  {
+    $ibuhamils = IbuHamil::all();
+    $pdf = PDF::loadview('pages.ibuhamil.ibuhamil_pdf', ['ibuhamils' => $ibuhamils]);
+    return $pdf->stream();
   }
 }

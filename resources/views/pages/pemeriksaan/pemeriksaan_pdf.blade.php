@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Membuat Laporan PDF Dengan DOMPDF Laravel</title>
 </head>
+
 <body>
     <style type="text/css">
         table tr td,
-        table tr th{
-                font-size: 9pt;
+        table tr th {
+            font-size: 9pt;
         }
     </style>
     <center>
@@ -24,16 +26,17 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($pemeriksaan as $a)
-            <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{$a->id_pemeriksaan}}</td>
-                <td>{{$a->ibu_hamil->nama}}</td>
-                <td>{{$a->tanggal}}</td>
-                <td>{{$a->catatan}}</td>
-            </tr>
+            @foreach ($pemeriksaans as $pemeriksaan)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $pemeriksaan->id_pemeriksaan }}</td>
+                    <td>{{ $pemeriksaan->ibu_hamil->nama }}</td>
+                    <td>{{ $pemeriksaan->tanggal }}</td>
+                    <td>{{ $pemeriksaan->catatan }}</td>
+                </tr>
             @endforeach
         </tbody>
     </table>
 </body>
+
 </html>
