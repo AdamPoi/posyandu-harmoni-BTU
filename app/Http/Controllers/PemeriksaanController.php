@@ -117,7 +117,7 @@ class PemeriksaanController extends Controller
         'id_ibu_hamil.required' => 'Nama Ibu Hamil wajib diisi',
       ]
     );
-    $pemeriksaan = Pemeriksaan::with('ibu_hamils')->where('id_pemeriksaan', $id_pemeriksaan)->first();
+    $pemeriksaan = Pemeriksaan::with('ibu_hamil')->where('id_pemeriksaan', $id_pemeriksaan)->first();
     $pemeriksaan->tanggal = $request->get('tanggal');
     $pemeriksaan->catatan = $request->get('catatan');
 
@@ -129,7 +129,7 @@ class PemeriksaanController extends Controller
     $pemeriksaan->save();
     //jika data berhasil ditambahkan, akan kembali ke halaman utama
     return redirect()->route('pemeriksaan.index')
-      ->with('msg-success', 'Data Berhasil ditambahkan');
+      ->with('msg-success', 'Data Berhasil dirubah');
   }
 
   /**
