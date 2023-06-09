@@ -20,7 +20,9 @@ class ImunisasiTable extends DataTableComponent
     return [
       Column::make("Id", "id_imunisasi")
         ->sortable(),
-      Column::make("Id balita", "id_balita")
+      Column::make("Balita", "balita.nama")
+        ->sortable(),
+      Column::make("Usia", "balita.usia")
         ->sortable(),
       Column::make("Jenis imunisasi", "jenis_imunisasi")
         ->sortable()->searchable(),

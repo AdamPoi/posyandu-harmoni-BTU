@@ -22,7 +22,7 @@ class PemeriksaanTable extends DataTableComponent
         ->sortable(),
       Column::make("Ibu Hamil", "ibu_hamil.nama")
         ->sortable(),
-      Column::make("Tanggal", "tanggal")
+      Column::make("Tanggal Pemeriksaan", "tanggal")
         ->sortable()->searchable(),
       Column::make("Catatan", "catatan")
         ->sortable(),

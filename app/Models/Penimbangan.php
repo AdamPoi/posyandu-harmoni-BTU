@@ -15,6 +15,7 @@ class Penimbangan extends Model
     'id_balita',
     'berat_badan',
     'tinggi_badan',
+    'lingkar_kepala',
     'tanggal',
   ];
   public function balita()
