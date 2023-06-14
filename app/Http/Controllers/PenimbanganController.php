@@ -72,7 +72,7 @@ class PenimbanganController extends Controller
     $penimbangan->save();
     //jika data berhasil ditambahkan, akan kembali ke halaman utama
     return redirect()->route('penimbangan.index')
-      ->with('success', 'Data Berhasil ditambahkan');
+      ->with('msg-success', 'Data Berhasil ditambahkan');
   }
 
 
@@ -109,7 +109,7 @@ class PenimbanganController extends Controller
    * @param  \App\Models\Penimbangan  $penimbangan
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request, Penimbangan $penimbangan)
+  public function update(Request $request, $id_penimbangan)
   {
     //melakukan validasi data
     $request->validate(
@@ -128,8 +128,7 @@ class PenimbanganController extends Controller
         'tanggal.required' => 'Tanggal wajib diisi',
       ]
     );
-    $penimbangan = new Penimbangan;
-    $penimbangan->id_balita = $request->get('id_penimbangan');
+    $penimbangan = Penimbangan::with('balita')->where('id_penimbangan', $id_penimbangan)->first();
     $penimbangan->tinggi_badan = $request->get('tinggi_badan');
     $penimbangan->lingkar_kepala = $request->get('lingkar_kepala');
     $penimbangan->berat_badan = $request->get('berat_badan');

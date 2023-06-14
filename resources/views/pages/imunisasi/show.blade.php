@@ -50,6 +50,13 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-12">
+                                        <label>Usia</label>
+                                        <input readonly type="text" class="form-control"
+                                            value="{{ $imunisasi->balita->usia }}">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-12">
                                         <label>jenis_imunisasi</label>
                                         <input readonly type="text" class="form-control"
                                             value="{{ $imunisasi->jenis_imunisasi }}">

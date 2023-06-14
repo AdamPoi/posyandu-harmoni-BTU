@@ -20,6 +20,7 @@
             <tr>
                 <th>No</th>
                 <th>Nama Balita</th>
+                <th>Usia</th>
                 <th>Berat Badan</th>
                 <th>Tinggi Badan</th>
                 <th>Tanggal</th>
@@ -31,6 +32,7 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $penimbangan->balita->nama }}</td>
+                    <td>{{ $penimbangan->balita->usia }}</td>
                     <td>{{ $penimbangan->berat_badan }}</td>
                     <td>{{ $penimbangan->tinggi_badan }}</td>
                     <td>{{ $penimbangan->tanggal }}</td>

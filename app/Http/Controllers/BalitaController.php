@@ -168,8 +168,8 @@ class BalitaController extends Controller
 
   public function cetak_pdf()
   {
-    $balitass = Balita::all();
-    $pdf = PDF::loadview('pages.balitas.balitas_pdf', ['balitass' => $balitass]);
+    $balitas = Balita::all();
+    $pdf = PDF::loadview('pages.balita.balita_pdf', ['balitas' => $balitas]);
     return $pdf->stream();
   }
 }

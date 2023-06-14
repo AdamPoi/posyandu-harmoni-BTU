@@ -44,6 +44,13 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-12">
+                                        <label>Usia</label>
+                                        <input readonly type="text" class="form-control"
+                                            value="{{ $penimbangan->balita->usia }}">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-12">
                                         <label>Berat Badan</label>
                                         <input readonly type="text" class="form-control"
                                             value="{{ $penimbangan->berat_badan }}">
