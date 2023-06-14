@@ -65,6 +65,13 @@
                                 </select>
                             </div>
                             <div class="form-group">
+                                <label for="usia">Usia</label>
+                                <input type="text" name="usia"
+                                    class="form-control @if (old('usia')) is-valid @endif
+                                @error('usia') is-invalid @enderror"
+                                    value="{{ old('usia') }}">
+                            </div>
+                            <div class="form-group">
                                 <label>Tanggal Lahir</label>
                                 <input type="date" name="tanggal_lahir"
                                     class="form-control @if (old('tanggal_lahir')) is-valid @endif
