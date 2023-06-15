@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BalitaController;
 use App\Http\Controllers\IbuHamilController;
 use App\Http\Controllers\UserController;
@@ -33,8 +34,7 @@ Route::redirect('/', '/dashboard-general-dashboard');
 //   Route::get('login', 'index')->name('login');
 // });
 
-
-
+Route::get('home', [HomeController::class, 'index'])->name('home');
 
 // Middleware Login
 
