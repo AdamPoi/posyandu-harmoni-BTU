@@ -18,7 +18,7 @@ return new class extends Migration
       $table->unsignedInteger('id_ibu_hamil');
       $table->string('nama');
       $table->string('nama_ayah');
-      $table->string('nama_ibu');
+      // $table->string('nama_ibu');
       $table->date('tanggal_lahir');
       $table->integer('usia')->nullable();
       $table->string('jenis_kelamin');

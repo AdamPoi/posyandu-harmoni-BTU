@@ -26,7 +26,9 @@ class BalitaTable extends DataTableComponent
         ->sortable()->searchable(),
       Column::make("Nama ayah", "nama_ayah")
         ->sortable(),
-      Column::make("Nama ibu", "nama_ibu")
+      // Column::make("Nama ibu", "nama_ibu")
+      //   ->sortable(),
+      Column::make("Ibu Hamil", "ibu_hamil.nama")
         ->sortable(),
       Column::make("Usia", "usia")
         ->sortable(),

@@ -44,7 +44,7 @@ class BalitaController extends Controller
       [
         'nama' => 'required',
         'nama_ayah' => 'required',
-        'ibu_hamil' => 'required',
+        'id_ibu_hamil' => 'required',
         'usia' => 'required',
         'tanggal_lahir' => 'required',
         'jenis_kelamin' => 'required',
@@ -52,7 +52,7 @@ class BalitaController extends Controller
       [
         'nama.required' => 'Nama wajib diisi',
         'nama_ayah.required' => 'Nama Ayah wajib diisi',
-        'ibu_hamil.required' => 'Nama Ibu wajib diisi',
+        'id_ibu_hamil.required' => 'Nama Ibu Hamil wajib diisi',
         'usia.required' => 'Usia wajib diisi',
         'tanggal_lahir.required' => 'Tanggal Lahir wajib diisi',
         'jenis_kelamin.required' => 'Jenis Kelamin wajib diisi',
@@ -62,15 +62,17 @@ class BalitaController extends Controller
     $balita->id_balita = $request->get('id_balita');
     $balita->nama = $request->get('nama');
     $balita->nama_ayah = $request->get('nama_ayah');
-    $balita->nama_ibu = explode('-', $request->get('ibu_hamil'))[1];
+    // $balita->nama_ibu = explode('-', $request->get('ibu_hamil'))[1];
     $balita->usia = $request->get('usia');
     $balita->tanggal_lahir = $request->get('tanggal_lahir');
     $balita->jenis_kelamin = $request->get('jenis_kelamin');
     // $balita->usia = Carbon::parse($request->get('usia'))->age;
 
+    // $ibu_hamils = new IbuHamil;
+    // $ibu_hamils->id_ibu_hamil = explode('-', $request->get('ibu_hamil'))[0];
     $ibu_hamils = new IbuHamil;
-    $ibu_hamils->id_ibu_hamil = explode('-', $request->get('ibu_hamil'))[0];
-
+    $ibu_hamils->id_ibu_hamil = $request->get('id_ibu_hamil');
+    
     //fungsi eloquent untuk menambah data dengan relasi belongsTo
     $balita->ibu_hamil()->associate($ibu_hamils);
     $balita->save();

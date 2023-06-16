@@ -49,7 +49,7 @@
                                 <div class="row">
                                     <div class="form-group col-12">
                                         <label>Nama Ibu</label>
-                                        <input readonly type="text" class="form-control" value="{{ $balita->nama_ibu }}">
+                                        <input readonly type="text" class="form-control" value="{{ $balita->ibu_hamil->nama }}">
                                     </div>
                                 </div>
                                 <div class="row">

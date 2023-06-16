@@ -56,18 +56,13 @@
                                 @error('nama_ayah') is-invalid @enderror"
                                 value="{{ old('nama_ayah', $balita->nama_ayah) }}">
                             </div>
-                            {{-- <div class="form-group">
-                                <label for="ibu_hamil">Nama Ibu</label>
-                                <input readonly hidden type="text" name="ibu_hamil" class="form-control" value="{{ $balita->id_balita }}">
-                                <input readonly type="text" name="ibu_hamil" class="form-control" value="{{ $balita->ibu_hamil->nama }}">
-                            </div> --}}
                             <div class="form-group">
                                 <label for="id_ibu_hamil">Nama Ibu</label>
                                 <select class="form-control" name="id_ibu_hamil" id="id_ibu_hamil">
-                                    @foreach ($ibu_hamils as $prk)
-                                        <option value="{{ $prk->id_ibu_hamil }}"
-                                            {{ $prk->id_ibu_hamil == $prk->id_ibu_hamil ? 'selected' : '' }}>
-                                            {{ $prk->nama }}</option>
+                                    @foreach ($ibu_hamils as $ibu)
+                                        <option value="{{ $ibu->id_ibu_hamil }}"
+                                            {{ $ibu->id_ibu_hamil == $balita->ibu_hamil->id_ibu_hamil ? 'selected' : '' }}>
+                                            {{ $ibu->nama }}</option>
                                     @endforeach
                                 </select>
                             </div>
