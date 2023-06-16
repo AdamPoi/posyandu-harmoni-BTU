@@ -39,9 +39,9 @@
                                 <h4>Data Pemeriksaan</h4>
                                 <div class="card-header-action">
 
-                                    <a href="{{ route('cetak.pdf.pemeriksaan') }}"
-                                        class="btn btn-icon btn-primary icon-left"><i class="fas fa-print"></i>
-                                        Print PDF</a>
+                                    <a href="{{ route('cetak.pdf.balita') }}" class="btn btn-icon btn-primary icon-left" target="_blank" rel="noopener noreferrer"><i
+                                        class="fas fa-print"></i>
+                                    Print PDF</a>
                                     <a href="{{ route('pemeriksaan.create') }}"
                                         class="btn btn-icon btn-primary icon-left"><i class="fas fa-plus"></i>
                                         Tambah</a>

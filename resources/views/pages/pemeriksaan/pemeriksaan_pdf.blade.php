@@ -6,24 +6,25 @@
 </head>
 
 <body>
-    <style type="text/css">
+    <style>
         .table-bordered {
-            border: 1px solid #000000;
             border-collapse: collapse;
+            width: 100%;
         }
-
+        
         .table-bordered th,
         .table-bordered td {
             border: 1px solid #000000;
             text-align: center;
-            padding: 8px; /* Atur jarak pada teks dalam tabel */
+            padding: 8px;
         }
-
+        
         .table .tanggal {
-              text-align: left; /* Mengatur teks di sebelah kiri untuk kolom tanggal */
-              white-space: nowrap; /* Mencegah pemutaran teks ke bawah (terlalu panjang) */
+            text-align: left;
+            white-space: nowrap;
         }
     </style>
+    
     <center>
         <h5>Laporan Data Pemeriksaan Posyandu Harmoni - BTU</h4>
     </center>

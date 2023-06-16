@@ -47,7 +47,7 @@
                                 <select class="form-control" name="id_ibu_hamil" id="id_ibu_hamil">
                                     @foreach ($ibu_hamils as $prk)
                                         <option value="{{ $prk->id_ibu_hamil }}"
-                                            {{ $prk->id_ibu_hamil == $prk->id_ibu_hamil ? 'selected' : '' }}>
+                                            {{ $prk->id_ibu_hamil == $pemeriksaan->ibu_hamil->id_ibu_hamil ? 'selected' : '' }}>
                                             {{ $prk->nama }}</option>
                                     @endforeach
                                 </select>
