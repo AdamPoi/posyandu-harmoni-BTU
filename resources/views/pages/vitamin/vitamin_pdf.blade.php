@@ -10,6 +10,7 @@
         .table-bordered {
             border: 1px solid #000000;
             border-collapse: collapse;
+            width: 100%;
         }
 
         .table-bordered th,
