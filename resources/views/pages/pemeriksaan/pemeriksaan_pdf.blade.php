@@ -26,7 +26,7 @@
     </style>
     
     <center>
-        <h5>Laporan Data Pemeriksaan Posyandu Harmoni - BTU</h4>
+        <h2>Laporan Data Pemeriksaan Posyandu Harmoni - BTU</h2>
     </center>
     <table class='table table-bordered'>
         <thead>
