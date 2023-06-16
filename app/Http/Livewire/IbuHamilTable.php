@@ -21,13 +21,13 @@ class IbuHamilTable extends DataTableComponent
   {
     return [
       Column::make("Id ibu hamil", "id_ibu_hamil")
-        ->sortable(),
+        ->sortable()->searchable(),
       Column::make("Nama", "nama")
         ->sortable()->searchable(),
       Column::make("Alamat", "alamat")
         ->sortable()->searchable(),
       Column::make("Usia kandungan", "usia_kandungan")
-        ->sortable(),
+        ->sortable()->searchable(),
       Column::make('Actions')
         ->label(
           function ($row) {

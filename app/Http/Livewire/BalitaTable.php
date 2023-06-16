@@ -25,15 +25,15 @@ class BalitaTable extends DataTableComponent
       Column::make("Nama", "nama")
         ->sortable()->searchable(),
       Column::make("Nama ayah", "nama_ayah")
-        ->sortable(),
+        ->sortable()->searchable(),
       // Column::make("Nama ibu", "nama_ibu")
       //   ->sortable(),
       Column::make("Ibu Hamil", "ibu_hamil.nama")
-        ->sortable(),
+        ->sortable()->searchable(),
       Column::make("Usia", "usia")
-        ->sortable(),
+        ->sortable()->searchable(),
       Column::make("Jenis kelamin", "jenis_kelamin")
-        ->sortable(),
+        ->sortable()->searchable(),
 
       // Column::make("Created at", "created_at")
       //     ->sortable(),

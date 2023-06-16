@@ -32,7 +32,7 @@ class JadwalTable extends DataTableComponent
       Column::make("Kegiatan", "kegiatan")
         ->sortable()->searchable(),
       Column::make("Deskripsi", "deskripsi")
-        ->sortable(),
+        ->sortable()->searchable(),
 
       Column::make('Actions')
         ->label(

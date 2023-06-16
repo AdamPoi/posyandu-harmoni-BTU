@@ -19,17 +19,17 @@ class ImunisasiTable extends DataTableComponent
   {
     return [
       Column::make("Id", "id_imunisasi")
-        ->sortable(),
+        ->sortable()->searchable(),
       Column::make("Balita", "balita.nama")
-        ->sortable(),
+        ->sortable()->searchable(),
       Column::make("Usia", "balita.usia")
-        ->sortable(),
+        ->sortable()->searchable(),
       Column::make("Jenis imunisasi", "jenis_imunisasi")
         ->sortable()->searchable(),
       Column::make("Tanggal", "tanggal")
         ->sortable()->searchable(),
       Column::make("Deskripsi", "deskripsi")
-        ->sortable(),
+        ->sortable()->searchable(),
       // Column::make("Created at", "created_at")
       //     ->sortable(),
       // Column::make("Updated at", "updated_at")

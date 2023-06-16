@@ -19,9 +19,11 @@ class VitaminTable extends DataTableComponent
   {
     return [
       Column::make("Id vitamin", "id_vitamin")
-        ->sortable(),
+        ->sortable()->searchable(),
       Column::make("Jenis vitamin", "jenis_vitamin")
-        ->sortable(),
+        ->sortable()->searchable(),
+        Column::make("Deskripsi Vitamin", "deskripsi")
+        ->sortable()->searchable(),
       Column::make('Actions')
         ->label(
           function ($row) {

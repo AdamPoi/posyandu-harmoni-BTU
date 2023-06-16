@@ -19,13 +19,13 @@ class PemeriksaanTable extends DataTableComponent
   {
     return [
       Column::make("Id Pemeriksaan", "id_pemeriksaan")
-        ->sortable(),
+        ->sortable()->searchable(),
       Column::make("Ibu Hamil", "ibu_hamil.nama")
-        ->sortable(),
+        ->sortable()->searchable(),
       Column::make("Tanggal Pemeriksaan", "tanggal")
         ->sortable()->searchable(),
       Column::make("Catatan", "catatan")
-        ->sortable(),
+        ->sortable()->searchable(),
       // Column::make("Created at", "created_at")
       //     ->sortable(),
       // Column::make("Updated at", "updated_at")

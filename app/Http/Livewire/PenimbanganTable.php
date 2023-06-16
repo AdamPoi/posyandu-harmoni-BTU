@@ -19,19 +19,19 @@ class PenimbanganTable extends DataTableComponent
   {
     return [
       Column::make("Id", "id_penimbangan")
-        ->sortable(),
+        ->sortable()->searchable(),
       Column::make("Balita", "balita.nama")
-        ->sortable(),
+        ->sortable()->searchable(),
       Column::make("Usia", "balita.usia")
-        ->sortable(),
+        ->sortable()->searchable(),
       Column::make("Berat badan", "berat_badan")
-        ->sortable(),
+        ->sortable()->searchable(),
       Column::make("Tinggi badan", "tinggi_badan")
-        ->sortable(),
+        ->sortable()->searchable(),
       Column::make("Lingkar Kepala", "lingkar_kepala")
-        ->sortable(),
+        ->sortable()->searchable(),
       Column::make("Tanggal", "tanggal")
-        ->sortable(),
+        ->sortable()->searchable(),
       // Column::make("Created at", "created_at")
       //   ->sortable(),
       // Column::make("Updated at", "updated_at")
