@@ -2,41 +2,39 @@
 
 namespace App\Exports;
 
-use App\Models\Jadwal;
+use App\Models\Vitamin;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 
-class JadwalsExport implements FromCollection, WithHeadings, WithMapping
+class VitaminsExport implements FromCollection, WithHeadings, WithMapping
 {
-  public $jadwals;
+  public $vitamins;
 
-  public function __construct($jadwals)
+  public function __construct($vitamins)
   {
-    $this->jadwals = $jadwals;
+    $this->vitamins = $vitamins;
   }
   /**
    * @return \Illuminate\Support\Collection
    */
-  public function map($jadwal): array
+  public function map($vitamin): array
   {
     return [
-      Carbon::parse($jadwal->tanggal)->locale('id'),
-      $jadwal->kegiatan,
-      $jadwal->deskripsi,
+      $vitamin->jenis_vitamin,
+      $vitamin->deskripsi,
     ];
   }
   public function headings(): array
   {
     return [
-      'Tanggal',
       'Kegiatan',
       'Deskripsi',
     ];
   }
   public function collection()
   {
-    return Jadwal::whereIn('id_jadwal', $this->jadwals)->get();
+    return Vitamin::whereIn('id_vitamin', $this->vitamins)->get();
   }
 }

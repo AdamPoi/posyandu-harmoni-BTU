@@ -6,6 +6,12 @@ use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\Views\Columns\ImageColumn;
 use App\Models\User;
+use Illuminate\Contracts\Database\Eloquent\Builder;
+use Rappasoft\LaravelLivewireTables\Views\Filters\DateFilter;
+use App\Exports\UsersExport;
+
+use Excel;
+use PDF;
 
 class UserTable extends DataTableComponent
 {
@@ -57,5 +63,47 @@ class UserTable extends DataTableComponent
           }
         )->html(),
     ];
+  }
+  // public function filters(): array
+  // {
+  //   return [
+  //     DateFilter::make('Dari Tanggal')
+  //     ->filter(function (Builder $builder, string $value) {
+  //       $builder->where('tanggal', '>=', $value);
+  //     }),
+  //     DateFilter::make('Sampai Tanggal')
+  //     ->filter(function (Builder $builder, string $value) {
+  //       $builder->where('tanggal', '<=', $value);
+  //     }),
+  //   ];
+  // }
+
+  public function bulkActions(): array
+  {
+    return [
+      'exportPdf' => 'Export PDF',
+      'exportExcel' => 'Export Excel',
+
+    ];
+  }
+
+  public function exportPdf()
+  {
+    $items = $this->getSelected();
+    $users = User::whereIn('id_user', $items)->get();
+    $this->clearSelected();
+    $pdf = PDF::loadview('pages.user.user_pdf', ['users' => $users])->output();
+
+    return response()->streamDownload(
+      fn () => print($pdf),
+      "data-user.pdf"
+    );
+  }
+
+  public function exportExcel()
+  {
+    $items = $this->getSelected();
+    $this->clearSelected();
+    return Excel::download(new UsersExport($items), 'users.xlsx');
   }
 }

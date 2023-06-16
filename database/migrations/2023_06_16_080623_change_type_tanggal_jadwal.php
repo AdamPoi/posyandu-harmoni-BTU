@@ -13,12 +13,8 @@ return new class extends Migration
    */
   public function up()
   {
-    Schema::create('jadwals', function (Blueprint $table) {
-      $table->increments('id_jadwal');
-      $table->date('tanggal');
-      $table->string('kegiatan');
-      $table->text('deskripsi')->nullable();
-      $table->timestamps();
+    Schema::table('jadwals', function (Blueprint $table) {
+      $table->date('tanggal')->change();
     });
   }
 
@@ -29,6 +25,6 @@ return new class extends Migration
    */
   public function down()
   {
-    Schema::dropIfExists('jadwals');
+    //
   }
 };

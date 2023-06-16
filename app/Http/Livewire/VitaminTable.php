@@ -5,6 +5,12 @@ namespace App\Http\Livewire;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Vitamin;
+use Illuminate\Contracts\Database\Eloquent\Builder;
+use Rappasoft\LaravelLivewireTables\Views\Filters\DateFilter;
+use App\Exports\VitaminsExport;
+
+use Excel;
+use PDF;
 
 class VitaminTable extends DataTableComponent
 {
@@ -43,5 +49,47 @@ class VitaminTable extends DataTableComponent
           }
         )->html(),
     ];
+  }
+  public function filters(): array
+  {
+    return [
+      DateFilter::make('Dari Tanggal')
+        ->filter(function (Builder $builder, string $value) {
+          $builder->where('tanggal', '>=', $value);
+        }),
+      DateFilter::make('Sampai Tanggal')
+        ->filter(function (Builder $builder, string $value) {
+          $builder->where('tanggal', '<=', $value);
+        }),
+    ];
+  }
+
+  public function bulkActions(): array
+  {
+    return [
+      'exportPdf' => 'Export PDF',
+      'exportExcel' => 'Export Excel',
+
+    ];
+  }
+
+  public function exportPdf()
+  {
+    $items = $this->getSelected();
+    $vitamins = Vitamin::whereIn('id_vitamin', $items)->get();
+    $this->clearSelected();
+    $pdf = PDF::loadview('pages.vitamin.vitamin_pdf', ['vitamins' => $vitamins])->output();
+
+    return response()->streamDownload(
+      fn () => print($pdf),
+      "data-vitamin.pdf"
+    );
+  }
+
+  public function exportExcel()
+  {
+    $items = $this->getSelected();
+    $this->clearSelected();
+    return Excel::download(new VitaminsExport($items), 'vitamins.xlsx');
   }
 }

@@ -52,7 +52,7 @@
                             <div class="form-group">
                                 <label>Tanggal</label>
                                 <input type="date" name="tanggal"
-                                    class="form-control @if (old('tanggal')) is-valid @endif
+                                    class="form-control @if (old('tanggal')) is-valid @endif 
                                 @error('tanggal') is-invalid @enderror"
                                     value="{{ old('tanggal', $jadwal->tanggal) }}">
                             </div>

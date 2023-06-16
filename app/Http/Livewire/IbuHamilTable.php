@@ -5,6 +5,12 @@ namespace App\Http\Livewire;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\IbuHamil;
+use Illuminate\Contracts\Database\Eloquent\Builder;
+use Rappasoft\LaravelLivewireTables\Views\Filters\NumberFilter;
+use App\Exports\IbuHamilsExport;
+
+use Excel;
+use PDF;
 
 class IbuHamilTable extends DataTableComponent
 {
@@ -56,5 +62,55 @@ class IbuHamilTable extends DataTableComponent
       // Column::make("Updated at", "updated_at")
       //   ->sortable(),
     ];
+  }
+  public function filters(): array
+  {
+    return [
+      NumberFilter::make('Usia Kandungan dari')
+        ->config([
+          'min' => 0,
+          'max' => 20,
+        ])
+        ->filter(function (Builder $builder, string $value) {
+          $builder->where('usia_kandungan', '>=', $value);
+        }),
+      NumberFilter::make('Sampai Usia Kandungan')
+        ->config([
+          'min' => 0,
+          'max' => 20,
+        ])
+        ->filter(function (Builder $builder, string $value) {
+          $builder->where('usia_kandungan', '<=', $value);
+        }),
+    ];
+  }
+
+  public function bulkActions(): array
+  {
+    return [
+      'exportPdf' => 'Export PDF',
+      'exportExcel' => 'Export Excel',
+
+    ];
+  }
+
+  public function exportPdf()
+  {
+    $items = $this->getSelected();
+    $ibuhamils = IbuHamil::whereIn('id_ibu_hamil', $items)->get();
+    $this->clearSelected();
+    $pdf = PDF::loadview('pages.ibuhamil.ibuhamil_pdf', ['ibuhamils' => $ibuhamils])->output();
+
+    return response()->streamDownload(
+      fn () => print($pdf),
+      "data-ibuhamil.pdf"
+    );
+  }
+
+  public function exportExcel()
+  {
+    $items = $this->getSelected();
+    $this->clearSelected();
+    return Excel::download(newIbuHamilsExport($items), 'ibuhamils.xlsx');
   }
 }
