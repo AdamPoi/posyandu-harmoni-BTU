@@ -60,8 +60,7 @@
                                 <textarea name="alamat"
                                     class="form-control @if (old('alamat')) is-valid @endif
                                 @error('alamat') is-invalid @enderror"
-                                    value="{{ old('alamat') }}"class="form-control" data-height="150">
-                                </textarea>
+                                    value="{{ old('alamat') }}"class="form-control" data-height="150"></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Usia Kandungan</label>

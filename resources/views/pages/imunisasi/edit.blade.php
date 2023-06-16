@@ -71,8 +71,7 @@
                                 <textarea name="deskripsi"
                                     class="form-control @if (old('deskripsi')) is-valid @endif
                                 @error('deskripsi') is-invalid @enderror"
-                                    data-height="150">{{ old('deskripsi', $imunisasi->deskripsi) }}
-                            </textarea>
+                                    data-height="150">{{ old('deskripsi', $imunisasi->deskripsi) }}</textarea>
                             </div>
                         </div>
                         <div class="card-footer text-right">

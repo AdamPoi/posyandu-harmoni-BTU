@@ -20,18 +20,18 @@
 
             <div class="section-body">
                 @if ($errors->any())
-                <div class="pt-3">
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <ul>
-                        @foreach ($errors->all() as $item)
-                            <li>{{ $item }}</li>
-                        @endforeach
-                        </ul>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                    <div class="pt-3">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <ul>
+                                @foreach ($errors->all() as $item)
+                                    <li>{{ $item }}</li>
+                                @endforeach
+                            </ul>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     </div>
-                </div>
                 @endif
                 <div class="card">
                     <div class="card-header">
@@ -45,7 +45,7 @@
                                 <label for="id_balita">Nama Balita</label>
                                 <select class="form-control" name="id_balita" id="id_balita">
                                     @foreach ($balitas as $bal)
-                                        <option value="{{$bal->id_balita}}">{{$bal->nama}}</option>
+                                        <option value="{{ $bal->id_balita }}">{{ $bal->nama }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -66,11 +66,9 @@
                             <div class="form-group">
                                 <label>Deskripsi</label>
                                 <textarea name="deskripsi"
-                                class="form-control @if (old('deskripsi')) is-valid @endif
+                                    class="form-control @if (old('deskripsi')) is-valid @endif
                                 @error('deskripsi') is-invalid @enderror"
-                                value="{{ old('deskripsi') }}"class="form-control"
-                                data-height="150">
-                                </textarea>
+                                    value="{{ old('deskripsi') }}"class="form-control" data-height="150"></textarea>
                             </div>
                         </div>
                         <div class="card-footer text-right">

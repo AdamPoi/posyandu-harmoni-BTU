@@ -41,7 +41,8 @@
                                     <a href="{{ route('cetak.pdf.jadwal') }}" class="btn btn-icon btn-primary icon-left"><i
                                             class="fas fa-print"></i>
                                         Print PDF</a>
-                                    <a href="#" class="btn btn-icon btn-primary icon-left"><i class="fas fa-plus"></i>
+                                    <a href="{{ route('jadwal.create') }}" class="btn btn-icon btn-primary icon-left"><i
+                                            class="fas fa-plus"></i>
                                         Tambah</a>
 
                                 </div>

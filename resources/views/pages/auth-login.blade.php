@@ -14,6 +14,12 @@
         </div>
 
         <div class="card-body">
+            <div class="alert-msg alert alert-danger alert-dismissible fade show d-none" role="alert">
+                <p>Email atau Password yang anda Masukkan tidak ditemukan</p>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
             <form method="POST" id="login-form" action="{{ url('login/proses') }}" class="needs-validation" novalidate="">
                 @csrf
                 <div class="form-group">
@@ -24,8 +30,7 @@
                             is-invalid
                         @enderror"
                         name="email" tabindex="1" required autofocus>
-                    <div class="invalid-feedback">
-                        Please fill in your email
+                    <div class="invalid-feedback">Email Harus diisi
                     </div>
                     @error('email')
                         <div class="invalid-feedback">
@@ -37,11 +42,7 @@
                 <div class="form-group">
                     <div class="d-block">
                         <label for="password" class="control-label">Password</label>
-                        <div class="float-right">
-                            <a href="auth-forgot-password.html" class="text-small">
-                                Forgot Password?
-                            </a>
-                        </div>
+
                     </div>
                     <input id="password" type="password"
                         class="form-control
@@ -50,7 +51,7 @@
                         @enderror"
                         name="password" tabindex="2" required>
                     <div class="invalid-feedback">
-                        please fill in your password
+                        Password harus diisi
                     </div>
                     @error('password')
                         <div class="invalid-feedback">
@@ -59,12 +60,6 @@
                     @enderror
                 </div>
 
-                <div class="form-group">
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember-me">
-                        <label class="custom-control-label" for="remember-me">Remember Me</label>
-                    </div>
-                </div>
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
@@ -72,27 +67,10 @@
                     </button>
                 </div>
             </form>
-            <div class="mt-4 mb-3 text-center">
-                <div class="text-job text-muted">Login With Social</div>
-            </div>
-            <div class="row sm-gutters">
-                <div class="col-6">
-                    <a class="btn btn-block btn-social btn-facebook">
-                        <span class="fab fa-facebook"></span> Facebook
-                    </a>
-                </div>
-                <div class="col-6">
-                    <a class="btn btn-block btn-social btn-twitter">
-                        <span class="fab fa-twitter"></span> Twitter
-                    </a>
-                </div>
-            </div>
 
         </div>
     </div>
-    <div class="text-muted mt-5 text-center">
-        Don't have an account? <a href="auth-register.html">Create One</a>
-    </div>
+
 @endsection
 
 @push('scripts')
@@ -113,8 +91,7 @@
                     window.location.href = '/user';
                 },
                 error: function(xhr) {
-                    var errors = xhr.responseJSON.errors;
-                    console.log(errors);
+                    $('.alert-msg').toggleClass('d-block d-none')
                 }
             })
         })

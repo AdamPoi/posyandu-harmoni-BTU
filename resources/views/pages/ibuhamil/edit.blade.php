@@ -61,8 +61,7 @@
                                 <textarea name="alamat"
                                     class="form-control @if (old('alamat')) is-valid @endif
                                 @error('alamat') is-invalid @enderror"
-                                    class="form-control" data-height="160">{{ old('alamat', $ibuhamil->alamat) }}
-                                </textarea>
+                                    class="form-control" data-height="160">{{ old('alamat', $ibuhamil->alamat) }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label>Usia Kandungan</label>
