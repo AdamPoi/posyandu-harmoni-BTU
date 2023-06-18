@@ -17,15 +17,18 @@ class DatabaseSeeder extends Seeder
   public function run()
   {
     // \App\Models\User::factory(10)->create();
+    $this->call([
+      UserSeeder::class,
+      IbuHamilSeeder::class,
+      BalitaSeeder::class,
+      JadwalSeeder::class,
+      ImunisasiSeeder::class,
+      VitaminSeeder::class,
+      PemeriksaanSeeder::class,
+      PenimbanganSeeder::class,
 
-    DB::table('users')->insert([
-      'nama' => 'Admin',
-      'role' => 'admin',
-      'usia' => 13,
-      'alamat' => 'malang',
-      'email' => 'admin@admin.com',
-      'password' => Hash::make('admin12345')
     ]);
+
     // \App\Models\Jadwal::factory(100)->create();
     // \App\Models\Vitamin::factory(100)->create();
     // \App\Models\IbuHamil::factory(100)->create();

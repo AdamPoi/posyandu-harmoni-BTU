@@ -16,7 +16,7 @@ class Balita extends Model
     'id_ibu_hamil',
     'nama',
     'nama_ayah',
-    'nama_ibu',
+    // 'nama_ibu',
     'usia',
     'jenis_kelamin',
     'tanggal_lahir'
