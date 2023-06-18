@@ -43,12 +43,12 @@
                             @csrf
                             <div class="form-group">
                                 <label for="id_ibu_hamil">Nama Ibu</label>
-                                <select class="form-control" name="id_ibu_hamil" id="id_ibu_hamil">
-                                    @foreach ($ibu_hamils as $ibu)
-                                        <option value="{{ $ibu->id_ibu_hamil }}">{{ $ibu->nama }}</option>
-                                    @endforeach
+                                <select class="form-control" name="id_ibu_hamil" id="id-ibu-hamil">
+
                                 </select>
                             </div>
+                            <input type="hidden" id="nama-ibu-hamil" name="nama_ibu_hamil"
+                                value="{{ old('nama_ibu_hamil') }}">
                             <div class="form-group">
                                 <label>Tanggal</label>
                                 <input type="date" name="tanggal"
@@ -61,8 +61,9 @@
                                 <textarea name="catatan"
                                     class="form-control @if (old('catatan')) is-valid @endif
                                 @error('catatan') is-invalid @enderror"
-                                    class="form-control" data-height="160">{{ old('catatan') }}</textarea>
+                                    value="{{ old('catatan') }}" style="height:8rem;"></textarea>
                             </div>
+
                         </div>
                         <div class="card-footer text-right">
                             <button type="submit" class="btn btn-primary">Submit</button>
@@ -75,3 +76,32 @@
 
     </div>
 @endsection
+@push('scripts')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{{ asset('library/select2/dist/js/select2.full.min.js') }}"></script>
+    <script type="text/javascript">
+        $('#id-ibu-hamil').select2({
+            placeholder: 'Pilih Ibu Hamil',
+            ajax: {
+                url: '{!! route('autocomplete.ibuhamil') !!}',
+                dataType: 'json',
+                delay: 250,
+                processResults: function(data) {
+                    return {
+                        results: $.map(data, function(item) {
+                            return {
+                                text: item.nama,
+                                id: item.id_ibu_hamil
+                            }
+                        })
+                    };
+                },
+                cache: true
+            }
+        });
+        $('#id-ibu-hamil').on('change', function(e) {
+            var title = $(this).select2('data')[0].text;
+            $('#nama-ibu-hamil').val(title);
+        });
+    </script>
+@endpush

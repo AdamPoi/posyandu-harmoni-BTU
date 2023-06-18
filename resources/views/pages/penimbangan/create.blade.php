@@ -42,13 +42,12 @@
                         <div class="card-body">
                             @csrf
                             <div class="form-group">
-                                <label for="id_balita">Nama Balita</label>
-                                <select class="form-control" name="id_balita" id="id_balita">
-                                    @foreach ($balitas as $balita)
-                                        <option value="{{ $balita->id_balita }}">{{ $balita->nama }}</option>
-                                    @endforeach
+                                <label for="id-balita">Nama Balita</label>
+                                <select class="form-control" name="id_balita" id="id-balita">
+
                                 </select>
                             </div>
+                            <input type="hidden" id="nama-balita" name="nama_balita" value="{{ old('nama_balita') }}">
                             <div class="form-group">
                                 <label>Berat Badan</label>
                                 <div class="input-group">
@@ -83,11 +82,11 @@
                                 <label>Lingkar Kepala</label>
                                 <div class="input-group">
 
-                                  <input type="text" name="lingkar_kepala"
-                                  class="form-control @if (old('lingkar_kepala')) is-valid @endif
+                                    <input type="text" name="lingkar_kepala"
+                                        class="form-control @if (old('lingkar_kepala')) is-valid @endif
                                   @error('lingkar_kepala') is-invalid @enderror"
-                                  value="{{ old('lingkar_kepala') }}">
-                                   <div class="input-group-append">
+                                        value="{{ old('lingkar_kepala') }}">
+                                    <div class="input-group-append">
                                         <div class="input-group-text">
                                             cm
                                         </div>
@@ -113,3 +112,32 @@
 
     </div>
 @endsection
+@push('scripts')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{{ asset('library/select2/dist/js/select2.full.min.js') }}"></script>
+    <script type="text/javascript">
+        $('#id-balita').select2({
+            placeholder: 'Pilih Balita',
+            ajax: {
+                url: '{!! route('autocomplete.balita') !!}',
+                dataType: 'json',
+                delay: 250,
+                processResults: function(data) {
+                    return {
+                        results: $.map(data, function(item) {
+                            return {
+                                text: item.nama,
+                                id: item.id_balita
+                            }
+                        })
+                    };
+                },
+                cache: true
+            }
+        });
+        $('#id-balita').on('change', function(e) {
+            var title = $(this).select2('data')[0].text;
+            $('#nama-balita').val(title);
+        });
+    </script>
+@endpush

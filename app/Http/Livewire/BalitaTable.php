@@ -6,6 +6,8 @@ use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Balita;
 use App\Exports\BalitasExport;
+use Rappasoft\LaravelLivewireTables\Views\Filters\NumberFilter;
+use Illuminate\Database\Eloquent\Builder;
 
 use Excel;
 use PDF;
@@ -36,7 +38,7 @@ class BalitaTable extends DataTableComponent
       Column::make("Ibu Hamil", "ibu_hamil.nama")
         ->sortable()->searchable(),
       Column::make("Usia", "usia")
-        ->sortable()->searchable(),
+        ->sortable()->searchable()->format(fn ($value) => $value . ' bulan'),
       Column::make("Jenis kelamin", "jenis_kelamin")
         ->sortable()->searchable(),
 
@@ -61,20 +63,26 @@ class BalitaTable extends DataTableComponent
         })->html()
     ];
   }
-  // public function filters(): array
-  // {
-  //   return [
-  //     DateFilter::make('Dari Tanggal')
-  //     ->filter(function (Builder $builder, string $value) {
-  //       $builder->where('tanggal', '>=', $value);
-  //     }),
-  //     DateFilter::make('Sampai Tanggal')
-  //     ->filter(function (Builder $builder, string $value) {
-  //       $builder->where('tanggal', '<=', $value);
-  //     }),
-  //   ];
-  // }
+  public function filters(): array
+  {
+    return [
+      NumberFilter::make('Dari Usia')
+        ->config([
+          'min' => 0,
 
+        ])
+        ->filter(function (Builder $builder, string $value) {
+          $builder->where('usia', '>=', $value);
+        }),
+      NumberFilter::make('Sampai Usia')
+        ->config([
+          'min' => 0,
+        ])
+        ->filter(function (Builder $builder, string $value) {
+          $builder->where('usia', '<=', $value);
+        }),
+    ];
+  }
   public function bulkActions(): array
   {
     return [

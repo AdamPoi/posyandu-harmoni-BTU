@@ -19,6 +19,7 @@ class ImunisasiTable extends DataTableComponent
   public function configure(): void
   {
     $this->setPrimaryKey('id_imunisasi');
+    $this->setFilterLayout('slide-down');
   }
 
   public function columns(): array

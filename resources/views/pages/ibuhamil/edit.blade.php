@@ -61,14 +61,21 @@
                                 <textarea name="alamat"
                                     class="form-control @if (old('alamat')) is-valid @endif
                                 @error('alamat') is-invalid @enderror"
-                                    class="form-control" data-height="160">{{ old('alamat', $ibuhamil->alamat) }}</textarea>
+                                    class="form-control" style="height:8rem;">{{ old('alamat', $ibuhamil->alamat) }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label>Usia Kandungan</label>
-                                <input type="number" name="usia_kandungan"
-                                    class="form-control @if (old('usia_kandungan')) is-valid @endif
-                                @error('usia_kandungan') is-invalid @enderror"
-                                    value="{{ old('usia_kandungan', $ibuhamil->usia_kandungan) }}">
+                                <div class="input-group">
+                                    <input type="number" name="usia_kandungan"
+                                        class="form-control @if (old('usia_kandungan')) is-valid @endif
+                                  @error('usia_kandungan') is-invalid @enderror"
+                                        value="{{ old('usia_kandungan', $ibuhamil->usia_kandungan) }}">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            bulan
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label>Tanggal Hamil</label>

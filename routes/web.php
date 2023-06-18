@@ -65,7 +65,7 @@ Route::group(['middleware' => ['auth:sanctum', 'auth.role:admin']], function () 
     Route::get('imunisasi', [ImunisasiController::class, 'cetak_pdf'])->name('imunisasi');
   });
 
-  Route::prefix('autocomplete')->as('autocomplete.')->controller(AutocompleteController::class)->group(function () {
-    Route::get('ibuHamil', 'getIbuHamil')->name('ibuHamil');
-  });
+  // Route::prefix('autocomplete')->as('autocomplete.')->controller(AutocompleteController::class)->group(function () {
+  //   Route::get('ibuHamil', 'getIbuHamil')->name('ibuHamil');
+  // });
 });

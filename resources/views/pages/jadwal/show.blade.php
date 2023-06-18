@@ -57,7 +57,7 @@
                                 <div class="row">
                                     <div class="form-group col-12">
                                         <label>Deskripsi</label>
-                                        <textarea readonly class="form-control summernote-simple" data-height="160">{{ $jadwal->deskripsi }}</textarea>
+                                        <textarea readonly class="form-control summernote-simple" style="height:8rem;">{{ $jadwal->deskripsi }}</textarea>
                                     </div>
                                 </div>
                             </div>

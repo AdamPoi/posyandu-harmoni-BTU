@@ -51,12 +51,20 @@
 
                                 <div class="form-group col-12">
                                     <label>Alamat</label>
-                                    <textarea readonly class="form-control" data-height="160">{{ $ibuhamil->alamat }}</textarea>
+                                    <textarea readonly class="form-control" style="height:8rem;">{{ $ibuhamil->alamat }}</textarea>
                                 </div>
                                 <div class="form-group col-12">
                                     <label>Usia Kandungan</label>
-                                    <input readonly type="text" class="form-control"
-                                        value="{{ $ibuhamil->usia_kandungan }}">
+                                    <div class="input-group">
+
+                                        <input readonly type="text" class="form-control"
+                                            value="{{ $ibuhamil->usia_kandungan }}">
+                                        <div class="input-group-append">
+                                            <div class="input-group-text">
+                                                bulan
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group col-12">
                                     <label>Tanggal Hamil</label>

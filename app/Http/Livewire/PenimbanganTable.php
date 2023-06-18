@@ -19,6 +19,7 @@ class PenimbanganTable extends DataTableComponent
   public function configure(): void
   {
     $this->setPrimaryKey('id_penimbangan');
+    $this->setFilterLayout('slide-down');
   }
 
   public function columns(): array

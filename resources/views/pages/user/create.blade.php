@@ -71,7 +71,7 @@
                                 <textarea name="alamat"
                                     class="form-control @if (old('alamat')) is-valid @endif
                                 @error('alamat') is-invalid @enderror"
-                                    data-height="150">{{ old('alamat') }}</textarea>
+                                    style="height:8rem;">{{ old('alamat') }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label>Email</label>

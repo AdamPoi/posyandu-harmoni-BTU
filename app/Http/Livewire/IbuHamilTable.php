@@ -19,6 +19,7 @@ class IbuHamilTable extends DataTableComponent
   public function configure(): void
   {
     $this->setPrimaryKey('id');
+    $this->setFilterLayout('slide-down');
   }
   public function deleteId($id)
   {
@@ -33,7 +34,7 @@ class IbuHamilTable extends DataTableComponent
       Column::make("Alamat", "alamat")
         ->sortable()->searchable(),
       Column::make("Usia kandungan", "usia_kandungan")
-        ->sortable()->searchable(),
+        ->sortable()->searchable()->format(fn ($value) => $value . ' bulan'),
       Column::make('Aksi')
         ->label(
           function ($row) {
@@ -111,6 +112,6 @@ class IbuHamilTable extends DataTableComponent
   {
     $items = $this->getSelected();
     $this->clearSelected();
-    return Excel::download(newIbuHamilsExport($items), 'ibuhamils.xlsx');
+    return Excel::download(new IbuHamilsExport($items), 'ibuhamils.xlsx');
   }
 }

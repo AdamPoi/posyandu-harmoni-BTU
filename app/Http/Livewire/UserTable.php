@@ -21,6 +21,7 @@ class UserTable extends DataTableComponent
   {
     $this->setPrimaryKey('id_user');
     $this->setAdditionalSelects(['users.profile_picture as avatar']);
+    $this->setFilterLayout('slide-down');
   }
 
   public function columns(): array

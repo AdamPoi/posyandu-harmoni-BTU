@@ -43,15 +43,17 @@
                             @csrf
                             @method('PUT')
                             <div class="form-group">
-                                <label for="id_ibu_hamil">Nama Balita</label>
-                                <select class="form-control" name="id_balita" id="id_balita">
-                                    @foreach ($balitas as $prk)
-                                        <option value="{{ $prk->id_balita }}"
-                                            {{ $prk->id_balita == $prk->id_balita ? 'selected' : '' }}>{{ $prk->nama }}
+                                <label for="id-balita">Nama Balita</label>
+                                <select class="form-control" name="id_balita" id="id-balita">
+                                    @if (old('id_balita', $imunisasi->id_balita))
+                                        <option value="{{ old('id_balita', $imunisasi->id_balita) }}" selected>
+                                            {{ old('nama_balita', $imunisasi->balita->nama) }}
                                         </option>
-                                    @endforeach
+                                    @endif
                                 </select>
                             </div>
+                            <input type="hidden" id="nama-balita" name="nama_balita"
+                                value="{{ old('nama_balita', $imunisasi->balita->nama) }}">
                             <div class="form-group">
                                 <label>Jenis Imunisasi</label>
                                 <input type="text" name="jenis_imunisasi"
@@ -70,8 +72,8 @@
                                 <label>Deskripsi</label>
                                 <textarea name="deskripsi"
                                     class="form-control @if (old('deskripsi')) is-valid @endif
-                                @error('deskripsi') is-invalid @enderror"
-                                    data-height="150">{{ old('deskripsi', $imunisasi->deskripsi) }}</textarea>
+                                @error('deskripsi') is-invalid @enderror summernote-simple"
+                                    style="height:8rem;">{{ old('deskripsi', $imunisasi->deskripsi) }}</textarea>
                             </div>
                         </div>
                         <div class="card-footer text-right">
@@ -84,3 +86,32 @@
 
     </div>
 @endsection
+@push('scripts')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{{ asset('library/select2/dist/js/select2.full.min.js') }}"></script>
+    <script type="text/javascript">
+        $('#id-balita').select2({
+            placeholder: 'Pilih Balita',
+            ajax: {
+                url: '{!! route('autocomplete.balita') !!}',
+                dataType: 'json',
+                delay: 250,
+                processResults: function(data) {
+                    return {
+                        results: $.map(data, function(item) {
+                            return {
+                                text: item.nama,
+                                id: item.id_balita
+                            }
+                        })
+                    };
+                },
+                cache: true
+            }
+        });
+        $('#id-balita').on('change', function(e) {
+            var title = $(this).select2('data')[0].text;
+            $('#nama-balita').val(title);
+        });
+    </script>
+@endpush

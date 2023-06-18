@@ -19,6 +19,7 @@ class PemeriksaanTable extends DataTableComponent
   public function configure(): void
   {
     $this->setPrimaryKey('id_pemeriksaan');
+    $this->setFilterLayout('slide-down');
   }
 
   public function columns(): array

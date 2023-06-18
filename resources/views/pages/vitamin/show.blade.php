@@ -26,7 +26,7 @@
                 <div class="row mt-sm-4">
                     <div class="col-12 col-md-12">
                         <div class="card">
-                           <div class="card-header">
+                            <div class="card-header">
                                 <div class="card-header-action">
                                     <a href="{{ route('vitamin.edit', $vitamin->id_vitamin) }}"
                                         class="btn btn-icon btn-warning icon-left"><i class="far fa-edit"></i>
@@ -50,7 +50,7 @@
                                 <div class="row">
                                     <div class="form-group col-12">
                                         <label>Deskripsi</label>
-                                        <textarea readonly class="form-control summernote-simple" data-height="160">{{ $vitamin->deskripsi }}</textarea>
+                                        <textarea readonly class="form-control summernote-simple" style="height:8rem;">{{ $vitamin->deskripsi }}</textarea>
                                     </div>
                                 </div>
                             </div>

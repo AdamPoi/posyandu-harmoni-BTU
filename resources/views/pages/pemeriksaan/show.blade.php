@@ -59,7 +59,7 @@
                                 <div class="row">
                                     <div class="form-group col-12">
                                         <label>Catatan</label>
-                                        <textarea readonly class="form-control summernote-simple" data-height="160">{{ $pemeriksaan->catatan }}</textarea>
+                                        <textarea readonly class="form-control summernote-simple" style="height:8rem;">{{ $pemeriksaan->catatan }}</textarea>
                                     </div>
                                 </div>
                             </div>

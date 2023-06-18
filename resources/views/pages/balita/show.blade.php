@@ -49,7 +49,8 @@
                                 <div class="row">
                                     <div class="form-group col-12">
                                         <label>Nama Ibu</label>
-                                        <input readonly type="text" class="form-control" value="{{ $balita->ibu_hamil->nama }}">
+                                        <input readonly type="text" class="form-control"
+                                            value="{{ $balita->ibu_hamil->nama }}">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -62,7 +63,14 @@
                                 <div class="row">
                                     <div class="form-group col-12">
                                         <label>Usia</label>
-                                        <input readonly type="text" class="form-control" value="{{ $balita->usia }}">
+                                        <div class="input-group">
+                                            <input readonly type="text" class="form-control" value="{{ $balita->usia }}">
+                                            <div class="input-group-append">
+                                                <div class="input-group-text">
+                                                    bulan
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">

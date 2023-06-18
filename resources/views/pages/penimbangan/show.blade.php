@@ -52,22 +52,43 @@
                                 <div class="row">
                                     <div class="form-group col-12">
                                         <label>Berat Badan</label>
-                                        <input readonly type="text" class="form-control"
-                                            value="{{ $penimbangan->berat_badan }}">
+                                        <div class="input-group">
+                                            <input readonly type="text" class="form-control"
+                                                value="{{ $penimbangan->berat_badan }}">
+                                            <div class="input-group-append">
+                                                <div class="input-group-text">
+                                                    Kg
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-12">
                                         <label>Tinggi Badan</label>
-                                        <input readonly type="text" class="form-control"
-                                            value="{{ $penimbangan->tinggi_badan }}">
+                                        <div class="input-group">
+                                            <input readonly type="text" class="form-control"
+                                                value="{{ $penimbangan->tinggi_badan }}">
+                                            <div class="input-group-append">
+                                                <div class="input-group-text">
+                                                    cm
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                 <div class="row">
+                                <div class="row">
                                     <div class="form-group col-12">
                                         <label>Lingkar Kepala</label>
-                                        <input readonly type="text" class="form-control"
-                                            value="{{ $penimbangan->lingkar_kepala }}">
+                                        <div class="input-group">
+                                            <input readonly type="text" class="form-control"
+                                                value="{{ $penimbangan->lingkar_kepala }}">
+                                            <div class="input-group-append">
+                                                <div class="input-group-text">
+                                                    cm
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">
