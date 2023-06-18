@@ -25,12 +25,12 @@ class VitaminTable extends DataTableComponent
   {
     return [
       Column::make("Id vitamin", "id_vitamin")
-        ->sortable()->searchable(),
+        ->sortable()->searchable()->deselected(),
       Column::make("Jenis vitamin", "jenis_vitamin")
         ->sortable()->searchable(),
-        Column::make("Deskripsi Vitamin", "deskripsi")
+      Column::make("Deskripsi Vitamin", "deskripsi")
         ->sortable()->searchable(),
-      Column::make('Actions')
+      Column::make('Aksi')
         ->label(
           function ($row) {
             $delete = ' <button class="btn btn-danger btn-icon icon-center"

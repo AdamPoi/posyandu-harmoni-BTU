@@ -20,18 +20,18 @@
 
             <div class="section-body">
                 @if ($errors->any())
-                <div class="pt-3">
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <ul>
-                        @foreach ($errors->all() as $item)
-                            <li>{{ $item }}</li>
-                        @endforeach
-                        </ul>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                    <div class="pt-3">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <ul>
+                                @foreach ($errors->all() as $item)
+                                    <li>{{ $item }}</li>
+                                @endforeach
+                            </ul>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     </div>
-                </div>
                 @endif
                 <div class="card">
                     <div class="card-header">
@@ -47,14 +47,14 @@
                                 <input type="text" name="nama"
                                     class="form-control @if (old('nama')) is-valid @endif 
                                 @error('nama') is-invalid @enderror"
-                                value="{{ old('nama', $balita->nama) }}">
+                                    value="{{ old('nama', $balita->nama) }}">
                             </div>
                             <div class="form-group">
                                 <label for="nama_ayah">Nama Ayah</label>
                                 <input type="text" name="nama_ayah"
                                     class="form-control @if (old('nama_ayah')) is-valid @endif 
                                 @error('nama_ayah') is-invalid @enderror"
-                                value="{{ old('nama_ayah', $balita->nama_ayah) }}">
+                                    value="{{ old('nama_ayah', $balita->nama_ayah) }}">
                             </div>
                             <div class="form-group">
                                 <label for="id_ibu_hamil">Nama Ibu</label>
@@ -68,23 +68,33 @@
                             </div>
                             <div class="form-group">
                                 <label for="usia">Usia</label>
-                                <input type="text" name="usia"
-                                    class="form-control @if (old('usia')) is-valid @endif 
-                                @error('usia') is-invalid @enderror"
-                                value="{{ old('usia', $balita->usia) }}">
+                                <div class="input-group">
+
+                                    <input type="text" name="usia"
+                                        class="form-control @if (old('usia')) is-valid @endif 
+                                  @error('usia') is-invalid @enderror"
+                                        value="{{ old('usia', $balita->usia) }}">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            bulan
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label>Tanggal Lahir</label>
                                 <input type="date" name="tanggal_lahir"
                                     class="form-control @if (old('tanggal_lahir')) is-valid @endif 
                                 @error('tanggal_lahir') is-invalid @enderror"
-                                value="{{ old('tanggal_lahir', $balita->tanggal_lahir) }}">
+                                    value="{{ old('tanggal_lahir', $balita->tanggal_lahir) }}">
                             </div>
                             <div class="form-group">
                                 <label>Jenis Kelamin</label>
                                 <select class="form-control" name="jenis_kelamin" id="jenis_kelamin">
-                                    <option value="L" @if($balita == 'L') selected @endif>Laki-Laki</option>
-                                    <option value="P" @if($balita == 'P') selected @endif>Perempuan</option>
+                                    <option value="L" @if ($balita == 'L') selected @endif>Laki-Laki
+                                    </option>
+                                    <option value="P" @if ($balita == 'P') selected @endif>Perempuan
+                                    </option>
                                 </select>
                             </div>
                         </div>

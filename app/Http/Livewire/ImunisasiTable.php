@@ -25,11 +25,13 @@ class ImunisasiTable extends DataTableComponent
   {
     return [
       Column::make("Id", "id_imunisasi")
-        ->sortable()->searchable(),
+        ->sortable()->searchable()->deselected(),
       Column::make("Balita", "balita.nama")
         ->sortable()->searchable(),
       Column::make("Usia", "balita.usia")
-        ->sortable()->searchable(),
+        ->sortable()->searchable()->format(
+          fn ($value) => $value . ' bulan'
+        ),
       Column::make("Jenis imunisasi", "jenis_imunisasi")
         ->sortable()->searchable(),
       Column::make("Tanggal", "tanggal")
@@ -40,7 +42,7 @@ class ImunisasiTable extends DataTableComponent
       //     ->sortable(),
       // Column::make("Updated at", "updated_at")
       //     ->sortable(),
-      Column::make('Actions')
+      Column::make('Aksi')
         ->label(
           function ($row) {
             $delete =

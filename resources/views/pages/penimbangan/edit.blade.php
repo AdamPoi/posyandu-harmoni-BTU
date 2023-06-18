@@ -54,24 +54,48 @@
                             </div>
                             <div class="form-group">
                                 <label>Berat Badan</label>
-                                <input type="text" name="berat_badan"
-                                    class="form-control @if (old('berat_badan')) is-valid @endif
-                                @error('berat_badan') is-invalid @enderror"
-                                    value="{{ old('berat_badan', $penimbangan->berat_badan) }}">
+                                <div class="input-group">
+
+                                    <input type="text" name="berat_badan"
+                                        class="form-control @if (old('berat_badan')) is-valid @endif
+                                  @error('berat_badan') is-invalid @enderror"
+                                        value="{{ old('berat_badan', $penimbangan->berat_badan) }}">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            Kg
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label>Tinggi Badan</label>
-                                <input type="text" name="tinggi_badan"
-                                    class="form-control @if (old('tinggi_badan')) is-valid @endif
-                                @error('tinggi_badan') is-invalid @enderror"
-                                    value="{{ old('tinggi_badan', $penimbangan->tinggi_badan) }}">
+                                <div class="input-group">
+
+                                    <input type="text" name="tinggi_badan"
+                                        class="form-control @if (old('tinggi_badan')) is-valid @endif
+                                  @error('tinggi_badan') is-invalid @enderror"
+                                        value="{{ old('tinggi_badan', $penimbangan->tinggi_badan) }}">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            cm
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label>Lingkar Kepala</label>
-                                <input type="text" name="lingkar_kepala"
-                                    class="form-control @if (old('lingkar_kepala')) is-valid @endif
-                                @error('lingkar_kepala') is-invalid @enderror"
-                                    value="{{ old('lingkar_kepala', $penimbangan->lingkar_kepala) }}">
+                                <div class="input-group">
+
+                                    <input type="text" name="lingkar_kepala"
+                                        class="form-control @if (old('lingkar_kepala')) is-valid @endif
+                                  @error('lingkar_kepala') is-invalid @enderror"
+                                        value="{{ old('lingkar_kepala', $penimbangan->lingkar_kepala) }}">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            cm
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label>Tanggal</label>

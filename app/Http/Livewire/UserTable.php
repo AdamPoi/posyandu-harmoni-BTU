@@ -43,7 +43,7 @@ class UserTable extends DataTableComponent
       Column::make("Email", "email")
         ->sortable()->searchable(),
 
-      Column::make('Actions')
+      Column::make('Aksi')
         ->label(
           function ($row) {
             $delete =

@@ -26,7 +26,7 @@ class JadwalTable extends DataTableComponent
   {
     return [
       Column::make("Id jadwal", "id_jadwal")
-        ->sortable()->deselected(),
+        ->sortable()->searchable()->deselected(),
       Column::make("Tanggal", "tanggal")
         ->sortable()->searchable(),
       Column::make("Kegiatan", "kegiatan")
@@ -34,7 +34,7 @@ class JadwalTable extends DataTableComponent
       Column::make("Deskripsi", "deskripsi")
         ->sortable()->searchable(),
 
-      Column::make('Actions')
+      Column::make('Aksi')
         ->label(
           function ($row) {
             $delete = ' <button class="btn btn-danger btn-icon icon-center"

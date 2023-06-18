@@ -25,24 +25,32 @@ class PenimbanganTable extends DataTableComponent
   {
     return [
       Column::make("Id", "id_penimbangan")
-        ->sortable()->searchable(),
+        ->sortable()->searchable()->deselected(),
       Column::make("Balita", "balita.nama")
         ->sortable()->searchable(),
       Column::make("Usia", "balita.usia")
-        ->sortable()->searchable(),
+        ->sortable()->searchable()->format(
+          fn ($value) => $value . ' bulan'
+        ),
       Column::make("Berat badan", "berat_badan")
-        ->sortable()->searchable(),
+        ->sortable()->searchable()->format(
+          fn ($value) => $value . ' Kg'
+        ),
       Column::make("Tinggi badan", "tinggi_badan")
-        ->sortable()->searchable(),
+        ->sortable()->searchable()->format(
+          fn ($value) => $value . ' cm'
+        ),
       Column::make("Lingkar Kepala", "lingkar_kepala")
-        ->sortable()->searchable(),
+        ->sortable()->searchable()->format(
+          fn ($value) => $value . ' cm'
+        ),
       Column::make("Tanggal", "tanggal")
         ->sortable()->searchable(),
       // Column::make("Created at", "created_at")
       //   ->sortable(),
       // Column::make("Updated at", "updated_at")
       //   ->sortable(),
-      Column::make('Actions')
+      Column::make('Aksi')
         ->label(
           function ($row) {
             $delete =

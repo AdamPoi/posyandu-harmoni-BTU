@@ -27,14 +27,14 @@ class IbuHamilTable extends DataTableComponent
   {
     return [
       Column::make("Id ibu hamil", "id_ibu_hamil")
-        ->sortable()->searchable(),
+        ->sortable()->searchable()->deselected(),
       Column::make("Nama", "nama")
         ->sortable()->searchable(),
       Column::make("Alamat", "alamat")
         ->sortable()->searchable(),
       Column::make("Usia kandungan", "usia_kandungan")
         ->sortable()->searchable(),
-      Column::make('Actions')
+      Column::make('Aksi')
         ->label(
           function ($row) {
             $delete = ' <button class="btn btn-danger btn-icon icon-center"

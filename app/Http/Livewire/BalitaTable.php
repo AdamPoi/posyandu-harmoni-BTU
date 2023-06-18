@@ -24,7 +24,7 @@ class BalitaTable extends DataTableComponent
   {
     return [
       Column::make("Id balita", "id_balita")
-        ->sortable(),
+        ->sortable()->searchable()->deselected(),
       // Column::make("Id ibu hamil", "id_ibu_hamil")
       //     ->sortable(),
       Column::make("Nama", "nama")
@@ -45,7 +45,7 @@ class BalitaTable extends DataTableComponent
       // Column::make("Updated at", "updated_at")
       //     ->sortable(),
 
-      Column::make('Actions')
+      Column::make('Aksi')
         ->label(function ($row) {
           $delete = ' <button class="btn btn-danger btn-icon icon-center"
                                 data-action="' . route('balita.destroy', ['balita' => $row->id_balita]) . '" data-toggle="modal"

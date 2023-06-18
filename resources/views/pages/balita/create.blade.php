@@ -73,22 +73,31 @@
                                     @endforeach
                                 </select>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="usia">Usia</label>
-                                <input type="text" name="usia"
-                                    class="form-control @if (old('usia')) is-valid @endif
-                                @error('usia') is-invalid @enderror"
-                                    value="{{ old('usia') }}">
+                                <div class="input-group">
+                                    <input type="text" name="usia"
+                                        class="form-control @if (old('usia')) is-valid @endif
+                                  @error('usia') is-invalid @enderror"
+                                        value="{{ old('usia') }}">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            bulan
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label>Tanggal Lahir</label>
+
                                 <input type="date" name="tanggal_lahir"
                                     class="form-control @if (old('tanggal_lahir')) is-valid @endif
-                                @error('tanggal_lahir') is-invalid @enderror"
+                                    @error('tanggal_lahir') is-invalid @enderror"
                                     value="{{ old('tanggal_lahir') }}">
                             </div>
-                           
+
                             <div class="form-group">
                                 <label>Jenis Kelamin</label>
                                 <select class="form-control" name="jenis_kelamin" id="jenis_kelamin">

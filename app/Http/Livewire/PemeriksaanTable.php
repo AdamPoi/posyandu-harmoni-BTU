@@ -25,7 +25,7 @@ class PemeriksaanTable extends DataTableComponent
   {
     return [
       Column::make("Id Pemeriksaan", "id_pemeriksaan")
-        ->sortable()->searchable(),
+        ->sortable()->searchable()->deselected(),
       Column::make("Ibu Hamil", "ibu_hamil.nama")
         ->sortable()->searchable(),
       Column::make("Tanggal Pemeriksaan", "tanggal")
@@ -36,7 +36,7 @@ class PemeriksaanTable extends DataTableComponent
       //     ->sortable(),
       // Column::make("Updated at", "updated_at")
       //     ->sortable(),
-      Column::make('Actions')
+      Column::make('Aksi')
         ->label(
           function ($row) {
             $delete =
