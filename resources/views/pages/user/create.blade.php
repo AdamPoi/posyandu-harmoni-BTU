@@ -63,7 +63,7 @@
                                     value="{{ old('role') }}">
                                     <option value="" disabled selected>Pilih role</option>
                                     <option value="admin">Admin</option>
-                                    <option value="owner">Owner</option>
+                                    <option value="bidan">Bidan</option>
                                 </select>
                             </div>
                             <div class="form-group">

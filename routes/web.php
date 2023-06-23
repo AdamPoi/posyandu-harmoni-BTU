@@ -40,7 +40,7 @@ Route::get('home', [HomeController::class, 'index'])->name('home');
 
 // });
 Route::get('login', [LoginController::class, 'index'])->name('login');
-Route::group(['middleware' => ['auth:sanctum', 'auth.role:admin']], function () {
+Route::group(['middleware' => ['auth:sanctum', 'auth.role']], function () {
   Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
 
   Route::resource('user', UserController::class);

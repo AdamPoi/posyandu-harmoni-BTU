@@ -15,14 +15,14 @@ class AuthenticateRole
    * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
    * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
    */
-  public function handle(Request $request, Closure $next, $rules)
+  public function handle(Request $request, Closure $next)
   {
     if (!Auth::check()) {
       return redirect('login');
     }
 
     $user = Auth::user();
-    if ($user->role == $rules) {
+    if ($user->role == 'admin' || $user->role == 'bidan') {
       return $next($request);
     }
 

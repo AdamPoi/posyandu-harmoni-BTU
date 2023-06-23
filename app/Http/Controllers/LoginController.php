@@ -11,8 +11,8 @@ class LoginController extends Controller
   {
 
     if ($user = Auth::user()) {
-      if ($user->role == 'admin' || $user->role == 'owner') {
-        return redirect()->route('user.index');
+      if ($user->role == 'admin' || $user->role == 'bidan') {
+        return redirect()->route('dashboard');
       }
     }
 
@@ -32,10 +32,9 @@ class LoginController extends Controller
       $request->session()->regenerate();
       $user = Auth::user();
 
-      if ($user->status == 'admin') {
+      if ($user->status == 'admin' || $user->status == 'bidan') {
         return redirect()->intended('/dashboard-general-dashboard');
-      }
-
+      } 
       return redirect()->intended('/');
     }
 
