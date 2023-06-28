@@ -57,12 +57,13 @@
                                     value="{{ old('tanggal') }}">
                             </div>
                             <div class="form-group">
-                                <label>Catatan</label>
-                                <textarea name="catatan"
-                                    class="form-control @if (old('catatan')) is-valid @endif
-                                @error('catatan') is-invalid @enderror"
-                                    value="{{ old('catatan') }}" style="height:8rem;"></textarea>
-                            </div>
+                                <label for="catatan">Catatan</label>
+                                <select name="catatan" id="catatan" class="form-control @if (old('catatan')) is-valid @endif @error('catatan') is-invalid @enderror">
+                                    <option value="">Pilih catatan</option>
+                                    <option value="Kondisi dalam keadaan sehat" @if (old('catatan') == 'Kondisi dalam keadaan sehat') selected @endif>Kondisi dalam keadaan sehat</option>
+                                    <option value="Kondisi dalam keadaan tidak sehat" @if (old('catatan') == 'Kondisi dalam keadaan tidak sehat') selected @endif>Kondisi dalam keadaan tidak sehat</option>
+                                </select>
+                            </div>                            
 
                         </div>
                         <div class="card-footer text-right">
