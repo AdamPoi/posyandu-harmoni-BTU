@@ -22,6 +22,11 @@ class HomeController extends Controller
     return view('pages.homepage.home');
   }
 
+  public function about()
+  {
+    return view('pages.homepage.about');
+  }
+
   public function dashboard()
   {
     $userCount = User::count();

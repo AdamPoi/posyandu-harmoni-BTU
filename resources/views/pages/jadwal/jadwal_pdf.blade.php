@@ -16,8 +16,9 @@
         .table-bordered th,
         .table-bordered td {
             border: 1px solid #000000;
-            text-align: center;
+            text-align: left;
             padding: 8px;
+            vertical-align: top;
         }
 
         .table .tanggal {

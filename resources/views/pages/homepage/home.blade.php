@@ -83,6 +83,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
                 <a href="{{ url('home') }}" class="nav-item nav-link active">Home</a>
+                <a href="{{ url('about') }}" class="nav-item nav-link active">About Us</a>
             </div>
             <a href="{{ url('login') }}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">LOGIN<i class="fa fa-arrow-right ms-3"></i></a>
         </div>
@@ -133,37 +134,6 @@
         </div>
     </div>
     <!-- Header End -->
-
-
-    <!-- About Start -->
-    <div class="container-xxl py-5">
-        <div class="container">
-            <div class="row g-5">
-                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
-                    <div class="d-flex flex-column">
-                        <img class="img-fluid rounded w-75 align-self-end" src="{{ asset('style/img/about-1.jpg') }}" alt="">
-                        <img class="img-fluid rounded w-50 bg-white pt-3 pe-3" src="{{ asset('style/img/about-2.jpg') }}" alt="" style="margin-top: -25%;">
-                    </div>
-                </div>
-                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
-                    {{-- <p class="d-inline-block border rounded-pill py-1 px-4">About Us</p> --}}
-                    <h1 class="mb-4">Kenali Tentang Kami! Posyandu Harmoni!</h1>
-                    <p>Misi kami adalah meningkatkan kesehatan dan kesejahteraan keluarga melalui upaya pencegahan, pendidikan, dan pengawasan. Melalui
-                        kegiatan Posyandu, kami berupaya untuk memberikan pemantauan tumbuh kembang anak, imunisasi, pemeriksaan kesehatan ibu hamil,
-                        serta penyuluhan gizi dan kesehatan.</p>
-                    <p class="mb-4">Kami memiliki tim yang terdiri dari tenaga medis terlatih dan sukarelawan yang peduli dengan kesehatan anak-anak dan
-                        ibu hamil. Dengan pengalaman dan pengetahuan kami, kami siap memberikan perawatan dan informasi yang berkualitas kepada Anda.</p>
-                    <p class="mb-4">Jangan ragu untuk menghubungi kami melalui telepon atau melalui fitur chat online kami jika Anda memiliki pertanyaan
-                        atau membutuhkan bantuan seputar balita dan ibu hamil.</p>
-                    <p><i class="far fa-check-circle text-primary me-3"></i>Memantau tumbuh kembang anak</p>
-                    <p><i class="far fa-check-circle text-primary me-3"></i>Memberikan imunisasi lengkap</p>
-                    <p><i class="far fa-check-circle text-primary me-3"></i>Memonitor kondisi pemeriksaan ibu hamil</p>
-                    {{-- <a class="btn btn-primary rounded-pill py-3 px-5 mt-3" href="">Read More</a> --}}
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- About End -->
 
 
     <!-- Service Start -->
@@ -241,12 +211,12 @@
 
 
     <!-- Feature Start -->
-    <div class="container-fluid bg-primary overflow-hidden my-5 px-lg-0">
+    {{-- <div class="container-fluid bg-primary overflow-hidden my-5 px-lg-0">
         <div class="container feature px-lg-0">
             <div class="row g-0 mx-lg-0">
                 <div class="col-lg-6 feature-text py-5 wow fadeIn" data-wow-delay="0.1s">
                     <div class="p-lg-5 ps-lg-0">
-                        {{-- <p class="d-inline-block border rounded-pill text-light py-1 px-4">Features</p> --}}
+                        <p class="d-inline-block border rounded-pill text-light py-1 px-4">Features</p>
                         <h1 class="text-white mb-4">Kenapa Harus Kami</h1>
                         <p class="text-white mb-4 pb-2">Kami memiliki tim yang terdiri dari tenaga medis dan kesehatan yang berpengalaman dan terlatih dengan baik.
                             Mereka peduli terhadap kesejahteraan Anda dan keluarga, serta siap memberikan perawatan yang komprehensif dan berkualitas. Kami juga
@@ -307,7 +277,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Feature End -->
 
 

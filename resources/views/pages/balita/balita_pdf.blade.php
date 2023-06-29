@@ -11,20 +11,21 @@
             border-collapse: collapse;
             width: 100%;
         }
-        
+
         .table-bordered th,
         .table-bordered td {
             border: 1px solid #000000;
-            text-align: center;
+            text-align: left;
             padding: 8px;
+            vertical-align: top;
         }
-        
+
         .table .tanggal {
             text-align: left;
             white-space: nowrap;
         }
     </style>
-    
+
     <center>
         <h2>Laporan Data Balita Posyandu Harmoni - BTU</h2>
     </center>

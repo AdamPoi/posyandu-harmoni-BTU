@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Apotek Arema - Website Apotek</title>
+    <title>Posyandu Harmoni - Website Posyandu</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -30,6 +30,15 @@
 
     <!-- Template Stylesheet -->
     <link href="{{ asset('style/css/style.css') }}" rel="stylesheet">
+
+    <!-- Include Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCizv5y-ciYAfoT0R9DdqcnN_3Fr_jvjpQ"></script>
+    <style>
+        /* Set the height of the map container */
+        #map {
+            height: 600px;
+        }
+    </style>
 </head>
 
 <body>
@@ -48,11 +57,11 @@
             <div class="col-lg-7 px-5 text-start">
                 <div class="h-100 d-inline-flex align-items-center py-3 me-4">
                     <small class="fa fa-map-marker-alt text-primary me-2"></small>
-                    <small>Kepanjen, Malang</small>
+                    <small>Lokasi : Kepanjen, Malang</small>
                 </div>
                 <div class="h-100 d-inline-flex align-items-center py-3">
                     <small class="far fa-clock text-primary me-2"></small>
-                    <small>Senin - Jumat : 10.00 AM - 08.00 PM</small>
+                    <small>Waktu : 08.00 AM - Selesai</small>
                 </div>
             </div>
             <div class="col-lg-5 px-5 text-end">
@@ -75,7 +84,7 @@
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0 wow fadeIn" data-wow-delay="0.1s">
         <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-            <h1 class="m-0 text-primary"><i class="far fa-hospital me-3"></i>Apotek Arema</h1>
+            <h1 class="m-0 text-primary"><i class="far fa-hospital me-3"></i>Posyandu Harmoni</h1>
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
@@ -85,6 +94,7 @@
                 <a href="{{ url('home') }}" class="nav-item nav-link">Home</a>
                 <a href="{{ url('about') }}" class="nav-item nav-link active">About Us</a>
             </div>
+            <a href="{{ url('login') }}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">LOGIN<i class="fa fa-arrow-right ms-3"></i></a>
         </div>
     </nav>
     <!-- Navbar End -->
@@ -101,24 +111,113 @@
                     </div>
                 </div>
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
-                    <p class="d-inline-block border rounded-pill py-1 px-4">About Us</p>
-                    <h1 class="mb-4">Kenali Tentang Kami! Apotek Arema!</h1>
-                    <p>Apotek Arema adalah destinasi utama Anda dalam perawatan kesehatan. Tim profesional kami terdiri dari apoteker terlatih yang siap
-                        memberikan saran ahli dan panduan mengenai penggunaan obat yang tepat serta perawatan kesehatan secara menyeluruh.</p>
-                    <p class="mb-4">Kami dengan senang hati akan membantu Anda dalam mencari produk yang
-                        Anda butuhkan, memberikan informasi mengenai dosis dan penggunaan yang tepat, serta memberikan saran kesehatan yang berharga. Kami
-                        berusaha untuk memberikan pengalaman belanja yang nyaman dan terpercaya setiap kali Anda mengunjungi apotek kami.</p>
-                    <p class="mb-4">Jangan ragu untuk menghubungi tim kami melalui telepon atau melalui fitur chat online kami jika Anda memiliki pertanyaan
-                        atau membutuhkan bantuan. Kami siap membantu Anda dalam menjaga kesehatan dan kesejahteraan Anda.</p>
-                    <p><i class="far fa-check-circle text-primary me-3"></i>Perawatan kesehatan yang berkualitas</p>
-                    <p><i class="far fa-check-circle text-primary me-3"></i>Dokter Berkualitas</p>
-                    <p><i class="far fa-check-circle text-primary me-3"></i>Profesional Riset Medis</p>
+                    {{-- <p class="d-inline-block border rounded-pill py-1 px-4">About Us</p> --}}
+                    <h1 class="mb-4">Kenali Tentang Kami! Posyandu Harmoni!</h1>
+                    <p>Misi kami adalah meningkatkan kesehatan dan kesejahteraan keluarga melalui upaya pencegahan, pendidikan, dan pengawasan. Melalui
+                        kegiatan Posyandu, kami berupaya untuk memberikan pemantauan tumbuh kembang anak, imunisasi, pemeriksaan kesehatan ibu hamil,
+                        serta penyuluhan gizi dan kesehatan.</p>
+                    <p class="mb-4">Kami memiliki tim yang terdiri dari tenaga medis terlatih dan sukarelawan yang peduli dengan kesehatan anak-anak dan
+                        ibu hamil. Dengan pengalaman dan pengetahuan kami, kami siap memberikan perawatan dan informasi yang berkualitas kepada Anda.</p>
+                    <p class="mb-4">Jangan ragu untuk menghubungi kami melalui telepon atau melalui fitur chat online kami jika Anda memiliki pertanyaan
+                        atau membutuhkan bantuan seputar balita dan ibu hamil.</p>
+                    <p><i class="far fa-check-circle text-primary me-3"></i>Memantau tumbuh kembang anak</p>
+                    <p><i class="far fa-check-circle text-primary me-3"></i>Memberikan imunisasi lengkap</p>
+                    <p><i class="far fa-check-circle text-primary me-3"></i>Memonitor kondisi pemeriksaan ibu hamil</p>
                     {{-- <a class="btn btn-primary rounded-pill py-3 px-5 mt-3" href="">Read More</a> --}}
                 </div>
             </div>
         </div>
     </div>
     <!-- About End -->
+
+
+    <!-- Location -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-12 wow fadeIn" data-wow-delay="0.5s">
+                    <h1>Lokasi Posyandu Harmoni</h1>
+                    {{-- <div class="form-group">
+                        <input type="text" id="search-input" class="form-control" placeholder="Enter a location">
+                    </div> --}}
+                    <div id="map"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Initialize the map
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: -7.986596, lng: 112.672663}, // Default center coordinates (USA)
+                zoom: 15 // Zoom level ,
+            });
+
+            // Create the search box and link it to the UI element
+            var input = document.getElementById('search-input');
+            var searchBox = new google.maps.places.SearchBox(input);
+
+            // Bias the search box results towards the current map's viewport
+            map.addListener('bounds_changed', function() {
+                searchBox.setBounds(map.getBounds());
+            });
+
+            // Listen for the event fired when the user selects a prediction and retrieve
+            // more details for that place.
+            searchBox.addListener('places_changed', function() {
+                var places = searchBox.getPlaces();
+
+                if (places.length === 0) {
+                    return;
+                }
+
+                // Clear out the old markers
+                markers.forEach(function(marker) {
+                    marker.setMap(null);
+                });
+                markers = [];
+
+                // For each place, get the icon, name and location
+                var bounds = new google.maps.LatLngBounds();
+                places.forEach(function(place) {
+                    if (!place.geometry) {
+                        console.log("Returned place contains no geometry");
+                        return;
+                    }
+
+                    var icon = {
+                        url: place.icon,
+                        size: new google.maps.Size(71, 71),
+                        origin: new google.maps.Point(0, 0),
+                        anchor: new google.maps.Point(17, 34),
+                        scaledSize: new google.maps.Size(25, 25)
+                    };
+
+                    // Create a marker for each place
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        icon: icon,
+                        title: place.name,
+                        position: place.geometry.location
+                    });
+
+                    markers.push(marker);
+
+                    if (place.geometry.viewport) {
+                        // Only geocodes have viewport
+                        bounds.union(place.geometry.viewport);
+                    } else {
+                        bounds.extend(place.geometry.location);
+                    }
+                });
+
+                map.fitBounds(bounds);
+            });
+        }
+    </script>
+    <!-- Call the initMap function when the page finishes loading -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCizv5y-ciYAfoT0R9DdqcnN_3Fr_jvjpQ&callback=initMap"></script>
+    <!-- Location -->
 
 
     <!-- Footer Start -->
@@ -169,6 +268,8 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="{{ asset('style/lib/wow/wow.min.js') }}"></script>
     <script src="{{ asset('style/lib/easing/easing.min.js') }}"></script>
     <script src="{{ asset('style/lib/waypoints/waypoints.min.js') }}"></script>
