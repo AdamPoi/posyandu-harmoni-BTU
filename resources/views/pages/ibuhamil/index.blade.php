@@ -38,9 +38,9 @@
                             <div class="card-header">
                                 <h4>Data Ibu Hamil</h4>
                                 <div class="card-header-action">
-                                    <a href="{{ route('cetak.pdf.ibuhamil') }}"
+                                    {{-- <a href="{{ route('cetak.pdf.ibuhamil') }}"
                                         class="btn btn-icon btn-primary icon-left"><i class="fas fa-print"></i>
-                                        Print PDF</a>
+                                        Print PDF</a> --}}
                                     <a href="{{ route('ibuhamil.create') }}" class="btn btn-icon btn-primary icon-left"><i
                                             class="fas fa-plus"></i>
                                         Tambah</a>

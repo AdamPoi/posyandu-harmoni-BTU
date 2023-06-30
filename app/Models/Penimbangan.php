@@ -22,4 +22,8 @@ class Penimbangan extends Model
   {
     return $this->belongsTo(Balita::class, 'id_balita');
   }
+  public function ibuHamil()
+  {
+    return $this->belongsTo(IbuHamil::class, 'id_ibu_hamil');
+  }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\IbuHamil;
 use App\Models\Pemeriksaan;
 use Illuminate\Http\Request;
+use Dompdf\Dompdf;
 use PDF;
 
 class PemeriksaanController extends Controller
@@ -148,8 +149,78 @@ class PemeriksaanController extends Controller
 
   public function cetak_pdf()
   {
-    $pemeriksaans = Pemeriksaan::all();
-    $pdf = PDF::loadview('pages.pemeriksaan.pemeriksaan_pdf', ['pemeriksaans' => $pemeriksaans]);
-    return $pdf->stream();
-  }
+    // Mengambil data dari database atau sumber data lainnya
+    $data = Pemeriksaan::join('ibu_hamils', 'pemeriksaans.id_ibu_hamil', '=', 'ibu_hamils.id_ibu_hamil')
+    ->orderBy('ibu_hamils.nama', 'asc')
+    ->get();
+
+    // Inisialisasi objek Dompdf
+    $dompdf = new Dompdf();
+
+    // Menyiapkan markup HTML yang akan dicetak ke PDF
+    $html = '<html><body>';
+
+    $html .= '<h1 style="text-align: center">Laporan Pemeriksaan Posyandu Harmoni - BTU</h1>'; // Menambahkan judul
+    $html .= '<br>';
+
+    $count = 1; // Variabel hitungan untuk nomor tabel
+
+    foreach ($data as $item) {
+    $html .= '<h3>Data Pemeriksaan ke-' . $count . '</h3>'; // Menambahkan nomor tabel
+
+    $html .= '<table border="1" style="border-collapse: collapse; width: 100%;">';
+    $html .= '<tr>';
+    $html .= '<th style="padding: 8px; text-align: left;">No</th>';
+    $html .= '<th style="padding: 8px; text-align: left;">Nama Ibu</th>';
+    $html .= '<th style="padding: 8px; text-align: left;">Tanggal</th>';
+    $html .= '<th style="padding: 8px; text-align: left;">Catatan</th>';
+    $html .= '</tr>';
+    $html .= '<tr>';
+    $html .= '<td style="padding: 8px;">' . $count . '</td>';
+    $html .= '<td style="padding: 8px;">' . $item->nama . '</td>';
+    $html .= '<td style="padding: 8px;">' . date('d-m-Y', strtotime($item->tanggal)) . '</td>';
+    $html .= '<td style="padding: 8px;">' . $item->catatan . '</td>';
+    $html .= '</tr>';
+    $html .= '</table>';
+
+    $html .= '<br>';
+
+    $html .= '<h3>Data Ibu</h3>'; // Menambahkan nomor tabel
+
+    $html .= '<table border="1" style="border-collapse: collapse; width: 100%;">';
+    $html .= '<tr>';
+    $html .= '<th style="padding: 8px; text-align: left;">No</th>';
+    $html .= '<th style="padding: 8px; text-align: left;">Nama Ibu</th>';
+    $html .= '<th style="padding: 8px; text-align: left;">Alamat</th>';
+    $html .= '<th style="padding: 8px; text-align: left;">No Telepon</th>';
+    $html .= '<th style="padding: 8px; text-align: left;">Usia Kandungan</th>';
+    $html .= '<th style="padding: 8px; text-align: left;">Tanggal Hamil</th>';
+    $html .= '<th style="padding: 8px; text-align: left;">Tanggal Lahir</th>';
+    $html .= '</tr>';
+    $html .= '<tr>';
+    $html .= '<td style="padding: 8px;">' . $count . '</td>';
+    $html .= '<td style="padding: 8px;">' . $item->nama . '</td>';
+    $html .= '<td style="padding: 8px;">' . $item->alamat . '</td>';
+    $html .= '<td style="padding: 8px;">' . $item->no_telepon . '</td>';
+    $html .= '<td style="padding: 8px;">' . $item->usia_kandungan . '</td>';
+    $html .= '<td style="padding: 8px;">' . $item->tanggal_hamil . '</td>';
+    $html .= '<td style="padding: 8px;">' . $item->tanggal_lahir . '</td>';
+    $html .= '</tr>';
+    $html .= '</table>';
+
+    $html .= '<br>';
+
+    $count++;
+    }
+    $html .= '</body></html>';
+
+    // Memasukkan markup HTML ke objek Dompdf
+    $dompdf->loadHtml($html);
+
+    // Render HTML menjadi PDF
+    $dompdf->render();
+
+    // Mengirimkan hasil PDF ke browser untuk diunduh
+    $dompdf->stream('Cetak-Laporan-Pemeriksaan.pdf');
+  }  
 }
