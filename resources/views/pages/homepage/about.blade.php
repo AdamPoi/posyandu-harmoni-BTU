@@ -149,8 +149,16 @@
         // Initialize the map
         function initMap() {
             var map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: -7.986596, lng: 112.672663}, // Default center coordinates (USA)
+                center: {lat: -7.986188, lng: 112.672747}, // Default center coordinates (USA)
                 zoom: 15 // Zoom level ,
+            });
+
+            // Add a marker for Posyandu Harmoni
+            var posyanduHarmoniLocation = { lat: -7.986188, lng: 112.672747 };
+            var marker = new google.maps.Marker({
+                map: map,
+                position: posyanduHarmoniLocation,
+                title: "Posyandu Harmoni"
             });
 
             // Create the search box and link it to the UI element
