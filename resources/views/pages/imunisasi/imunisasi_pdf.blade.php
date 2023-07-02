@@ -44,7 +44,7 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $imunisasi->balita->nama }}</td>
-                    <td>{{ $imunisasi->jenis_imunisasi }}</td>
+                    <td>{{ $imunisasi->vitamin->jenis_vitamin }}</td>
                     <td>{{ $imunisasi->tanggal }}</td>
                     <td>{{ $imunisasi->deskripsi }}</td>
                 </tr>

@@ -15,12 +15,16 @@ class Imunisasi extends Model
 
   protected $fillable = [
     'id_balita',
-    'jenis_imunisasi',
+    'id_vitamin',
     'tanggal',
     'deskripsi',
   ];
   public function balita()
   {
     return $this->belongsTo(Balita::class, 'id_balita');
+  }
+  public function vitamin()
+  {
+    return $this->belongsTo(Vitamin::class, 'id_vitamin');
   }
 }

@@ -59,7 +59,7 @@
                                     <div class="form-group col-12">
                                         <label>jenis_imunisasi</label>
                                         <input readonly type="text" class="form-control"
-                                            value="{{ $imunisasi->jenis_imunisasi }}">
+                                            value="{{ $imunisasi->vitamin->jenis_vitamin }}">
                                     </div>
                                 </div>
                                 <div class="row">

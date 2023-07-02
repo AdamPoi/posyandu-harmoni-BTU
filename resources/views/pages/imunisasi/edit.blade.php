@@ -52,15 +52,20 @@
                                     @endif
                                 </select>
                             </div>
-                            <input type="hidden" id="nama-balita" name="nama_balita"
-                                value="{{ old('nama_balita', $imunisasi->balita->nama) }}">
-                            <div class="form-group">
-                                <label>Jenis Imunisasi</label>
-                                <input type="text" name="jenis_imunisasi"
-                                    class="form-control @if (old('jenis_imunisasi')) is-valid @endif 
-                                @error('jenis_imunisasi') is-invalid @enderror"
-                                    value="{{ old('jenis_imunisasi', $imunisasi->jenis_imunisasi) }}">
+                            <input type="hidden" id="jenis-vitamin" name="jenis_vitamin"
+                                value="{{ old('jenis_vitamin', $imunisasi->vitamin->jenis_vitamin) }}">
+                                <div class="form-group">
+                                <label for="id-vitamin">Jenis Imunisasi</label>
+                                <select class="form-control" name="id_vitamin" id="id-vitamin">
+                                    @if (old('id_vitamin', $imunisasi->id_vitamin))
+                                        <option value="{{ old('id_vitamin', $imunisasi->id_vitamin) }}" selected>
+                                            {{ old('jenis_vitamin', $imunisasi->vitamin->jenis_vitamin) }}
+                                        </option>
+                                    @endif
+                                </select>
                             </div>
+                            <input type="hidden" id="jenis-vitamin" name="jenis_vitamin"
+                                value="{{ old('jenis_vitamin', $imunisasi->vitamin->jenis_vitamin) }}">
                             <div class="form-group">
                                 <label>Tanggal</label>
                                 <input type="date" name="tanggal"
@@ -112,6 +117,29 @@
         $('#id-balita').on('change', function(e) {
             var title = $(this).select2('data')[0].text;
             $('#nama-balita').val(title);
+        });
+        $('#id-vitamin').select2({
+            placeholder: 'Pilih Jenis Imunisasi',
+            ajax: {
+                url: '{!! route('autocomplete.vitamin') !!}',
+                dataType: 'json',
+                delay: 250,
+                processResults: function(data) {
+                    return {
+                        results: $.map(data, function(item) {
+                            return {
+                                text: item.jenis_vitamin,
+                                id: item.id_vitamin
+                            }
+                        })
+                    };
+                },
+                cache: true
+            }
+        });
+        $('#id-vitamin').on('change', function(e) {
+            var title = $(this).select2('data')[0].text;
+            $('#jenis-vitamin').val(title);
         });
     </script>
 @endpush

@@ -16,7 +16,7 @@ return new class extends Migration
     Schema::create('imunisasis', function (Blueprint $table) {
       $table->increments('id_imunisasi');
       $table->unsignedInteger('id_balita');
-      $table->string('jenis_imunisasi');
+      $table->unsignedInteger('id_vitamin');
       $table->date('tanggal');
       $table->text('deskripsi')->nullable();
       $table->timestamps();

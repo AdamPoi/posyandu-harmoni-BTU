@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\IbuHamil;
 use App\Models\Balita;
+use App\Models\Vitamin;
 use Illuminate\Http\Request;
 
 class AutoCompleteController extends Controller
@@ -27,5 +28,15 @@ class AutoCompleteController extends Controller
         ->where('nama', 'LIKE', "%$search%")->get();
     }
     return response()->json($dataBalita);
+  }
+  public function getVitamin(Request $request)
+  {
+    $dataVitamin = [];
+    if ($request->has('q')) {
+      $search = $request->q;
+      $dataVitamin = Vitamin::select("id_vitamin", "jenis_vitamin")
+        ->where('jenis_vitamin', 'LIKE', "%$search%")->get();
+    }
+    return response()->json($dataVitamin);
   }
 }

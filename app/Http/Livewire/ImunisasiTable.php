@@ -33,7 +33,7 @@ class ImunisasiTable extends DataTableComponent
         ->sortable()->searchable()->format(
           fn ($value) => $value . ' bulan'
         ),
-      Column::make("Jenis imunisasi", "jenis_imunisasi")
+      Column::make("Jenis Imunisasi", "vitamin.jenis_vitamin")
         ->sortable()->searchable(),
       Column::make("Tanggal", "tanggal")
         ->sortable()->searchable(),

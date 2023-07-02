@@ -27,4 +27,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware(['auth:sanctum', 'auth.role:admin'])->prefix('autocomplete')->controller(AutoCompleteController::class)->as('autocomplete.')->group(function () {
   Route::get('ibuhamil', 'getIbuHamil')->name('ibuhamil');
   Route::get('balita', 'getBalita')->name('balita');
+  Route::get('vitamin', 'getVitamin')->name('vitamin');
 });

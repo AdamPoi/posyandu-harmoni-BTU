@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Balita;
 use App\Models\Imunisasi;
+use App\Models\Vitamin;
 use Illuminate\Http\Request;
 use PDF;
 
@@ -27,7 +28,8 @@ class ImunisasiController extends Controller
   public function create()
   {
     $balitas = Balita::all(); //mendapatkan data dari tabel Balita
-    return view('pages.imunisasi.create', ['balitas' => $balitas]);
+    $vitamins = Vitamin::all(); //mendapatkan data dari tabel Vitamin
+    return view('pages.imunisasi.create', ['balitas' => $balitas, 'vitamins' => $vitamins]);
   }
 
   /**
@@ -42,29 +44,31 @@ class ImunisasiController extends Controller
     $request->validate(
       [
         'id_balita' => 'required',
-        'jenis_imunisasi' => 'required',
+        'id_vitamin' => 'required',
         'tanggal' => 'required',
         'deskripsi' => 'required',
       ],
       [
         'id_balita.required' => 'Nama Ibu Hamil wajib diisi',
-        'jenis_imunisasi.required' => 'jenis imunisasi wajib diisi',
+        'id_vitamin.required' => 'jenis imunisasi wajib diisi',
         'tanggal.required' => 'Tanggal wajib diisi',
         'deskripsi.required' => 'Catatan wajib diisi',
 
       ]
     );
     $imunisasi = new Imunisasi;
-    $imunisasi->id_imunisasi = $request->get('id_imunisasi');
-    $imunisasi->jenis_imunisasi = $request->get('jenis_imunisasi');
+    $imunisasi->id_balita = $request->get('id_imunisasi');
+    $imunisasi->id_vitamin = $request->get('id_imunisasi');
     $imunisasi->tanggal = $request->get('tanggal');
     $imunisasi->deskripsi = $request->get('deskripsi');
 
     $balitas = new Balita;
     $balitas->id_balita = $request->get('id_balita');
-
+    $vitamins = new Vitamin;
+    $vitamins->id_vitamin = $request->get('id_vitamin');
     //fungsi eloquent untuk menambah data dengan relasi belongsTo
     $imunisasi->balita()->associate($balitas);
+    $imunisasi->vitamin()->associate($vitamins);
     $imunisasi->save();
     //jika data berhasil ditambahkan, akan kembali ke halaman utama
     return redirect()->route('imunisasi.index')
@@ -92,11 +96,10 @@ class ImunisasiController extends Controller
    */
   public function edit($id_imunisasi)
   {
-    //menampilkan detail data dengan menemukan berdasarkan id_imunisasi 
-    //Pemriksaan untuk diedit
     $imunisasi = Imunisasi::with('balita')->where('id_imunisasi', $id_imunisasi)->first();
     $balitas = Balita::all(); //mendapatkan data dari balita
-    return view('pages.imunisasi.edit', compact('imunisasi', 'balitas'));
+    $vitamins = Vitamin::all(); //mendapatkan data dari vitamin
+    return view('pages.imunisasi.edit', compact('imunisasi', 'balitas', 'vitamins'));
   }
 
   /**
@@ -111,32 +114,32 @@ class ImunisasiController extends Controller
     //melakukan validasi data
     $request->validate(
       [
-        'jenis_imunisasi' => 'required',
+        'id_vitamin' => 'required',
         'tanggal' => 'required',
         'id_balita' => 'required',
         'deskripsi' => 'required',
       ],
       [
-        'jenis_imunisasi.required' => 'jenis imunisasi wajib diisi',
+        'id_vitamin.required' => 'jenis imunisasi wajib diisi',
         'tanggal.required' => 'Tanggal wajib diisi',
         'deskripsi.required' => 'Deskripsi wajib diisi',
         'id_balita.required' => 'Nama Balita wajib diisi',
       ]
     );
     $imunisasi = Imunisasi::with('balita')->where('id_imunisasi', $id_imunisasi)->first();
-    $imunisasi->jenis_imunisasi = $request->get('jenis_imunisasi');
+    $imunisasi = Imunisasi::with('vitamin')->where('id_imunisasi', $id_imunisasi)->first();
     $imunisasi->tanggal = $request->get('tanggal');
     $imunisasi->deskripsi = $request->get('deskripsi');
-
     $balitas = new Balita;
     $balitas->id_balita = $request->get('id_balita');
+    $vitamins = new Vitamin;
+    $vitamins->id_vitamin = $request->get('id_vitamin');
 
-    //fungsi eloquent untuk menambah data dengan relasi belongsTo
     $imunisasi->balita()->associate($balitas);
+    $imunisasi->vitamin()->associate($vitamins);
     $imunisasi->save();
-    //jika data berhasil ditambahkan, akan kembali ke halaman utama
     return redirect()->route('imunisasi.index')
-      ->with('msg-success', 'Data Berhasil diubah');
+    ->with('msg-success', 'Data Berhasil diubah');
   }
 
   /**
@@ -148,7 +151,8 @@ class ImunisasiController extends Controller
   public function destroy(Imunisasi $imunisasi)
   {
     $imunisasi->delete();
-    return redirect()->route('imunisasi.index')->with('msg-success', 'Data Berhasil Dihapus');
+    return redirect()->route('imunisasi.index')
+      ->with('msg-success', 'Data Berhasil Dihapus');
   }
   public function cetak_pdf()
   {
