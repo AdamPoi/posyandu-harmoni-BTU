@@ -16,4 +16,9 @@ class Vitamin extends Model
     'jenis_vitamin',
     'deskripsi',
   ];
+
+  public function imunisasi()
+  {
+    return $this->hasMany(Imunisasi::class, 'id_vitamin');
+  }
 }

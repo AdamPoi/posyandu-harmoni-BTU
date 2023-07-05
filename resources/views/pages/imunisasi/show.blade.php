@@ -64,6 +64,13 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-12">
+                                        <label>Kegiatan</label>
+                                        <input readonly type="text" class="form-control"
+                                            value="{{ $imunisasi->jadwal->kegiatan ? $imunisasi->jadwal->kegiatan : '-' }}">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-12">
                                         <label>Tanggal</label>
                                         <input readonly type="date" class="form-control"
                                             value="{{ $imunisasi->tanggal }}">

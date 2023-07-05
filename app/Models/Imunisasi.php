@@ -16,6 +16,7 @@ class Imunisasi extends Model
   protected $fillable = [
     'id_balita',
     'id_vitamin',
+    'id_jadwal',
     'tanggal',
     'deskripsi',
   ];
@@ -26,5 +27,9 @@ class Imunisasi extends Model
   public function vitamin()
   {
     return $this->belongsTo(Vitamin::class, 'id_vitamin');
+  }
+  public function jadwal()
+  {
+    return $this->belongsTo(Jadwal::class, 'id_jadwal');
   }
 }

@@ -22,8 +22,8 @@
         }
 
         .table .tanggal {
-              text-align: left;
-              white-space: nowrap;
+            text-align: left;
+            white-space: nowrap;
         }
     </style>
     <center>
@@ -34,6 +34,7 @@
             <tr>
                 <th>No</th>
                 <th>Kegiatan</th>
+                <th>Jenis Kegiatan</th>
                 <th>Tanggal</th>
                 <th>Deskripsi</th>
             </tr>
@@ -43,6 +44,7 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $jadwal->kegiatan }}</td>
+                    <td>{{ $jadwal->jenis }}</td>
                     <td>{{ $jadwal->tanggal }}</td>
                     <td>{{ $jadwal->deskripsi }}</td>
                 </tr>

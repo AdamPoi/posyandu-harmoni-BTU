@@ -28,4 +28,5 @@ Route::middleware(['auth:sanctum', 'auth.role:admin'])->prefix('autocomplete')->
   Route::get('ibuhamil', 'getIbuHamil')->name('ibuhamil');
   Route::get('balita', 'getBalita')->name('balita');
   Route::get('vitamin', 'getVitamin')->name('vitamin');
+  Route::get('jadwal', 'getJadwal')->name('jadwal');
 });

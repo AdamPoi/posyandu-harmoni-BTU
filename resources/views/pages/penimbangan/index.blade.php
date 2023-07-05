@@ -44,6 +44,9 @@
                                     <a href="{{ route('penimbangan.create') }}"
                                         class="btn btn-icon btn-primary icon-left"><i class="fas fa-plus"></i>
                                         Tambah</a>
+                                    <a href="{{ route('jadwal.create', ['jenis' => 'penimbangan']) }}"
+                                        class="btn btn-icon btn-primary icon-left"><i class="fas fa-calendar"></i>
+                                        Buat Jadwal</a>
 
                                 </div>
                             </div>

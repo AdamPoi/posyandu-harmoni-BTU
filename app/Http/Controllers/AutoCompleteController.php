@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\IbuHamil;
 use App\Models\Balita;
+use App\Models\Jadwal;
 use App\Models\Vitamin;
 use Illuminate\Http\Request;
 
@@ -28,6 +29,17 @@ class AutoCompleteController extends Controller
         ->where('nama', 'LIKE', "%$search%")->get();
     }
     return response()->json($dataBalita);
+  }
+  public function getJadwal(Request $request)
+  {
+    $dataJadwal = [];
+    if ($request->has('q')) {
+      $search = $request->q;
+
+      $dataJadwal = Jadwal::where('jenis', $request->get('jenis'))
+        ->where('kegiatan', 'LIKE', "%$search%")->get();
+    }
+    return response()->json($dataJadwal);
   }
   public function getVitamin(Request $request)
   {

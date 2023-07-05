@@ -7,6 +7,7 @@ use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Jadwal;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\Views\Filters\DateFilter;
+use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 use App\Exports\JadwalsExport;
 use Excel;
 use PDF;
@@ -27,6 +28,8 @@ class JadwalTable extends DataTableComponent
     return [
       Column::make("Id jadwal", "id_jadwal")
         ->sortable()->searchable()->deselected(),
+      Column::make("Jenis", "jenis")
+        ->sortable()->searchable(),
       Column::make("Tanggal", "tanggal")
         ->sortable()->searchable(),
       Column::make("Kegiatan", "kegiatan")
@@ -72,6 +75,25 @@ class JadwalTable extends DataTableComponent
       DateFilter::make('Sampai Tanggal')
         ->filter(function (Builder $builder, string $value) {
           $builder->where('tanggal', '<=', $value);
+        }),
+      SelectFilter::make('Jenis Kegiatan')
+        ->options([
+          '' => 'Semua',
+          'Imunisasi' => 'Imunisasi',
+          'Penimbangan' => 'Penimbangan',
+          'Pemeriksaan' => 'Pemeriksaan',
+          'Lainnya' => 'Lainnya',
+
+        ])->filter(function (Builder $builder, string $value) {
+          if ($value === 'Imunisasi') {
+            $builder->where('jenis', 'imunisasi');
+          } elseif ($value === 'Penimbangan') {
+            $builder->where('jenis', 'penimbangan');
+          } elseif ($value === 'Pemeriksaan') {
+            $builder->where('jenis', 'pemeriksaan');
+          } elseif ($value === 'Lainnya') {
+            $builder->where('jenis', 'lainnya');
+          }
         }),
     ];
   }

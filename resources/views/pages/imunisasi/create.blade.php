@@ -4,6 +4,12 @@
 
 @push('style')
     <link rel="stylesheet" href="{{ asset('library/select2/dist/css/select2.min.css') }}">
+    <style>
+        .select2-selection__clear {
+            position: absolute !important;
+            right: 40px !important;
+        }
+    </style>
 @endpush
 
 @section('main')
@@ -44,17 +50,37 @@
                             <div class="form-group">
                                 <label for="id-balita">Nama Balita</label>
                                 <select class="form-control" name="id_balita" id="id-balita">
-
+                                    @if (old('id_balita'))
+                                        <option value="{{ old('id_balita') }}" selected>
+                                            {{ old('nama_balita') }}
+                                        </option>
+                                    @endif
                                 </select>
                             </div>
                             <input type="hidden" id="nama-balita" name="nama_balita" value="{{ old('nama_balita') }}">
                             <div class="form-group">
                                 <label for="id-vitamin">Jenis Imunisasi</label>
                                 <select class="form-control" name="id_vitamin" id="id-vitamin">
-
+                                    @if (old('id_vitamin'))
+                                        <option value="{{ old('id_vitamin') }}" selected>
+                                            {{ old('jenis_vitamin') }}
+                                        </option>
+                                    @endif
                                 </select>
                             </div>
-                            <input type="hidden" id="jenis-vitamin" name="jenis_vitamin" value="{{ old('jenis_vitamin') }}">
+                            <input type="hidden" id="jenis-vitamin" name="jenis_vitamin"
+                                value="{{ old('jenis_vitamin') }}">
+                            <div class="form-group">
+                                <label for="kegiatan">Kegiatan</label>
+                                <select class="form-control" name="id_jadwal" id="kegiatan">
+                                    @if (old('id_jadwal'))
+                                        <option value="{{ old('id_jadwal') }}" selected>
+                                            {{ old('kegiatan') }}
+                                        </option>
+                                    @endif
+                                </select>
+                            </div>
+                            <input type="hidden" id='nama-kegiatan' name="kegiatan" value="{{ old('kegiatan') }}">
                             <div class="form-group">
                                 <label>Tanggal</label>
                                 <input type="date" name="tanggal"
@@ -108,8 +134,7 @@
             var title = $(this).select2('data')[0].text;
             $('#nama-balita').val(title);
         });
-    </script>
-    <script type="text/javascript">
+
         $('#id-vitamin').select2({
             placeholder: 'Pilih Jenis Imunisasi',
             ajax: {
@@ -132,6 +157,38 @@
         $('#id-vitamin').on('change', function(e) {
             var title = $(this).select2('data')[0].text;
             $('#jenis-vitamin').val(title);
+        });
+
+        let jadwals;
+        $('#kegiatan').select2({
+            placeholder: 'Pilih Kegiatan',
+            allowClear: true,
+            ajax: {
+                url: '{!! route('autocomplete.jadwal', ['jenis' => 'imunisasi']) !!}',
+                dataType: 'json',
+                delay: 250,
+                processResults: function(data) {
+
+                    jadwals = $.map(data, function(item) {
+                        return {
+                            tanggal: item.tanggal,
+                            text: item.kegiatan,
+                            id: item.id_jadwal
+                        }
+                    })
+
+                    return {
+                        results: jadwals
+                    };
+                },
+                cache: true
+            }
+        });
+        $('#kegiatan').on('change', function(e) {
+            var title = $(this).select2('data')[0].text;
+            $('#nama-kegiatan').val(title);
+            const selectedJadwal = jadwals.find(i => i.id = e.target.value)
+            $('#tanggal').val(selectedJadwal.tanggal);
         });
     </script>
 @endpush

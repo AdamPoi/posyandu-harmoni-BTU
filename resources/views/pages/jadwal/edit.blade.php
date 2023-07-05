@@ -45,9 +45,26 @@
                             <div class="form-group">
                                 <label>Kegiatan</label>
                                 <input type="text" name="kegiatan"
-                                    class="form-control @if (old('kegiatan')) is-valid @endif
+                                    class="form-control @if (old('id_jadwal')) is-valid @endif
                                 @error('kegiatan') is-invalid @enderror"
-                                    value="{{ old('kegiatan', $jadwal->kegiatan) }}">
+                                    value="{{ old('id_jadwal', $jadwal->kegiatan) }}">
+                            </div>
+                            <div class="form-group">
+                                <label>Jenis Kegiatan</label>
+                                <select name="jenis" id="jenis" class="form-control">
+                                    <option value="imunisasi"
+                                        {{ old('jenis', $jadwal->jenis) == 'imunisasi' ? 'selected' : '' }}>
+                                        Imunisasi</option>
+                                    <option
+                                        value="penimbangan"{{ old('jenis', $jadwal->jenis) == 'penimbangan' ? 'selected' : '' }}>
+                                        Penimbangan</option>
+                                    <option
+                                        value="pemeriksaan"{{ old('jenis', $jadwal->jenis) == 'pemeriksaan' ? 'selected' : '' }}>
+                                        Pemeriksaan</option>
+                                    <option
+                                        value="lainnya"{{ old('jenis', $jadwal->jenis) == 'lainnya' ? 'selected' : '' }}>
+                                        Lainnya</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label>Tanggal</label>
@@ -61,7 +78,7 @@
                                 <textarea name="deskripsi"
                                     class="form-control @if (old('deskripsi')) is-valid @endif
                                 @error('deskripsi') is-invalid @enderror"
-                                    class="form-control"   style="height:8rem;">{{ old('deskripsi', $jadwal->deskripsi) }}</textarea>
+                                    class="form-control" style="height:8rem;">{{ old('deskripsi', $jadwal->deskripsi) }}</textarea>
                             </div>
                         </div>
                         <div class="card-footer text-right">

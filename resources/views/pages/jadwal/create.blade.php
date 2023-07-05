@@ -45,9 +45,18 @@
                             <div class="form-group">
                                 <label>Kegiatan</label>
                                 <input type="text" name="kegiatan"
-                                    class="form-control @if (old('kegiatan')) is-valid @endif
+                                    class="form-control @if (old('id_jadwal')) is-valid @endif
                                 @error('kegiatan') is-invalid @enderror"
-                                    value="{{ old('kegiatan') }}">
+                                    value="{{ old('id_jadwal') }}">
+                            </div>
+                            <div class="form-group">
+                                <label>Jenis Kegiatan</label>
+                                <select name="jenis" id="jenis" class="form-control">
+                                    <option value="imunisasi">Imunisasi</option>
+                                    <option value="penimbangan">Penimbangan</option>
+                                    <option value="pemeriksaan">Pemeriksaan</option>
+                                    <option value="lainnya">Lainnya</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label>Tanggal</label>
@@ -61,7 +70,7 @@
                                 <textarea name="deskripsi"
                                     class="form-control @if (old('deskripsi')) is-valid @endif
                                 @error('deskripsi') is-invalid @enderror"
-                                    value="{{ old('deskripsi') }}"  style="height:8rem;"></textarea>
+                                    value="{{ old('deskripsi') }}" style="height:8rem;"></textarea>
                             </div>
                         </div>
                         <div class="card-footer text-right">
@@ -75,3 +84,10 @@
 
     </div>
 @endsection
+@push('scripts')
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const jenis = params.get('jenis');
+        $('#jenis').val(jenis)
+    </script>
+@endpush

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Balita;
 use App\Models\IbuHamil;
+use App\Models\Jadwal;
 use App\Models\Penimbangan;
 use Illuminate\Http\Request;
 use Dompdf\Dompdf;
@@ -47,6 +48,7 @@ class PenimbanganController extends Controller
         'tinggi_badan' => 'required',
         'id_balita' => 'required',
         'berat_badan' => 'required',
+        'id_jadwal' => 'nullable',
         'lingkar_kepala' => 'required',
         'tanggal' => 'required',
       ],
@@ -60,6 +62,7 @@ class PenimbanganController extends Controller
     );
     $penimbangan = new Penimbangan;
     $penimbangan->id_balita = $request->get('id_penimbangan');
+    $penimbangan->id_jadwal = $request->get('id_jadwal');
     $penimbangan->tinggi_badan = $request->get('tinggi_badan');
     $penimbangan->lingkar_kepala = $request->get('lingkar_kepala');
     $penimbangan->berat_badan = $request->get('berat_badan');
@@ -69,8 +72,13 @@ class PenimbanganController extends Controller
     $balitas = new Balita;
     $balitas->id_balita = $request->get('id_balita');
 
+    $jadwals = new Jadwal;
+    $jadwals->id_jadwal = $request->get('id_jadwal');
+    $penimbangan->jadwal()->associate($jadwals);
+
     //fungsi eloquent untuk menambah data dengan relasi belongsTo
     $penimbangan->balita()->associate($balitas);
+
     $penimbangan->save();
     //jika data berhasil ditambahkan, akan kembali ke halaman utama
     return redirect()->route('penimbangan.index')
@@ -118,19 +126,22 @@ class PenimbanganController extends Controller
       [
         'tinggi_badan' => 'required',
         'id_balita' => 'required',
-        'lingkar_kepala' => 'required',
         'berat_badan' => 'required',
+        'id_jadwal' => 'nullable',
+        'lingkar_kepala' => 'required',
         'tanggal' => 'required',
       ],
       [
-        'tinggi_badan.required' => 'Tinggi badan wajib diisi',
+        'tinggi_badan.required' => 'Tinngi badan wajib diisi',
+        'lingkar_kepala.required' => 'Tinngi badan wajib diisi',
         'berat_badan.required' => 'Berat badan wajib diisi',
-        'lingkar_kepala.required' => 'Lingkar kepala wajib diisi',
         'id_balita.required' => 'Id Balita wajib diisi',
-        'tanggal.required' => 'Tanggal wajib diisi',
+        'tanggal.required' => 'Id Balita wajib diisi',
       ]
     );
-    $penimbangan = Penimbangan::with('balita')->where('id_penimbangan', $id_penimbangan)->first();
+    $penimbangan = new Penimbangan;
+    $penimbangan->id_balita = $request->get('id_penimbangan');
+    $penimbangan->id_jadwal = $request->get('id_jadwal');
     $penimbangan->tinggi_badan = $request->get('tinggi_badan');
     $penimbangan->lingkar_kepala = $request->get('lingkar_kepala');
     $penimbangan->berat_badan = $request->get('berat_badan');
@@ -138,9 +149,12 @@ class PenimbanganController extends Controller
 
     $balitas = new Balita;
     $balitas->id_balita = $request->get('id_balita');
+    $jadwals = new Jadwal;
+    $jadwals->id_jadwal = $request->get('id_jadwal');
 
     //fungsi eloquent untuk menambah data dengan relasi belongsTo
     $penimbangan->balita()->associate($balitas);
+    $penimbangan->jadwal()->associate($jadwals);
     $penimbangan->save();
     //jika data berhasil ditambahkan, akan kembali ke halaman utama
     return redirect()->route('penimbangan.index')
@@ -163,8 +177,8 @@ class PenimbanganController extends Controller
   {
     // Mengambil data dari database atau sumber data lainnya
     $data = Penimbangan::join('balitas', 'penimbangans.id_balita', '=', 'balitas.id_balita')
-        ->orderBy('balitas.nama', 'asc')
-        ->get();
+      ->orderBy('balitas.nama', 'asc')
+      ->get();
 
     // Inisialisasi objek Dompdf
     $dompdf = new Dompdf();
@@ -178,56 +192,56 @@ class PenimbanganController extends Controller
     $count = 1; // Variabel hitungan untuk nomor tabel
 
     foreach ($data as $item) {
-    $html .= '<h3>Data Penimbangan ke-' . $count . '</h3>'; // Menambahkan nomor tabel
+      $html .= '<h3>Data Penimbangan ke-' . $count . '</h3>'; // Menambahkan nomor tabel
 
-    $html .= '<table border="1" style="border-collapse: collapse; width: 100%;">';
-    $html .= '<tr>';
-    $html .= '<th style="padding: 8px; text-align: left;">No</th>';
-    $html .= '<th style="padding: 8px; text-align: left;">Nama</th>';
-    $html .= '<th style="padding: 8px; text-align: left;">Berat Badan</th>';
-    $html .= '<th style="padding: 8px; text-align: left;">Tinggi Badan</th>';
-    $html .= '<th style="padding: 8px; text-align: left;">Lingkar Kepala</th>';
-    $html .= '<th style="padding: 8px; text-align: left;">Tanggal</th>';
-    $html .= '</tr>';
-    $html .= '<tr>';
-    $html .= '<td style="padding: 8px;">' . $count . '</td>';
-    $html .= '<td style="padding: 8px;">' . $item->nama . '</td>';
-    $html .= '<td style="padding: 8px;">' . $item->nama ? $item->balita->nama : '</td>';
-    $html .= '<td style="padding: 8px;">' . $item->berat_badan . '</td>';
-    $html .= '<td style="padding: 8px;">' . $item->tinggi_badan . '</td>';
-    $html .= '<td style="padding: 8px;">' . $item->lingkar_kepala . '</td>';
-    $html .= '<td style="padding: 8px;">' . date('d-m-Y', strtotime($item->tanggal)) . '</td>';
-    $html .= '</tr>';
-    $html .= '</table>';
+      $html .= '<table border="1" style="border-collapse: collapse; width: 100%;">';
+      $html .= '<tr>';
+      $html .= '<th style="padding: 8px; text-align: left;">No</th>';
+      $html .= '<th style="padding: 8px; text-align: left;">Nama</th>';
+      $html .= '<th style="padding: 8px; text-align: left;">Berat Badan</th>';
+      $html .= '<th style="padding: 8px; text-align: left;">Tinggi Badan</th>';
+      $html .= '<th style="padding: 8px; text-align: left;">Lingkar Kepala</th>';
+      $html .= '<th style="padding: 8px; text-align: left;">Tanggal</th>';
+      $html .= '</tr>';
+      $html .= '<tr>';
+      $html .= '<td style="padding: 8px;">' . $count . '</td>';
+      $html .= '<td style="padding: 8px;">' . $item->nama . '</td>';
+      $html .= '<td style="padding: 8px;">' . $item->nama ? $item->balita->nama : '</td>';
+      $html .= '<td style="padding: 8px;">' . $item->berat_badan . '</td>';
+      $html .= '<td style="padding: 8px;">' . $item->tinggi_badan . '</td>';
+      $html .= '<td style="padding: 8px;">' . $item->lingkar_kepala . '</td>';
+      $html .= '<td style="padding: 8px;">' . date('d-m-Y', strtotime($item->tanggal)) . '</td>';
+      $html .= '</tr>';
+      $html .= '</table>';
 
-    $html .= '<br>';
+      $html .= '<br>';
 
-    $html .= '<h3>Data Balita</h3>'; // Menambahkan nomor tabel
+      $html .= '<h3>Data Balita</h3>'; // Menambahkan nomor tabel
 
-    $html .= '<table border="1" style="border-collapse: collapse; width: 100%;">';
-    $html .= '<tr>';
-    $html .= '<th style="padding: 8px; text-align: left;">No</th>';
-    $html .= '<th style="padding: 8px; text-align: left;">Nama</th>';
-    // $html .= '<th style="padding: 8px; text-align: left;">Nama Ibu</th>';
-    // $html .= '<th style="padding: 8px; text-align: left;">Nama Ayah</th>';
-    $html .= '<th style="padding: 8px; text-align: left;">Tanggal Lahir</th>';
-    $html .= '<th style="padding: 8px; text-align: left;">Usia</th>';
-    $html .= '<th style="padding: 8px; text-align: left;">Jenis Kelamin</th>';
-    $html .= '</tr>';
-    $html .= '<tr>';
-    $html .= '<td style="padding: 8px;">' . $count . '</td>';
-    $html .= '<td style="padding: 8px;">' . $item->nama . '</td>';
-    // $html .= '<td style="padding: 8px;">' . $item->nama ? $item->ibu_hamil->nama : '</td>';
-    // $html .= '<td style="padding: 8px;">' . $item->nama_ayah . '</td>';
-    $html .= '<td style="padding: 8px;">' . date('d-m-Y', strtotime($item->tanggal_lahir)) . '</td>';
-    $html .= '<td style="padding: 8px;">' . $item->usia . '</td>';
-    $html .= '<td style="padding: 8px;">' . $item->jenis_kelamin . '</td>';
-    $html .= '</tr>';
-    $html .= '</table>';
+      $html .= '<table border="1" style="border-collapse: collapse; width: 100%;">';
+      $html .= '<tr>';
+      $html .= '<th style="padding: 8px; text-align: left;">No</th>';
+      $html .= '<th style="padding: 8px; text-align: left;">Nama</th>';
+      // $html .= '<th style="padding: 8px; text-align: left;">Nama Ibu</th>';
+      // $html .= '<th style="padding: 8px; text-align: left;">Nama Ayah</th>';
+      $html .= '<th style="padding: 8px; text-align: left;">Tanggal Lahir</th>';
+      $html .= '<th style="padding: 8px; text-align: left;">Usia</th>';
+      $html .= '<th style="padding: 8px; text-align: left;">Jenis Kelamin</th>';
+      $html .= '</tr>';
+      $html .= '<tr>';
+      $html .= '<td style="padding: 8px;">' . $count . '</td>';
+      $html .= '<td style="padding: 8px;">' . $item->nama . '</td>';
+      // $html .= '<td style="padding: 8px;">' . $item->nama ? $item->ibu_hamil->nama : '</td>';
+      // $html .= '<td style="padding: 8px;">' . $item->nama_ayah . '</td>';
+      $html .= '<td style="padding: 8px;">' . date('d-m-Y', strtotime($item->tanggal_lahir)) . '</td>';
+      $html .= '<td style="padding: 8px;">' . $item->usia . '</td>';
+      $html .= '<td style="padding: 8px;">' . $item->jenis_kelamin . '</td>';
+      $html .= '</tr>';
+      $html .= '</table>';
 
-    $html .= '<br>';
+      $html .= '<br>';
 
-    $count++;
+      $count++;
     }
     $html .= '</body></html>';
 

@@ -20,9 +20,10 @@ return new class extends Migration
       $table->float('tinggi_badan');
       $table->float('lingkar_kepala');
       $table->date('tanggal');
+      $table->unsignedInteger('id_jadwal')->nullable();
       $table->timestamps();
-
       $table->foreign('id_balita')->references('id_balita')->on('balitas')->onDelete('cascade');
+      $table->foreign('id_jadwal')->references('id_jadwal')->on('jadwals')->onDelete('cascade');
     });
   }
 

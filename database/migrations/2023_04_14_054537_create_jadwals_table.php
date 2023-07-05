@@ -16,6 +16,7 @@ return new class extends Migration
     Schema::create('jadwals', function (Blueprint $table) {
       $table->increments('id_jadwal');
       $table->date('tanggal');
+      $table->enum('jenis', ['imunisasi', 'penimbangan', 'pemeriksaan', 'lainnya']);
       $table->string('kegiatan');
       $table->text('deskripsi')->nullable();
       $table->timestamps();

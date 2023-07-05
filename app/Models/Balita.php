@@ -23,6 +23,6 @@ class Balita extends Model
 
   public function penimbangan()
   {
-    return $this->hasMany(penimbangan::class, 'id_balita');
+    return $this->hasMany(Penimbangan::class, 'id_balita');
   }
 }

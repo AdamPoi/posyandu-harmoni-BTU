@@ -45,7 +45,9 @@
                                     <a href="{{ route('imunisasi.create') }}" class="btn btn-icon btn-primary icon-left"><i
                                             class="fas fa-plus"></i>
                                         Tambah</a>
-
+                                    <a href="{{ route('jadwal.create', ['jenis' => 'imunisasi']) }}"
+                                        class="btn btn-icon btn-primary icon-left"><i class="fas fa-calendar"></i>
+                                        Buat Jadwal</a>
                                 </div>
                             </div>
                             <div class="card-body">

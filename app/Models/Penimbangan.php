@@ -13,6 +13,7 @@ class Penimbangan extends Model
 
   protected $fillable = [
     'id_balita',
+    'id_jadwal',
     'berat_badan',
     'tinggi_badan',
     'lingkar_kepala',
@@ -25,5 +26,9 @@ class Penimbangan extends Model
   public function ibuHamil()
   {
     return $this->belongsTo(IbuHamil::class, 'id_ibu_hamil');
+  }
+  public function jadwal()
+  {
+    return $this->belongsTo(Jadwal::class, 'id_jadwal');
   }
 }

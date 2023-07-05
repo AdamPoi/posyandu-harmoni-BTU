@@ -49,7 +49,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $balita->nama }}</td>
                     <td>{{ $balita->nama_ayah }}</td>
-                    <td>{{ $balita->ibu_hamil->nama }}</td>
+                    <td>{{ $balita->nama_ibu }}</td>
                     <td>{{ $balita->usia }}</td>
                     <td>{{ $balita->jenis_kelamin }}</td>
                     <td>{{ $balita->tanggal_lahir }}</td>

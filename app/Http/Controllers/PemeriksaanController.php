@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\IbuHamil;
+use App\Models\Jadwal;
 use App\Models\Pemeriksaan;
 use Illuminate\Http\Request;
 use Dompdf\Dompdf;
@@ -44,6 +45,7 @@ class PemeriksaanController extends Controller
       [
         'tanggal' => 'required',
         'id_ibu_hamil' => 'required',
+        'id_jadwal' => 'nullable',
         'catatan' => 'required',
       ],
       [
@@ -54,12 +56,16 @@ class PemeriksaanController extends Controller
     );
     $pemeriksaan = new Pemeriksaan;
     $pemeriksaan->id_pemeriksaan = $request->get('id_pemeriksaan');
+
     $pemeriksaan->tanggal = $request->get('tanggal');
     $pemeriksaan->catatan = $request->get('catatan');
 
     $ibu_hamils = new IbuHamil;
     $ibu_hamils->id_ibu_hamil = $request->get('id_ibu_hamil');
+    $jadwals = new Jadwal;
+    $jadwals->id_jadwal = $request->get('id_jadwal');
 
+    $pemeriksaan->jadwal()->associate($jadwals);
     //fungsi eloquent untuk menambah data dengan relasi belongsTo
     $pemeriksaan->ibu_hamil()->associate($ibu_hamils);
     $pemeriksaan->save();
@@ -110,6 +116,7 @@ class PemeriksaanController extends Controller
       [
         'tanggal' => 'required',
         'id_ibu_hamil' => 'required',
+        'id_jadwal' => 'nullable',
         'catatan' => 'required',
       ],
       [
@@ -124,6 +131,10 @@ class PemeriksaanController extends Controller
 
     $ibu_hamils = new IbuHamil;
     $ibu_hamils->id_ibu_hamil = $request->get('id_ibu_hamil');
+    $jadwals = new Jadwal;
+    $jadwals->id_jadwal = $request->get('id_jadwal');
+
+    $pemeriksaan->jadwal()->associate($jadwals);
 
     //fungsi eloquent untuk menambah data dengan relasi belongsTo
     $pemeriksaan->ibu_hamil()->associate($ibu_hamils);
@@ -151,8 +162,8 @@ class PemeriksaanController extends Controller
   {
     // Mengambil data dari database atau sumber data lainnya
     $data = Pemeriksaan::join('ibu_hamils', 'pemeriksaans.id_ibu_hamil', '=', 'ibu_hamils.id_ibu_hamil')
-    ->orderBy('ibu_hamils.nama', 'asc')
-    ->get();
+      ->orderBy('ibu_hamils.nama', 'asc')
+      ->get();
 
     // Inisialisasi objek Dompdf
     $dompdf = new Dompdf();
@@ -166,51 +177,51 @@ class PemeriksaanController extends Controller
     $count = 1; // Variabel hitungan untuk nomor tabel
 
     foreach ($data as $item) {
-    $html .= '<h3>Data Pemeriksaan ke-' . $count . '</h3>'; // Menambahkan nomor tabel
+      $html .= '<h3>Data Pemeriksaan ke-' . $count . '</h3>'; // Menambahkan nomor tabel
 
-    $html .= '<table border="1" style="border-collapse: collapse; width: 100%;">';
-    $html .= '<tr>';
-    $html .= '<th style="padding: 8px; text-align: left;">No</th>';
-    $html .= '<th style="padding: 8px; text-align: left;">Nama Ibu</th>';
-    $html .= '<th style="padding: 8px; text-align: left;">Tanggal</th>';
-    $html .= '<th style="padding: 8px; text-align: left;">Catatan</th>';
-    $html .= '</tr>';
-    $html .= '<tr>';
-    $html .= '<td style="padding: 8px;">' . $count . '</td>';
-    $html .= '<td style="padding: 8px;">' . $item->nama . '</td>';
-    $html .= '<td style="padding: 8px;">' . date('d-m-Y', strtotime($item->tanggal)) . '</td>';
-    $html .= '<td style="padding: 8px;">' . $item->catatan . '</td>';
-    $html .= '</tr>';
-    $html .= '</table>';
+      $html .= '<table border="1" style="border-collapse: collapse; width: 100%;">';
+      $html .= '<tr>';
+      $html .= '<th style="padding: 8px; text-align: left;">No</th>';
+      $html .= '<th style="padding: 8px; text-align: left;">Nama Ibu</th>';
+      $html .= '<th style="padding: 8px; text-align: left;">Tanggal</th>';
+      $html .= '<th style="padding: 8px; text-align: left;">Catatan</th>';
+      $html .= '</tr>';
+      $html .= '<tr>';
+      $html .= '<td style="padding: 8px;">' . $count . '</td>';
+      $html .= '<td style="padding: 8px;">' . $item->nama . '</td>';
+      $html .= '<td style="padding: 8px;">' . date('d-m-Y', strtotime($item->tanggal)) . '</td>';
+      $html .= '<td style="padding: 8px;">' . $item->catatan . '</td>';
+      $html .= '</tr>';
+      $html .= '</table>';
 
-    $html .= '<br>';
+      $html .= '<br>';
 
-    $html .= '<h3>Data Ibu</h3>'; // Menambahkan nomor tabel
+      $html .= '<h3>Data Ibu</h3>'; // Menambahkan nomor tabel
 
-    $html .= '<table border="1" style="border-collapse: collapse; width: 100%;">';
-    $html .= '<tr>';
-    $html .= '<th style="padding: 8px; text-align: left;">No</th>';
-    $html .= '<th style="padding: 8px; text-align: left;">Nama Ibu</th>';
-    $html .= '<th style="padding: 8px; text-align: left;">Alamat</th>';
-    $html .= '<th style="padding: 8px; text-align: left;">No Telepon</th>';
-    $html .= '<th style="padding: 8px; text-align: left;">Usia Kandungan</th>';
-    $html .= '<th style="padding: 8px; text-align: left;">Tanggal Hamil</th>';
-    $html .= '<th style="padding: 8px; text-align: left;">Tanggal Lahir</th>';
-    $html .= '</tr>';
-    $html .= '<tr>';
-    $html .= '<td style="padding: 8px;">' . $count . '</td>';
-    $html .= '<td style="padding: 8px;">' . $item->nama . '</td>';
-    $html .= '<td style="padding: 8px;">' . $item->alamat . '</td>';
-    $html .= '<td style="padding: 8px;">' . $item->no_telepon . '</td>';
-    $html .= '<td style="padding: 8px;">' . $item->usia_kandungan . '</td>';
-    $html .= '<td style="padding: 8px;">' . $item->tanggal_hamil . '</td>';
-    $html .= '<td style="padding: 8px;">' . $item->tanggal_lahir . '</td>';
-    $html .= '</tr>';
-    $html .= '</table>';
+      $html .= '<table border="1" style="border-collapse: collapse; width: 100%;">';
+      $html .= '<tr>';
+      $html .= '<th style="padding: 8px; text-align: left;">No</th>';
+      $html .= '<th style="padding: 8px; text-align: left;">Nama Ibu</th>';
+      $html .= '<th style="padding: 8px; text-align: left;">Alamat</th>';
+      $html .= '<th style="padding: 8px; text-align: left;">No Telepon</th>';
+      $html .= '<th style="padding: 8px; text-align: left;">Usia Kandungan</th>';
+      $html .= '<th style="padding: 8px; text-align: left;">Tanggal Hamil</th>';
+      $html .= '<th style="padding: 8px; text-align: left;">Tanggal Lahir</th>';
+      $html .= '</tr>';
+      $html .= '<tr>';
+      $html .= '<td style="padding: 8px;">' . $count . '</td>';
+      $html .= '<td style="padding: 8px;">' . $item->nama . '</td>';
+      $html .= '<td style="padding: 8px;">' . $item->alamat . '</td>';
+      $html .= '<td style="padding: 8px;">' . $item->no_telepon . '</td>';
+      $html .= '<td style="padding: 8px;">' . $item->usia_kandungan . '</td>';
+      $html .= '<td style="padding: 8px;">' . $item->tanggal_hamil . '</td>';
+      $html .= '<td style="padding: 8px;">' . $item->tanggal_lahir . '</td>';
+      $html .= '</tr>';
+      $html .= '</table>';
 
-    $html .= '<br>';
+      $html .= '<br>';
 
-    $count++;
+      $count++;
     }
     $html .= '</body></html>';
 
@@ -222,5 +233,5 @@ class PemeriksaanController extends Controller
 
     // Mengirimkan hasil PDF ke browser untuk diunduh
     $dompdf->stream('Cetak-Laporan-Pemeriksaan.pdf');
-  }  
+  }
 }

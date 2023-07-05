@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Balita;
 use App\Models\Imunisasi;
+use App\Models\Jadwal;
 use App\Models\Vitamin;
 use Illuminate\Http\Request;
 use PDF;
@@ -41,15 +42,18 @@ class ImunisasiController extends Controller
   public function store(Request $request)
   {
     //melakukan validasi data
+
     $request->validate(
       [
         'id_balita' => 'required',
         'id_vitamin' => 'required',
+        'id_jadwal' => 'nullable',
+
         'tanggal' => 'required',
         'deskripsi' => 'required',
       ],
       [
-        'id_balita.required' => 'Nama Ibu Hamil wajib diisi',
+        'id_balita.required' => 'Balita wajib diisi',
         'id_vitamin.required' => 'jenis imunisasi wajib diisi',
         'tanggal.required' => 'Tanggal wajib diisi',
         'deskripsi.required' => 'Catatan wajib diisi',
@@ -57,8 +61,10 @@ class ImunisasiController extends Controller
       ]
     );
     $imunisasi = new Imunisasi;
-    $imunisasi->id_balita = $request->get('id_imunisasi');
-    $imunisasi->id_vitamin = $request->get('id_imunisasi');
+    $imunisasi->id_balita = $request->get('id_balita');
+    $imunisasi->id_vitamin = $request->get('id_vitamin');
+    $imunisasi->id_jadwal = $request->get('id_jadwal');
+
     $imunisasi->tanggal = $request->get('tanggal');
     $imunisasi->deskripsi = $request->get('deskripsi');
 
@@ -66,7 +72,10 @@ class ImunisasiController extends Controller
     $balitas->id_balita = $request->get('id_balita');
     $vitamins = new Vitamin;
     $vitamins->id_vitamin = $request->get('id_vitamin');
+    $jadwals = new Jadwal;
+    $jadwals->id_jadwal = $request->get('id_jadwal');
     //fungsi eloquent untuk menambah data dengan relasi belongsTo
+    $imunisasi->jadwal()->associate($jadwals);
     $imunisasi->balita()->associate($balitas);
     $imunisasi->vitamin()->associate($vitamins);
     $imunisasi->save();
@@ -117,6 +126,7 @@ class ImunisasiController extends Controller
         'id_vitamin' => 'required',
         'tanggal' => 'required',
         'id_balita' => 'required',
+        'id_jadwal' => 'nullable',
         'deskripsi' => 'required',
       ],
       [
@@ -126,20 +136,23 @@ class ImunisasiController extends Controller
         'id_balita.required' => 'Nama Balita wajib diisi',
       ]
     );
-    $imunisasi = Imunisasi::with('balita')->where('id_imunisasi', $id_imunisasi)->first();
-    $imunisasi = Imunisasi::with('vitamin')->where('id_imunisasi', $id_imunisasi)->first();
+    $imunisasi = Imunisasi::find($id_imunisasi);
     $imunisasi->tanggal = $request->get('tanggal');
     $imunisasi->deskripsi = $request->get('deskripsi');
     $balitas = new Balita;
     $balitas->id_balita = $request->get('id_balita');
     $vitamins = new Vitamin;
     $vitamins->id_vitamin = $request->get('id_vitamin');
+    $jadwals = new Jadwal;
+    $jadwals->id_jadwal = $request->get('id_jadwal');
 
+    $imunisasi->jadwal()->associate($jadwals);
     $imunisasi->balita()->associate($balitas);
     $imunisasi->vitamin()->associate($vitamins);
+
     $imunisasi->save();
     return redirect()->route('imunisasi.index')
-    ->with('msg-success', 'Data Berhasil diubah');
+      ->with('msg-success', 'Data Berhasil diubah');
   }
 
   /**

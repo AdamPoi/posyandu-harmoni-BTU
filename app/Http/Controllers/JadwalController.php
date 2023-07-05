@@ -36,18 +36,20 @@ class JadwalController extends Controller
    */
   public function store(Request $request)
   {
-    $request->validate([
+    $validated = $request->validate([
       'kegiatan' => 'required|string|max:255',
       'tanggal' => 'required|date',
+      'jenis' => 'required|in:imunisasi,pemeriksaan,penimbangan,lainnya',
       'deskripsi' => 'required|string',
 
     ], [
       'kegiatan.required' => 'Kegiatan harus diisi',
+      'jenis.required' => 'Jenis Kegiatan harus diisi',
       'tanggal.required' => 'Tanggal harus diisi',
       'deskripsi.required' => 'Deskripsi harus diisi',
 
     ]);
-    Jadwal::create($request->all());
+    Jadwal::create($validated);
     return redirect()->route('jadwal.index')
       ->with('msg-success', 'Berhasil menambahkan data Jadwal ');
   }
@@ -83,18 +85,20 @@ class JadwalController extends Controller
    */
   public function update(Request $request, Jadwal $jadwal)
   {
-    $request->validate([
+    $validated = $request->validate([
       'kegiatan' => 'required|string|max:255',
       'tanggal' => 'required|date',
+      'jenis' => 'required|in:imunisasi,pemeriksaan,penimbangan,lainnya',
       'deskripsi' => 'required|string',
 
     ], [
       'kegiatan.required' => 'Kegiatan harus diisi',
+      'jenis.required' => 'Jenis Kegiatan harus diisi',
       'tanggal.required' => 'Tanggal harus diisi',
       'deskripsi.required' => 'Deskripsi harus diisi',
 
     ]);
-    $jadwal->update($request->all());
+    $jadwal->update($validated);
     return redirect()->route('jadwal.index')
       ->with('msg-success', 'Berhasil mengubah data Jadwal ');
   }

@@ -22,8 +22,8 @@ class DatabaseSeeder extends Seeder
       IbuHamilSeeder::class,
       BalitaSeeder::class,
       JadwalSeeder::class,
-      ImunisasiSeeder::class,
       VitaminSeeder::class,
+      ImunisasiSeeder::class,
       PemeriksaanSeeder::class,
       PenimbanganSeeder::class,
 

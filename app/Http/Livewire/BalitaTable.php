@@ -83,7 +83,7 @@ class BalitaTable extends DataTableComponent
         }),
       SelectFilter::make('Jenis Kelamin')
         ->options([
-          '' => 'All',
+          '' => 'Semua',
           'L' => 'L',
           'P' => 'P',
         ])->filter(function (Builder $builder, string $value) {

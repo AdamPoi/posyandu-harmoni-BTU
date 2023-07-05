@@ -41,13 +41,19 @@
                                             value="{{ $jadwal->id_jadwal }}">
                                     </div>
                                 </div>
+
                                 <div class="row">
                                     <div class="form-group col-12">
                                         <label>Kegiatan</label>
                                         <input readonly type="text" class="form-control" value="{{ $jadwal->kegiatan }}">
                                     </div>
                                 </div>
-
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <label>Jenis Kegiatan</label>
+                                        <input readonly type="text" class="form-control" value="{{ $jadwal->jenis }}">
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="form-group col-12">
                                         <label>Tanggal</label>
