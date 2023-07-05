@@ -18,7 +18,7 @@ class IbuHamilTable extends DataTableComponent
 
   public function configure(): void
   {
-    $this->setPrimaryKey('id');
+    $this->setPrimaryKey('id_ibu_hamil');
     $this->setFilterLayout('slide-down');
   }
   public function deleteId($id)

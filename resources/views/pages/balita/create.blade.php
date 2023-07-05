@@ -57,14 +57,12 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="id_ibu_hamil">Nama Ibu</label>
-                                <select class="form-control" name="id_ibu_hamil" id="id-ibu-hamil">
+                                <label for="nama_ibu">Nama Ibu</label>
+                                <select class="form-control" name="nama_ibu" id="nama-ibu">
 
                                 </select>
 
                             </div>
-                            <input type="hidden" id="nama-ibu-hamil" name="nama_ibu_hamil"
-                                value="{{ old('nama_ibu_hamil') }}">
                             <div class="form-group">
                                 <label for="usia">Usia</label>
                                 <div class="input-group">
@@ -112,8 +110,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{ asset('library/select2/dist/js/select2.full.min.js') }}"></script>
     <script type="text/javascript">
-        $('#id-ibu-hamil').select2({
+        $('#nama-ibu').select2({
             placeholder: 'Pilih Ibu Hamil',
+            tags: true,
             ajax: {
                 url: '{!! route('autocomplete.ibuhamil') !!}',
                 dataType: 'json',
@@ -123,17 +122,14 @@
                         results: $.map(data, function(item) {
                             return {
                                 text: item.nama,
-                                id: item.id_ibu_hamil
+                                id: item.nama
                             }
                         })
                     };
                 },
-                cache: true
+                cache: true,
+
             }
-        });
-        $('#id-ibu-hamil').on('change', function(e) {
-            var title = $(this).select2('data')[0].text;
-            $('#nama-ibu-hamil').val(title);
         });
     </script>
 @endpush

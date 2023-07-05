@@ -13,10 +13,9 @@ class Balita extends Model
   protected $primaryKey = 'id_balita';
 
   protected $fillable = [
-    'id_ibu_hamil',
     'nama',
     'nama_ayah',
-    // 'nama_ibu',
+    'nama_ibu',
     'usia',
     'jenis_kelamin',
     'tanggal_lahir'
@@ -25,9 +24,5 @@ class Balita extends Model
   public function penimbangan()
   {
     return $this->hasMany(penimbangan::class, 'id_balita');
-  }
-  public function ibu_hamil()
-  {
-    return $this->belongsTo(IbuHamil::class, 'id_ibu_hamil');
   }
 }

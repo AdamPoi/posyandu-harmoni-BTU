@@ -44,7 +44,7 @@ class BalitaController extends Controller
       [
         'nama' => 'required',
         'nama_ayah' => 'required',
-        'id_ibu_hamil' => 'required',
+        'nama_ibu' => 'required',
         'usia' => 'required',
         'tanggal_lahir' => 'required',
         'jenis_kelamin' => 'required',
@@ -52,31 +52,21 @@ class BalitaController extends Controller
       [
         'nama.required' => 'Nama wajib diisi',
         'nama_ayah.required' => 'Nama Ayah wajib diisi',
-        'id_ibu_hamil.required' => 'Nama Ibu Hamil wajib diisi',
+        'nama_ibu.required' => 'Nama Ibu Hamil wajib diisi',
         'usia.required' => 'Usia wajib diisi',
         'tanggal_lahir.required' => 'Tanggal Lahir wajib diisi',
         'jenis_kelamin.required' => 'Jenis Kelamin wajib diisi',
       ]
     );
     $balita = new Balita();
-    $balita->id_balita = $request->get('id_balita');
     $balita->nama = $request->get('nama');
     $balita->nama_ayah = $request->get('nama_ayah');
-    // $balita->nama_ibu = explode('-', $request->get('ibu_hamil'))[1];
+    $balita->nama_ibu = $request->get('nama_ibu');
     $balita->usia = $request->get('usia');
     $balita->tanggal_lahir = $request->get('tanggal_lahir');
     $balita->jenis_kelamin = $request->get('jenis_kelamin');
-    // $balita->usia = Carbon::parse($request->get('usia'))->age;
 
-    // $ibu_hamils = new IbuHamil;
-    // $ibu_hamils->id_ibu_hamil = explode('-', $request->get('ibu_hamil'))[0];
-    $ibu_hamils = new IbuHamil;
-    $ibu_hamils->id_ibu_hamil = $request->get('id_ibu_hamil');
-    
-    //fungsi eloquent untuk menambah data dengan relasi belongsTo
-    $balita->ibu_hamil()->associate($ibu_hamils);
     $balita->save();
-    //jika data berhasil ditambahkan, akan kembali ke halaman utama
     return redirect()->route('balita.index')
       ->with('msg-success', 'Data Berhasil ditambahkan');
   }
@@ -103,9 +93,8 @@ class BalitaController extends Controller
   {
     //menampilkan detail data dengan menemukan berdasarkan id_balita 
     //Pemriksaan untuk diedit
-    $balita = Balita::with('ibu_hamil')->where('id_balita', $id_balita)->first();
-    $ibu_hamils = IbuHamil::all(); //mendapatkan data dari ibu hamil
-    return view('pages.balita.edit', compact('balita', 'ibu_hamils'));
+    $balita = Balita::find($id_balita);
+    return view('pages.balita.edit', compact('balita'));
   }
 
   /**
@@ -117,37 +106,34 @@ class BalitaController extends Controller
    */
   public function update(Request $request, $id_balita)
   {
-      //melakukan validasi data
-      $request->validate(
-        [
-          'nama' => 'required',
-          'nama_ayah' => 'required',
-          'id_ibu_hamil' => 'required',
-          'usia' => 'required',
-          'tanggal_lahir' => 'required',
-          'jenis_kelamin' => 'required',
-        ],
-        [
-          'nama.required' => 'Nama wajib diisi',
-          'nama_ayah.required' => 'Nama Ayah wajib diisi',
-          'id_ibu_hamil.required' => 'Nama Ibu wajib diisi',
-          'usia.required' => 'Usia wajib diisi',
-          'tanggal_lahir.required' => 'Tanggal Lahir wajib diisi',
-          'jenis_kelamin.required' => 'Jenis Kelamin wajib diisi',
-        ]
-      );
-    $balita = Balita::with('ibu_hamil')->where('id_balita', $id_balita)->first();
+    //melakukan validasi data
+    $request->validate(
+      [
+        'nama' => 'required',
+        'nama_ayah' => 'required',
+        'nama_ibu' => 'required',
+        'usia' => 'required',
+        'tanggal_lahir' => 'required',
+        'jenis_kelamin' => 'required',
+      ],
+      [
+        'nama.required' => 'Nama wajib diisi',
+        'nama_ayah.required' => 'Nama Ayah wajib diisi',
+        'nama_ibu.required' => 'Nama Ibu wajib diisi',
+        'usia.required' => 'Usia wajib diisi',
+        'tanggal_lahir.required' => 'Tanggal Lahir wajib diisi',
+        'jenis_kelamin.required' => 'Jenis Kelamin wajib diisi',
+      ]
+    );
+    $balita = Balita::find($id_balita);
     $balita->nama = $request->get('nama');
     $balita->nama_ayah = $request->get('nama_ayah');
+    $balita->nama_ibu = $request->get('nama_ibu');
     $balita->usia = $request->get('usia');
     $balita->tanggal_lahir = $request->get('tanggal_lahir');
     $balita->jenis_kelamin = $request->get('jenis_kelamin');
 
-    $ibu_hamils = new IbuHamil;
-    $ibu_hamils->id_ibu_hamil = $request->get('id_ibu_hamil');
-
     //fungsi eloquent untuk menambah data dengan relasi belongsTo
-    $balita->ibu_hamil()->associate($ibu_hamils);
     $balita->save();
     //jika data berhasil ditambahkan, akan kembali ke halaman utama
     return redirect()->route('balita.index')

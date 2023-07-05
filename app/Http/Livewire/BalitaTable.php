@@ -7,6 +7,7 @@ use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Balita;
 use App\Exports\BalitasExport;
 use Rappasoft\LaravelLivewireTables\Views\Filters\NumberFilter;
+use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 
 use Excel;
@@ -35,7 +36,7 @@ class BalitaTable extends DataTableComponent
         ->sortable()->searchable(),
       // Column::make("Nama ibu", "nama_ibu")
       //   ->sortable(),
-      Column::make("Ibu Hamil", "ibu_hamil.nama")
+      Column::make("Ibu Hamil", "nama_ibu")
         ->sortable()->searchable(),
       Column::make("Usia", "usia")
         ->sortable()->searchable()->format(fn ($value) => $value . ' bulan'),
@@ -69,7 +70,6 @@ class BalitaTable extends DataTableComponent
       NumberFilter::make('Dari Usia')
         ->config([
           'min' => 0,
-
         ])
         ->filter(function (Builder $builder, string $value) {
           $builder->where('usia', '>=', $value);
@@ -80,6 +80,18 @@ class BalitaTable extends DataTableComponent
         ])
         ->filter(function (Builder $builder, string $value) {
           $builder->where('usia', '<=', $value);
+        }),
+      SelectFilter::make('Jenis Kelamin')
+        ->options([
+          '' => 'All',
+          'L' => 'L',
+          'P' => 'P',
+        ])->filter(function (Builder $builder, string $value) {
+          if ($value === 'L') {
+            $builder->where('jenis_kelamin', 'L');
+          } elseif ($value === 'P') {
+            $builder->where('jenis_kelamin', 'P');
+          }
         }),
     ];
   }

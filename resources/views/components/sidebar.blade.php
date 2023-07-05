@@ -19,6 +19,7 @@
                 <a class="nav-link" href="{{ url('user') }}"><i class="fas fa-user"></i>
                     <span>Data User</span></a>
             </li>
+
             <li class="{{ str_contains(request()->url(), 'ibuhamil') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('ibuhamil') }}"><i class="fas fa-person-pregnant"></i>
                     <span>Data Ibu Hamil</span></a>
