@@ -57,15 +57,10 @@
                             </div>
                             <div class="form-group">
                                 <label>Role</label>
-                                <select name="role"
-                                    class="form-control @if (old('role')) is-valid @endif
-                                @error('role') is-invalid @enderror"
-                                    value="{{ old('role') }}">
-                                    <option value="" disabled selected>Pilih role</option>
-                                    <option value="admin">Admin</option>
-                                    <option value="bidan">Bidan</option>
-                                </select>
-                            </div>
+                                <input type="hidden" name="role" value="bidan">
+                                <input readonly type="text" class="form-control @if (old('role')) is-valid @endif @error('role') is-invalid @enderror"
+                                  value="{{ old('role', 'Bidan') }}">
+                            </div>
                             <div class="form-group">
                                 <label>Alamat</label>
                                 <textarea name="alamat"
