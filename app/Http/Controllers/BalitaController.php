@@ -79,7 +79,7 @@ class BalitaController extends Controller
    */
   public function show(Balita $balita)
   {
-    $balita = $balita->load('ibu_hamil');
+    // $balita = $balita->load('balita');
     return view('pages.balita.show', compact('balita'));
   }
 
