@@ -28,7 +28,7 @@ class UserTable extends DataTableComponent
   {
     return [
       Column::make("ID", "id_user")
-        ->sortable()->searchable(),
+        ->sortable()->searchable()->deselected(),
       Column::make("Nama", "nama")
         ->sortable()->searchable(),
       ImageColumn::make('Avatar')
