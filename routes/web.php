@@ -41,32 +41,34 @@ Route::get('about', [HomeController::class, 'about'])->name('about');
 
 // });
 Route::get('login', [LoginController::class, 'index'])->name('login');
+Route::get('login/proses', [LoginController::class, 'proses'])->name('login.proses');
+
 Route::group(['middleware' => ['auth:sanctum', 'auth.role']], function () {
-  Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+    Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
 
-  Route::resource('user', UserController::class);
-  Route::resource('ibuhamil', IbuHamilController::class);
-  Route::resource('balita', BalitaController::class)->parameters([
-    'balita' => 'balita'
-  ]);;
-  Route::resource('jadwal', JadwalController::class);
-  Route::resource('vitamin', VitaminController::class);
-  Route::resource('imunisasi', ImunisasiController::class);
-  Route::resource('pemeriksaan', PemeriksaanController::class);
-  Route::resource('penimbangan', PenimbanganController::class);
+    Route::resource('user', UserController::class);
+    Route::resource('ibuhamil', IbuHamilController::class);
+    Route::resource('balita', BalitaController::class)->parameters([
+        'balita' => 'balita'
+    ]);;
+    Route::resource('jadwal', JadwalController::class);
+    Route::resource('vitamin', VitaminController::class);
+    Route::resource('imunisasi', ImunisasiController::class);
+    Route::resource('pemeriksaan', PemeriksaanController::class);
+    Route::resource('penimbangan', PenimbanganController::class);
 
-  Route::prefix('cetak/pdf/')->as('cetak.pdf.')->middleware(['auth:sanctum', 'auth.role:admin'])->group(function () {
-    Route::get('user', [UserController::class, 'cetak_pdf'])->name('user');
-    Route::get('ibuhamil', [IbuHamilController::class, 'cetak_pdf'])->name('ibuhamil');
-    Route::get('balita', [BalitaController::class, 'cetak_pdf'])->name('balita');
-    Route::get('jadwal', [JadwalController::class, 'cetak_pdf'])->name('jadwal');
-    Route::get('vitamin', [VitaminController::class, 'cetak_pdf'])->name('vitamin');
-    Route::get('pemeriksaan', [PemeriksaanController::class, 'cetak_pdf'])->name('pemeriksaan');
-    Route::get('penimbangan', [PenimbanganController::class, 'cetak_pdf'])->name('penimbangan');
-    Route::get('imunisasi', [ImunisasiController::class, 'cetak_pdf'])->name('imunisasi');
-  });
+    Route::prefix('cetak/pdf/')->as('cetak.pdf.')->middleware(['auth:sanctum', 'auth.role:admin'])->group(function () {
+        Route::get('user', [UserController::class, 'cetak_pdf'])->name('user');
+        Route::get('ibuhamil', [IbuHamilController::class, 'cetak_pdf'])->name('ibuhamil');
+        Route::get('balita', [BalitaController::class, 'cetak_pdf'])->name('balita');
+        Route::get('jadwal', [JadwalController::class, 'cetak_pdf'])->name('jadwal');
+        Route::get('vitamin', [VitaminController::class, 'cetak_pdf'])->name('vitamin');
+        Route::get('pemeriksaan', [PemeriksaanController::class, 'cetak_pdf'])->name('pemeriksaan');
+        Route::get('penimbangan', [PenimbanganController::class, 'cetak_pdf'])->name('penimbangan');
+        Route::get('imunisasi', [ImunisasiController::class, 'cetak_pdf'])->name('imunisasi');
+    });
 
-  // Route::prefix('autocomplete')->as('autocomplete.')->controller(AutocompleteController::class)->group(function () {
-  //   Route::get('ibuHamil', 'getIbuHamil')->name('ibuHamil');
-  // });
+    // Route::prefix('autocomplete')->as('autocomplete.')->controller(AutocompleteController::class)->group(function () {
+    //   Route::get('ibuHamil', 'getIbuHamil')->name('ibuHamil');
+    // });
 });
